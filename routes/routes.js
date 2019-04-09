@@ -1,69 +1,30 @@
 let express = require("express");
 let router = express.Router();
-let mongoose = require('mongoose');
-let Restaurant = mongoose.model('restaurants');
+
+let controllers = require("../controllers/controllers.js");
 
 //The first page the user sees
-router.get("/", function(req, res){
-    res.send('Project for INFO30005 by the Artisans');
-});
+router.get("/", controllers.welcome);
 
 //Take the user to the Homepage
-router.get("/home", function(req, res){
-    res.send('This is the Homepage');
-});
+router.get("/home", controllers.home);
 
 //Take the user to the Maps Page
-router.get("/maps", function(req, res){
-    res.send('This is the Maps Page');
-});
+router.get("/maps", controllers.maps);
 
 //Take the user to the Health Ratings Page
-router.get("/ratings", function(req, res){
-    res.send('This is the Health Ratings Page');
-});
+router.get("/ratings", controllers.ratings);
 
 //Take the user to the Recommendations Page
-router.get("/recommendations", function(req, res){
-    res.send('This is the Recommendations Page');
-});
-
-//Find a restaurant by ID
-router.get('/restaurants/id/:id', function(req,res){
-    res.send("Restaurant Ids");
-    Restaurant.find(function(err,restaurants){
-        if(!err){
-            res.send(restaurants);
-        }else{
-            res.sendStatus(404);
-        }
-    });
-});
+router.get("/recommendations", controllers.recommendations);
 
 //List all restaurants
-router.get('/restaurants', function(req,res){
-    var restInx = req.params.id;
-    Restaurant.findById(restInx,function(err,restaurant){
-        res.send("List of all the Restaurants");
-        if(!err){
-            res.send(restaurant);
-        }else{
-            res.sendStatus(404);
-        }
-    });
-});
+router.get('/restaurants', controllers.findAllRestaurants);
+
+//Find a restaurant by ID
+router.get('/restaurants/id/:id', controllers.findRestaurantByID);
 
 //Find restaurant by name
-router.get('/restaurants/name/:name', function(req, res){
-    var restName = req.params.name;
-    Restaurant.find({name:restName},function(err,restaurant){
-        res.send("Restaurant name");
-        if(!err){
-            res.send(restaurant);
-        }else{
-            res.sendStatus(404);
-        }
-    });
-});
+router.get('/restaurants/name/:name', controllers.findRestaurantByName);
 
 module.exports = router;
