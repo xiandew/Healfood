@@ -3,6 +3,11 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
 
+//The first page the user sees
+router.get("/", function(req, res){
+    res.send('Project for INFO30005 by the Artisans');
+});
+
 //Take the user to the Homepage
 router.get("/home", function(req, res){
     res.send('This is the Homepage');
