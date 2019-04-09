@@ -1,11 +1,12 @@
 // Set up express
 let express = require('express');
 let app = express();
-
+let bodyParser = require('body-parser');
+app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
 // Database setup
-// require('./models/db.js');
+require('./models/db.js');
 
 // Routes setup
 let routes = require('./routes/routes.js');
