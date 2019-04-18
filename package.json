@@ -4,11 +4,12 @@
   "description": "info30005 group project, fall 2019",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "latest",
     "express": "^4.16.4",
     "mongodb": "^3.2.3",
     "mongoose": "^5.5.0",
-    "router": "^1.3.3",
-    "body-parser": "latest"
+    "pug": "^2.0.3",
+    "router": "^1.3.3"
   },
   "devDependencies": {},
   "scripts": {
