@@ -5,16 +5,6 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
-// Not sure if this is needed right now
-/* // Application setting properties
-app.set('views','./views');
-app.set('view engine', 'pug');
-
-// Route to render Pug files
-app.get('/', function (req, res) {
-    res.render('index', { title: 'The Artisans', message: 'HealFood'})
-}); */
-
 // Database setup
 require('./models/db.js');
 
