@@ -6,7 +6,7 @@ let welcome = function(req, res){
 };
 
 let home = function(req, res){
-    res.send('This is the Homepage');
+    res.sendFile(path.join(__dirname + '/index.html'));
 };
 
 let maps = function(req, res){
