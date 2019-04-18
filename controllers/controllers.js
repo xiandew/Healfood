@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
+let path = require("path");
 
 let welcome = function(req, res){
     res.sendFile(path.join(__dirname + '/index.html'));
