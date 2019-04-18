@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
 
 let welcome = function(req, res){
-    res.sendFile('/index.html');
+    res.sendFile(path.join(__dirname + '/index.html'));
 };
 
 let home = function(req, res){
