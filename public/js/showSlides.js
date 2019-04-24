@@ -1,20 +1,42 @@
+window.onload = initSlides;
+
 var slideIndex = 0;
-window.onload = showSlides;
+var slides, dots;
+var timeoutID;
+
+function initSlides() {
+    slides = document.getElementsByClassName("mySlides");
+    dots = document.getElementsByClassName("dot");
+    showSlides();
+}
 
 function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    for (i = 0; i < slides.length; i++) {
+    // wrap around slides if greater than total
+    slideIndex %= slides.length;
+
+    // update slides
+    for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
-    setTimeout(showSlides, 4000); // Change image every 4 seconds
+    slides[slideIndex].style.display = "block";
 
-    var dots = document.getElementsByClassName("dot");
-    for (i = 0; i < dots.length; i++) {
+    // update dots
+    for (let i = 0; i < dots.length; i++){
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    dots[slideIndex-1].className += " active";
+    dots[slideIndex].className += " active";
+
+    // Change image every 4 seconds
+    timeoutID =
+        setTimeout(function () {
+            showSlides();
+            slideIndex++;
+            }, 4000);
+}
+
+function currentSlide(index) {
+    clearTimeout(timeoutID);
+    // wrap around slides if index is negative
+    slideIndex = index < 0 ? slides.length + index : index;
+    showSlides();
 }
