@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title HealFood
+        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.8.1/css/all.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', type='text/css', href='/css/styles.css')
+        script(type='text/javascript', src='/js/showSlides.js')
+    body(background='/images/woodBack.jpg')
+        .homepage
+            .navbar
+                .dropdown
+                    button.dropbtn
+                        | Menu
+                        i.fa.fa-caret-down
+                    .dropdown-content
+                        a(href='./') Home
+                        a(href='./maps') Maps
+                        a(href='./ratings') Ratings
+                        a(href='./reviews') Reviews
+                        a(href='./restaurants') All Restaurants
+            header
+                h1#logo HealFood Melbourne
+
+            block content

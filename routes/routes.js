@@ -3,11 +3,8 @@ let router = express.Router();
 
 let controllers = require("../controllers/controllers.js");
 
-//The first page the user sees
-router.get("/", controllers.welcome);
-
 //Take the user to the Homepage
-router.get("/home", controllers.home);
+router.get("/", controllers.home);
 
 //Take the user to the Maps Page
 router.get("/maps", controllers.maps);
@@ -16,7 +13,7 @@ router.get("/maps", controllers.maps);
 router.get("/ratings", controllers.ratings);
 
 //Take the user to the Recommendations Page
-router.get("/recommendations", controllers.recommendations);
+router.get("/reviews", controllers.reviews);
 
 //List all restaurants
 router.get('/restaurants', controllers.findAllRestaurants);

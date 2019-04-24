@@ -1,0 +1,36 @@
+extends default
+
+block content
+
+    figure
+        // Slideshow container
+        .slideshow-container
+            // Full-width images with number and caption text
+            .mySlides.fade
+                img(src='/images/hamburger.jpeg', alt='Hamburger', width='304', height='228')
+                .text Hamburger
+            .mySlides.fade
+                img(src='/images/dumplings.jpeg', alt='Dumplings', width='304', height='228')
+                .text Dumplings
+            .mySlides.fade
+                img(src='/images/coffee.jpeg', alt='Coffee', width='304', height='228')
+                .text Coffee
+            // Next and previous buttons
+            a.prev(onclick='currentSlide(slideIndex-1)') ❮
+            a.next(onclick='currentSlide(slideIndex+1)') ❯
+        br
+        // The dots/circles
+        div(style='text-align:center')
+            span.dot(onclick='currentSlide(0)')
+            span.dot(onclick='currentSlide(1)')
+            span.dot(onclick='currentSlide(2)')
+    article
+        h2 Welcome to HealFood Melbourne!
+        span.byline Brought to you by The Artisans
+        p
+            | With our website, you will be able to find healthy restaurants
+            | located in Melbourne. Users are able to leave reviews about the
+            | restaurant and recommend healthy meals to ensure that you and your
+            | family are making the best choices when you go out to eat. Checkout
+            | our Maps page to find restaurants near you, or go to our All
+            | Restaurants page to find the complete list of restaurants.
