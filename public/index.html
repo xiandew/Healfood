@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HealFood</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script type="text/javascript" src="/js/showSlides.js"></script>
 </head>
-<body background="woodBack.jpg">
+<body background="/images/woodBack.jpg">
 <div class = "homepage">
     <div class="navbar">
         <div class="dropdown">
-            <button class="dropbtn">Menu
-                <i class="fa fa-caret-down"></i>
+            <button class="dropbtn">
+                Menu<i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
                 <a href="#">Home</a>
@@ -32,17 +34,17 @@
 
             <!-- Full-width images with number and caption text -->
             <div class="mySlides fade">
-                <img src="hamburger.jpeg" alt="Hamburger" width="304" height="228">
+                <img src="/images/hamburger.jpeg" alt="Hamburger" width="304" height="228">
                 <div class="text">Hamburger</div>
             </div>
 
             <div class="mySlides fade">
-                <img src="dumplings.jpeg" alt="Dumplings" width="304" height="228">
+                <img src="/images/dumplings.jpeg" alt="Dumplings" width="304" height="228">
                 <div class="text">Dumplings</div>
             </div>
 
             <div class="mySlides fade">
-                <img src="coffee.jpeg" alt="Coffee" width="304" height="228">
+                <img src="/images/coffee.jpeg" alt="Coffee" width="304" height="228">
                 <div class="text">Coffee</div>
             </div>
 
@@ -59,28 +61,6 @@
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
     </figure>
-    <script>
-       var slideIndex = 0;
-        showSlides();
-
-       function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
-            setTimeout(showSlides, 4000); // Change image every 4 seconds
-
-            var dots = document.getElementsByClassName("dot");
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            dots[slideIndex-1].className += " active";
-        }
-    </script>
     <article>
         <h2>Welcome to HealFood Melbourne!</h2> <span class="byline">Brought to you by The Artisans</span>
         <p>With our website, you will be able to find healthy restaurants located in Melbourne. Users are able to leave reviews about the restaurant and recommend healthy meals to ensure that you and your family are making the best choices when you go out to eat. Checkout our Maps page to find restaurants near you, or go to our All Restaurants page to find the complete list of restaurants.</p>

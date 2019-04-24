@@ -1,9 +1,11 @@
 // Set up express
 let express = require('express');
 let app = express();
+
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
-const PORT = process.env.PORT || 3000;
+
+app.use(express.static('public'));
 
 // Database setup
 require('./models/db.js');
@@ -13,6 +15,7 @@ let routes = require('./routes/routes.js');
 app.use('/', routes);
 
 // Start the server
-app.listen(PORT, function(req,res){
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function(){
     console.log(`Express listening on port ${PORT}`);
 });

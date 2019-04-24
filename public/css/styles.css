@@ -11,7 +11,7 @@
 header{
     grid-area: header;
     text-align: center;
-    font-family: Impact;
+    font-family: Impact, serif;
     font-size: 22px;
     letter-spacing: 2px;
     -webkit-text-fill-color: #e7c48a;
@@ -34,7 +34,7 @@ article{
     grid-area: nav;
     overflow: hidden;
     background-color: #333;
-    font-family: Arial;
+    font-family: Arial, serif;
     width: 70px;
 }
 
@@ -50,7 +50,6 @@ article{
 
 /* The dropdown container */
 .dropdown {
-    float: left;
     overflow: hidden;
 }
 
@@ -60,10 +59,11 @@ article{
     border: none;
     outline: none;
     color: #dfcdff;
-    padding: 14px 16px;
     background-color: inherit;
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0; /* Important for vertical align on mobile phones */
+    height: 40px;
+    width: 100%;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
@@ -76,7 +76,7 @@ article{
     position: absolute;
     background-color: #e7c48a;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
 
@@ -145,7 +145,7 @@ article{
 .text {
     color: #000000;
     font-size: 15px;
-    padding: 0px 12px;
+    padding: 0 12px;
     position: absolute;
     bottom: 3px;
     width: 100%;
