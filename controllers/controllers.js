@@ -1,13 +1,8 @@
 let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
-let path = require("path");
-
-let welcome = function(req, res){
-    res.sendFile(path.join(__dirname, '../public', '/index.html'));
-};
 
 let home = function(req, res){
-    res.sendFile(path.join(__dirname, '../public', '/index.html'));
+    res.render('index');
 };
 
 let maps = function(req, res){
@@ -18,8 +13,8 @@ let ratings = function(req, res){
     res.send('This is the Health Ratings Page');
 };
 
-let recommendations = function(req, res){
-    res.send('This is the Recommendations Page');
+let reviews = function(req, res){
+    res.send('This is the reviews Page');
 };
 
 let findAllRestaurants = function(req,res){
@@ -60,11 +55,10 @@ let findRestaurantByName = function(req, res){
     });
 };
 
-module.exports.welcome = welcome;
 module.exports.home = home;
 module.exports.maps = maps;
 module.exports.ratings = ratings;
-module.exports.recommendations = recommendations;
+module.exports.reviews = reviews;
 module.exports.findAllRestaurants = findAllRestaurants;
 module.exports.findRestaurantByID = findRestaurantByID;
 module.exports.findRestaurantByName = findRestaurantByName;

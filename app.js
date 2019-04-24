@@ -7,6 +7,9 @@ app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
+// set the view engine
+app.set('view engine', 'pug');
+
 // Database setup
 require('./models/db.js');
 
