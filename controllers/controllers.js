@@ -6,7 +6,7 @@ let home = function(req, res){
 };
 
 let maps = function(req, res){
-    res.send('This is the Maps Page');
+    res.render('maps');
 };
 
 let ratings = function(req, res){
@@ -18,11 +18,11 @@ let reviews = function(req, res){
 };
 
 let findAllRestaurants = function(req,res){
-    Restaurant.find(function(err,restaurants){
+    Restaurant.find(function(err, restaurants){
         if(!err){
-            res.write("List of all the Restaurants\n");
-            res.write(restaurants.toString());
-            res.send();
+            res.render('restaurants', {
+                restaurants: restaurants
+            });
         }else{
             res.sendStatus(404);
         }
