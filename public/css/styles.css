@@ -1,3 +1,17 @@
+body {
+    background: url('/images/woodBack.jpg');
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    display: block;
+    box-shadow: 0 1px 0 0 currentColor;
+    transition: color .1s linear, background-color .1s linear, opacity .1s linear;
+}
+a:focus {
+    outline: thin dotted;
+}
 .homepage {
     display:grid;
     grid-template-columns: 1fr;
@@ -186,4 +200,27 @@ article{
 @keyframes fade {
     from {opacity: .4}
     to {opacity: 1}
+}
+
+/* restaurant list */
+
+ul.restaurant-list {
+    padding: 0 10%;
+    list-style: none;
+    font-family: Montserrat, Merriweather, serif;
+}
+
+ul.restaurant-list li {
+    padding: 1rem;
+    border: 1px solid aliceblue;
+    margin-bottom: 5rem;
+    border-radius: 1rem;
+}
+
+ul.restaurant-list a {
+    display: table;
+}
+
+ul.restaurant-list a h1 {
+    margin: 0;
 }
