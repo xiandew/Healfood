@@ -1,5 +1,6 @@
 body {
     background: url('/images/woodBack.jpg');
+    background-attachment: fixed;
     max-width: 970px;
     margin: 0 auto;
 }
@@ -208,25 +209,40 @@ article{
 
 /* restaurant list */
 
-ul.restaurant-list {
+.restaurant-list {
     padding: 0 10%;
     list-style: none;
-    font-family: Montserrat, Merriweather, serif;
 }
-
-ul.restaurant-list li {
-    padding: 1rem;
+.restaurant-list li {
     border: 1px solid aliceblue;
     margin-bottom: 5rem;
     border-radius: 1rem;
+    overflow: hidden;
 }
-
-ul.restaurant-list a {
-    display: table;
-}
-
-ul.restaurant-list a h1 {
+.restaurant-list * {
     margin: 0;
+}
+.restaurant-list .photo {
+    display: block;
+    width: 12rem;
+    float: left;
+}
+.restaurant-list img {
+    vertical-align: middle;
+    max-width: 100%;
+}
+.restaurant-list .detail {
+    color: #e7c48a;
+    float: left;
+    margin: 0 1rem;
+}
+.restaurant-list .detail .name {
+    display: inline-table;
+    vertical-align: top;
+    color: inherit;
+}
+.restaurant-list .detail .rating {
+    margin: 0.5rem 0;
 }
 
 @media screen and (max-width: 970px) {
@@ -240,5 +256,29 @@ ul.restaurant-list a h1 {
     #mapid {
         width: 100%;
         height: 200px;
+    }
+    .restaurant-list li {
+        margin-bottom: 3.5rem;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .restaurant-list {
+        padding: 5%;
+    }
+    .restaurant-list li {
+        margin-bottom: 2rem;
+    }
+    .restaurant-list .photo {
+        width: auto;
+        float: none;
+        margin: -1rem -1rem 1rem;
+    }
+    .restaurant-list img {
+        width: 100%;
+        margin: 0;
+    }
+    .restaurant-list .detail{
+        margin: 0rem 1rem 1rem;
     }
 }

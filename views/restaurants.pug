@@ -1,14 +1,12 @@
 extends default
 
-block append head
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=' +
-    'Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7C' +
-    'Montserrat%3A400%2C700%7CInconsolata%3A400&subset=latin%2Clatin-ext',
-    type='text/css', media='all')
-
 block content
     ul.restaurant-list
         each r in restaurants
             li
-                a(href=`./restaurants/id/${r.id}`, style="color: #e7c48a;")
-                    h1 #{r.name}
+                .photo
+                    img(src=`${r.photo}`, alt=`${r.name}`)
+                .detail
+                    a.name(href=`./restaurants/id/${r.id}`)
+                        h2 #{r.name}
+                    .rating rating: #{r.rating}
