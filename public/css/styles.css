@@ -1,3 +1,7 @@
+* {
+    box-sizing:border-box
+}
+
 body {
     background: url('/images/woodBack.jpg');
     background-attachment: fixed;
@@ -111,19 +115,25 @@ article{
     display: block;
 }
 
-* {box-sizing:border-box}
-
 /* Slideshow container */
 .slideshow-container {
-    max-width: 1000px;
     position: relative;
-    margin: auto;
+    width: 400px;
+    height: 0;
+    padding-bottom: 70%;
 }
-
 
 .mySlides {
     display: none; /* Hide the images by default */
     text-align: center;
+}
+.mySlides img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Next & previous buttons */
@@ -158,9 +168,8 @@ article{
     background: #333;
     color: #fff;
     font-size: 15px;
-    padding: 0 12px;
     position: absolute;
-    bottom: 3px;
+    bottom: 0;
     width: 100%;
     text-align: center;
 }
@@ -255,7 +264,7 @@ article{
     }
     #mapid {
         width: 100%;
-        height: 200px;
+        height: 350px;
     }
     .restaurant-list li {
         margin-bottom: 3.5rem;
@@ -263,6 +272,9 @@ article{
 }
 
 @media screen and (max-width: 520px) {
+    figure, .slideshow-container {
+        width: 100%;
+    }
     .restaurant-list {
         padding: 5%;
     }
@@ -279,6 +291,6 @@ article{
         margin: 0;
     }
     .restaurant-list .detail{
-        margin: 0rem 1rem 1rem;
+        margin: 0 1rem 1rem;
     }
 }
