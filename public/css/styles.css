@@ -14,7 +14,7 @@ a:hover {
 a:focus {
     outline: thin dotted;
 }
-.homepage {
+.page {
     display:grid;
     grid-template-columns: 1fr;
     grid-template-areas:
