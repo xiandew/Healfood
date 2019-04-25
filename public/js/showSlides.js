@@ -29,12 +29,13 @@ function showSlides() {
     // Change image every 4 seconds
     timeoutID =
         setTimeout(function () {
-            showSlides();
             slideIndex++;
+            showSlides();
             }, 4000);
 }
 
 function currentSlide(index) {
+    console.log(index);
     clearTimeout(timeoutID);
     // wrap around slides if index is negative
     slideIndex = index < 0 ? slides.length + index : index;
