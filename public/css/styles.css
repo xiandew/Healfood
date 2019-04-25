@@ -235,6 +235,7 @@ ul.restaurant-list a h1 {
     }
     header {
         padding-left: 80px;
+        margin: 0;
     }
     #mapid {
         width: 100%;
