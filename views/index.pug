@@ -9,24 +9,19 @@ block content
         // Slideshow container
         .slideshow-container
             // Full-width images with number and caption text
-            .mySlides.fade
-                img(src='/images/hamburger.jpeg', alt='Hamburger', width='304', height='228')
-                .text Hamburger
-            .mySlides.fade
-                img(src='/images/dumplings.jpeg', alt='Dumplings', width='304', height='228')
-                .text Dumplings
-            .mySlides.fade
-                img(src='/images/coffee.jpeg', alt='Coffee', width='304', height='228')
-                .text Coffee
+            each r in restaurants
+                .mySlides.fade
+                    a(href=`/restaurants/id/${r.id}`)
+                        img(src=`${r.photo}`, alt=`${r.name}`)
+                        .text #{r.name}
             // Next and previous buttons
             a.prev(onclick='currentSlide(slideIndex-1)') ❮
             a.next(onclick='currentSlide(slideIndex+1)') ❯
         br
         // The dots/circles
         div(style='text-align:center')
-            span.dot(onclick='currentSlide(0)')
-            span.dot(onclick='currentSlide(1)')
-            span.dot(onclick='currentSlide(2)')
+            each _, i in restaurants
+                span.dot(onclick=`currentSlide(${i})`)
     article
         h2 Welcome to HealFood Melbourne!
         span.byline Brought to you by The Artisans

@@ -2,7 +2,15 @@ let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
 
 let home = function(req, res){
-    res.render('index');
+    Restaurant.find(function(err, restaurants){
+        if(!err){
+            res.render('index', {
+                restaurants: restaurants
+            });
+        }else{
+            res.sendStatus(404);
+        }
+    }).limit(5);
 };
 
 let maps = function(req, res){
