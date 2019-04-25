@@ -45,8 +45,6 @@ article{
 
 /* Navbar container */
 .navbar {
-    grid-area: nav;
-    overflow: hidden;
     background-color: #333;
     font-family: Arial, serif;
     width: 70px;
@@ -65,9 +63,6 @@ article{
 }
 
 /* The dropdown container */
-.dropdown {
-    overflow: hidden;
-}
 
 /* Dropdown button */
 .dropdown .dropbtn {
@@ -89,11 +84,9 @@ article{
 /* Dropdown content (hidden by default) */
 .dropdown-content {
     display: none;
-    position: absolute;
     background-color: #e7c48a;
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 1;
 }
 
 /* Links inside the dropdown */
@@ -101,7 +94,6 @@ article{
     float: none;
     color: black;
     padding: 12px 16px;
-    text-decoration: none;
     display: block;
     text-align: left;
 }
