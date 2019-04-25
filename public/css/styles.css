@@ -1,5 +1,7 @@
 body {
     background: url('/images/woodBack.jpg');
+    max-width: 970px;
+    margin: 0 auto;
 }
 a {
     text-decoration: none;
@@ -15,9 +17,8 @@ a:focus {
 .homepage {
     display:grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 40px 120px 300px 80px;
+    grid-template-rows: 120px 300px 80px;
     grid-template-areas:
-            "nav"
             "header"
             "figure"
             "article";
@@ -49,6 +50,8 @@ article{
     background-color: #333;
     font-family: Arial, serif;
     width: 70px;
+    position: absolute;
+    top: 2.25rem;
 }
 
 /* Links inside the navbar */
