@@ -41,9 +41,9 @@ let findRestaurantByID = function(req,res){
     let restInx = req.params.id;
     Restaurant.findById(restInx,function(err,restaurant){
         if(!err){
-            res.write(`Restaurant ID: ${restInx}\n`);
-            res.write(restaurant.toString());
-            res.send();
+            res.render('detail', {
+                r: restaurant
+            });
         }else{
             res.sendStatus(404);
         }
