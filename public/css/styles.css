@@ -271,6 +271,12 @@ article{
     }
 }
 
+/* restaurant detail */
+.detail {
+    font-size: 1.25rem;
+    color: wheat;
+}
+
 @media screen and (max-width: 520px) {
     .page {
         grid-template-areas: "header" "nav" "figure" "article";

@@ -1,0 +1,20 @@
+extends default
+
+block content
+    .detail
+        img(src=`${r.photo}`, alt=`${r.name}`)
+        div Rating #{r.rating}
+        div Address
+            a(href="/maps", style="color: inherit; display: inline-table")
+                | #{r.address}
+                i(style="margin-left: 1rem;").fas.fa-map-marker-alt
+        p(style="font-weight: bold; font-size: 1.5rem") Overview
+        p
+        | A hamburger (short: burger) is a sandwich consisting of one or more cooked patties
+        | of ground meat, usually beef, placed inside a sliced bread roll or bun. The patty
+        | may be pan fried, grilled, or flame broiled. Hamburgers are often served with cheese,
+        | lettuce, tomato, onion, pickles, bacon, or chiles; condiments such as ketchup,
+        | mayonnaise, mustard, relish, or "special sauce"; and are frequently placed on sesame
+        | seed buns. A hamburger topped with cheese is called a cheeseburger.
+
+        p(style="font-weight: bold; font-size: 1.5rem") Reviews
