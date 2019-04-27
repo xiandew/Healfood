@@ -259,7 +259,7 @@ article{
         margin: 0 4%;
     }
     header {
-        padding-left: 80px;
+        padding: 0 80px;
         margin: 0;
     }
     #mapid {
@@ -278,21 +278,11 @@ article{
 }
 
 @media screen and (max-width: 520px) {
-    .page {
-        grid-template-areas: "header" "nav" "figure" "article";
-    }
-    header {
-        padding-left: 0;
-        margin: 0;
+    .navbar {
+        top: 0;
     }
     header h1 {
         margin: 1rem 0;
-    }
-    .navbar {
-        grid-area: nav;
-        margin-bottom: 1.5rem;
-        position: relative;
-        top: 0;
     }
     figure, .slideshow-container {
         width: 100%;
