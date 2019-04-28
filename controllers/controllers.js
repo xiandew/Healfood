@@ -2,15 +2,12 @@ let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
 let path = require("path");
 
-var myPath = __dirname + '/index.html';
-console.log(myPath);
-
-let welcome = function(req, res){
-    res.sendFile(path.join(__dirname + '/index.html'));
-};
+//let myPath = __dirname + '/index.html';
+//console.log(myPath);
 
 let home = function(req, res){
     res.sendFile(path.join(__dirname + '/index.html'));
+    window.location.assign("index.html");
 };
 
 let maps = function(req, res){
