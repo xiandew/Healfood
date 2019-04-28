@@ -4,7 +4,7 @@ let router = express.Router();
 let controllers = require("../controllers/controllers.js");
 
 //The first page the user sees
-router.get("/", controllers.welcome);
+router.get("/", controllers.home);
 
 //Take the user to the Homepage
 router.get("/home", controllers.home);
