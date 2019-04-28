@@ -259,7 +259,6 @@ article{
         margin: 0 4%;
     }
     header {
-        padding: 0 80px;
         margin: 0;
     }
     #mapid {
@@ -280,9 +279,6 @@ article{
 @media screen and (max-width: 520px) {
     .navbar {
         top: 0;
-    }
-    header h1 {
-        margin: 1rem 0;
     }
     figure, .slideshow-container {
         width: 100%;
