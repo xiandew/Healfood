@@ -26,6 +26,7 @@ a:focus {
             "header"
             "figure"
             "article";
+    margin-bottom: 5rem;
 }
 header{
     grid-area: header;
