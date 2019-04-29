@@ -1,0 +1,16 @@
+extends default
+
+block append head
+    link(rel='stylesheet', type='text/css', href='/css/reviews.css')
+
+block content
+    form(method="post")
+        if buttonName == "sign up"
+            input.username(type='username', name='username', placeholder='username')
+            br(style='clear:both')
+        input.email(type='email', name='email', placeholder='email')
+        br(style='clear:both')
+        if buttonName == "log in"
+            input.password(type='password', name='password', placeholder='password')
+            br(style='clear:both')
+        button(type='submit') #{buttonName}

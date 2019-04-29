@@ -38,8 +38,7 @@ let findAllRestaurants = function(req,res){
 };
 
 let findRestaurantByID = function(req,res){
-    let restInx = req.params.id;
-    Restaurant.findById(restInx,function(err,restaurant){
+    Restaurant.findById(req.params.id,function(err,restaurant){
         if(!err){
             res.render('detail', {
                 r: restaurant

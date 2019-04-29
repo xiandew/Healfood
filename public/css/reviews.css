@@ -1,0 +1,78 @@
+form {
+    width: 630px;
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+}
+form input {
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #acacac;
+    outline: none;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-top: 1rem;
+    box-sizing: border-box;
+}
+.rating-stars-wrapper {
+    color: #fff;
+    margin-top: 2rem;
+}
+.rating-stars-wrapper p {
+    margin: 0;
+}
+.rating-stars {
+    padding: 1rem 0;
+    display: inline-block;
+    border: none;
+    font-size: 1.25rem;
+}
+.rating-stars label {
+    line-height: 30px;
+    color: #ddd;
+    float: right;
+}
+.rating-stars .half::before {
+    content: "\f089";
+    position: absolute;
+}
+.rating-stars label::before {
+    margin: 0 10px 0 0;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+.rating-stars > input[type="radio"] {
+    display: none;
+}
+
+.description {
+    position: relative;
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #acacac;
+    outline: none;
+    padding: 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    width: 100%;
+    resize: none;
+    margin-top: 1rem;
+    box-sizing: border-box;
+}
+button[type="submit"] {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    border-radius: 4.1px;
+    border: none;
+    outline: none;
+    min-width: 130px;
+    max-width: 100px;
+    margin-top: 1rem;
+    display: inline-block;
+}
