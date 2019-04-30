@@ -4,23 +4,16 @@ block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    if errors
-        ul.alert.alert-error
-            each error in errors
-                li #{error.msg}
+    .wrapper
+        .btn
+            a(href='/new-restaurant') Add new restaurant
     form(method="post")
-        if action === "log in"
-            input(type='email', name='email', placeholder='Email', value=body.email)
-            input(type='password', name='password', placeholder='Password', value=body.password)
-
-        if action === "sign up"
-            input(type='username', name='username', placeholder='Username', value=body.username)
-            input(type='email', name='email', placeholder='Email', value=body.email)
-            input(type='password', name='password', placeholder='Password', value=body.password)
-            input(type='password', name='confirmPwd', placeholder='Confirm password', value=body.confirmPwd)
-
-        button(type='submit') #{action}
-
-        if action === "log in"
-            .signup
-                a(href='/signup') CREATE ACCOUNT
+        label(for='username') Username
+        input(id='username', type='username', name='username', placeholder='Username', value=session.user.name)
+        label(for='email') Email
+        input(id='email', type='email', name='email', placeholder='Email', value=session.user.email)
+        button(type='submit', style="max-width: unset") Update
+    hr
+    .wrapper
+        .btn
+            a(href='/reset-pwd') Change Password

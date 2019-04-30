@@ -1,10 +1,10 @@
-form, .alert {
+form, .wrapper, .alert {
     max-width: 630px;
     width: 100%;
     margin: 0 auto;
     font-family: "Montserrat", sans-serif;
 }
-form input {
+form input, form textarea {
     border-radius: 3px;
     background-color: white;
     border: 1px solid #acacac;
@@ -14,6 +14,12 @@ form input {
     width: 100%;
     margin-top: 1rem;
     box-sizing: border-box;
+}
+form label {
+    font-variant: all-petite-caps;
+    color: white;
+    margin-top: 2rem;
+    display: block;
 }
 .rating-stars-wrapper {
     color: #fff;
@@ -62,7 +68,7 @@ form input {
     margin-top: 1rem;
     box-sizing: border-box;
 }
-button[type="submit"], .signup {
+button[type="submit"], .btn {
     cursor: pointer;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
@@ -74,17 +80,15 @@ button[type="submit"], .signup {
     border: none;
     outline: none;
     min-width: 130px;
-    max-width: 100px;
     margin-top: 1rem;
     display: inline-block;
 }
 
-.signup {
+.btn {
     background-color: wheat;
-    max-width: none;
     display: table;
 }
-.signup a {
+.btn a {
     box-shadow: none;
     color: black;
 }
@@ -102,4 +106,9 @@ button[type="submit"], .signup {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
 }

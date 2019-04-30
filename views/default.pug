@@ -23,7 +23,7 @@ html(lang='en')
                     a(href='/reviews') Reviews
                     a(href='/restaurants') Restaurants
                     if session
-                        a(href=`/user/${session.user._id}`) My account
+                        a(href='/user') My account
                         a(href='/logout') Log out
                     else
                         a(href='/login') Log in

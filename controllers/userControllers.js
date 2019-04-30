@@ -1,12 +1,15 @@
+let GET_user = function (req, res) {
+    res.render('user');
+};
 let GET_login = function (req, res) {
-    res.render('user', {
+    res.render('auth', {
         action: "log in",
         errors: req.errors,
         body:req.body
     });
 };
 let GET_signup = function (req, res) {
-    res.render('user', {
+    res.render('auth', {
         action: "sign up",
         errors: req.errors,
         body:req.body
@@ -250,6 +253,7 @@ let POST_resendToken = function (req, res) {
     });
 };
 
+module.exports.GET_user = GET_user;
 module.exports.GET_login = GET_login;
 module.exports.GET_signup = GET_signup;
 module.exports.GET_logout = GET_logout;

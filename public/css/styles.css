@@ -3,8 +3,7 @@
 }
 
 body {
-    background: url('/images/woodBack.jpg');
-    background-attachment: fixed;
+    background: url('/images/woodBack.jpg') fixed;
     max-width: 970px;
     margin: 0 auto;
 }
@@ -210,8 +209,8 @@ article{
 }
 .restaurant-list li {
     border: 1px solid aliceblue;
-    margin-bottom: 5rem;
-    border-radius: 1rem;
+    margin-bottom: 2.5rem;
+    border-radius: 0.5rem;
     overflow: hidden;
 }
 .restaurant-list * {
@@ -219,22 +218,25 @@ article{
 }
 .restaurant-list .photo {
     display: block;
-    width: 12rem;
+    width: 15rem;
     float: left;
 }
 .restaurant-list img {
     vertical-align: middle;
-    max-width: 100%;
+    width: 100%;
 }
 .restaurant-list .detail {
     color: #e7c48a;
     float: left;
     margin: 0 1rem;
+    font-family: "Montserrat", sans-serif;
 }
 .restaurant-list .detail .name {
     display: inline-table;
     vertical-align: top;
+    margin-top: 0.25rem;
     color: inherit;
+    font-variant: all-petite-caps;
 }
 .restaurant-list .detail .rating {
     margin: 0.5rem 0;
