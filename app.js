@@ -1,6 +1,6 @@
 // Set up express
 let express = require('express');
-let app = express();
+app = express();
 
 // Database setup
 require('./models/db.js');
@@ -28,6 +28,11 @@ app.use(expressSession({
 // Routes setup
 let routes = require('./routes/routes.js');
 app.use('/', routes);
+
+app.use(function (err, req, res) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 // Start the server
 const PORT = process.env.PORT || 3000;

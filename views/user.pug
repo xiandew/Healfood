@@ -4,20 +4,20 @@ block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    if req.errors
+    if errors
         ul.alert.alert-error
-            each error in req.errors
+            each error in errors
                 li #{error.msg}
     form(method="post")
         if action === "log in"
-            input(type='email', name='email', placeholder='Email', value=req.body.email)
-            input(type='password', name='password', placeholder='Password', value=req.body.password)
+            input(type='email', name='email', placeholder='Email', value=body.email)
+            input(type='password', name='password', placeholder='Password', value=body.password)
 
         if action === "sign up"
-            input(type='username', name='username', placeholder='Username', value=req.body.username)
-            input(type='email', name='email', placeholder='Email', value=req.body.email)
-            input(type='password', name='password', placeholder='Password', value=req.body.password)
-            input(type='password', name='confirmPwd', placeholder='Confirm password', value=req.body.confirmPwd)
+            input(type='username', name='username', placeholder='Username', value=body.username)
+            input(type='email', name='email', placeholder='Email', value=body.email)
+            input(type='password', name='password', placeholder='Password', value=body.password)
+            input(type='password', name='confirmPwd', placeholder='Confirm password', value=body.confirmPwd)
 
         button(type='submit') #{action}
 

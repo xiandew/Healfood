@@ -22,8 +22,8 @@ html(lang='en')
                     a(href='/maps') Maps
                     a(href='/reviews') Reviews
                     a(href='/restaurants') Restaurants
-                    if req.session.loggedIn
-                        a(href='/user/') My account
+                    if session
+                        a(href=`/user/${session.user._id}`) My account
                         a(href='/logout') Log out
                     else
                         a(href='/login') Log in

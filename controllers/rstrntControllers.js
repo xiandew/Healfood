@@ -2,10 +2,10 @@ let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
 
 let findAllRestaurants = function(req,res){
-    Restaurant.find(function(err, restaurants){
+    Restaurant.find(function(err, rstrnts){
         if(!err){
-            res.render('restaurants', {
-                restaurants: restaurants
+            res.render('rstrnts', {
+                rstrnts: rstrnts
             });
         }else{
             res.sendStatus(404);

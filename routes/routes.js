@@ -30,6 +30,7 @@ router.get('/new-review', function (req, res) {
 
 router.get('/login', userControllers.GET_login);
 router.get('/signup', userControllers.GET_signup);
+router.get('/logout', userControllers.GET_logout);
 router.get('/confirm-email/:token', userControllers.GET_confirmEmail);
 
 router.post('/login', userControllers.POST_login);
