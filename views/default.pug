@@ -13,17 +13,20 @@ html(lang='en')
 
     body
         .page
-            .navbar
-                .dropdown
-                    button.dropbtn
-                        | Menu
-                        i.fa.fa-caret-down
-                    .dropdown-content
-                        a(href='/') Home
-                        a(href='/maps') Maps
-                        a(href='/ratings') Ratings
-                        a(href='/reviews') Reviews
-                        a(href='/restaurants') All Restaurants
+            .menu
+                button.dropbtn
+                    | Menu
+                    i.fa.fa-caret-down
+                .menu-content
+                    a(href='/') Home
+                    a(href='/maps') Maps
+                    a(href='/reviews') Reviews
+                    a(href='/restaurants') Restaurants
+                    if req.session.loggedIn
+                        a(href='/user/') My account
+                        a(href='/logout') Log out
+                    else
+                        a(href='/login') Log in
             header
                 h1#logo HealFood Melbourne
 

@@ -23,6 +23,7 @@ a:focus {
     display:grid;
     grid-template-columns: 1fr;
     grid-template-areas:
+            "nav"
             "header"
             "figure"
             "article";
@@ -50,70 +51,54 @@ article{
 }
 
 /* Navbar container */
-.navbar {
+.menu {
     background-color: #333;
     font-family: Arial, serif;
-    width: 70px;
-    position: absolute;
-    top: 2.25rem;
 }
 
-/* Links inside the navbar */
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: #e7c48a;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* The dropdown container */
+/* The menu container */
 
 /* Dropdown button */
-.dropdown .dropbtn {
+.dropbtn {
+    display: none;
+}
+.menu .dropbtn {
     font-size: 16px;
     border: none;
     outline: none;
     color: #dfcdff;
     background-color: inherit;
-    font-family: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
+    font-family: inherit;
+    margin: 0;
     height: 40px;
     width: 100%;
 }
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #b19569;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
+/* Dropdown content */
+.menu-content {
     background-color: #e7c48a;
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 99999;
+    line-height: 40px;
+    height: 40px;
+    width: 100%;
+    max-width: 970px;
+    text-align: center;
+    overflow: hidden;
 }
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    float: none;
+.menu-content a {
     color: black;
     padding: 12px 16px;
-    display: block;
-    text-align: left;
 }
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
+.menu-content a:hover {
+    display: inline;
+    box-shadow: none;
     background-color: #ddd;
 }
 
+
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-    display: block;
+    /*display: block;*/
 }
 
 /* Slideshow container */
@@ -255,9 +240,45 @@ article{
     margin: 0.5rem 0;
 }
 
+/* restaurant detail */
+.detail {
+    font-size: 1.25rem;
+    color: wheat;
+}
+
 @media screen and (max-width: 970px) {
     body {
         margin: 0 4%;
+    }
+    .menu {
+        width: 100%;
+    }
+    .dropbtn {
+        display: block;
+    }
+    .menu-content {
+        display: none;
+        position: absolute;
+        z-index: 99999;
+        width: 92%;
+        height: auto;
+        line-height: unset;
+    }
+    .menu-content a {
+        display: block;
+        text-align: left;
+        font-size: 16px;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    .menu:hover .dropbtn {
+        background-color: #b19569;
+    }
+    .menu:hover .menu-content {
+        display: block;
+    }
+    .menu-content a:hover {
+        display: block;
     }
     header {
         margin: 0;
@@ -271,16 +292,7 @@ article{
     }
 }
 
-/* restaurant detail */
-.detail {
-    font-size: 1.25rem;
-    color: wheat;
-}
-
 @media screen and (max-width: 520px) {
-    .navbar {
-        top: 0;
-    }
     figure, .slideshow-container {
         width: 100%;
     }

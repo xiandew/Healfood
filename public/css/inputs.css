@@ -1,5 +1,6 @@
-form {
-    width: 630px;
+form, .alert {
+    max-width: 630px;
+    width: 100%;
     margin: 0 auto;
     font-family: "Montserrat", sans-serif;
 }
@@ -39,7 +40,7 @@ form input {
 .rating-stars label::before {
     margin: 0 10px 0 0;
     font-size: 1.25em;
-    font-family: FontAwesome;
+    font-family: FontAwesome, serif;
     display: inline-block;
     content: "\f005";
 }
@@ -61,7 +62,8 @@ form input {
     margin-top: 1rem;
     box-sizing: border-box;
 }
-button[type="submit"] {
+button[type="submit"], .signup {
+    cursor: pointer;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 1.3px;
@@ -75,4 +77,29 @@ button[type="submit"] {
     max-width: 100px;
     margin-top: 1rem;
     display: inline-block;
+}
+
+.signup {
+    background-color: wheat;
+    max-width: none;
+    display: table;
+}
+.signup a {
+    box-shadow: none;
+    color: black;
+}
+
+.alert {
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 15px 15px 15px 2rem;
+}
+.alert li {
+    line-height: 1.5;
+}
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }
