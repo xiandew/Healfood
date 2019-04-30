@@ -1,12 +1,29 @@
+let GET_login = function (req, res) {
+    res.render('user', {
+        action: "log in",
+        req: req
+    });
+};
+let GET_signup = function (req, res) {
+    res.render('user', {
+        action: "sign up",
+        req: req
+    });
+};
+
 /**
  * Reference: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
+ *
  * POST /login
  * Sign in with email and password
  */
 let crypto = require('crypto');
 let nodemailer = require('nodemailer');
+let mongoose = require('mongoose');
+let User = mongoose.model('users');
+let Token = mongoose.model('tokens');
 
-let login = function (req, res) {
+let POST_login = function (req, res, next) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.assert('password', 'Password cannot be blank').notEmpty();
@@ -14,7 +31,11 @@ let login = function (req, res) {
 
     // Check for validation erro
     var errors = req.validationErrors();
-    if (errors) return res.status(400).send(errors);
+    if (errors) {
+        req.errors = errors;
+        req.action = "log in";
+        return next();
+    }
 
     User.findOne({email: req.body.email}, function (err, user) {
         if (!user) return res.status(401).send({
@@ -47,18 +68,19 @@ let login = function (req, res) {
 /**
  * POST /signup
  */
-let signup = function (req, res) {
-    console.log(req.body);
-    req.assert('name', 'Name cannot be blank').notEmpty();
+let POST_signup = function (req, res, next) {
+    req.assert('username', 'Name cannot be blank').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password must be at least 4 characters long').len(4);
+    req.assert('password', 'Password must be at least 8 characters long').len(8);
+    req.assert('password', 'Passwords do not match').equals(req.body.confirmPwd);
     req.sanitize('email').normalizeEmail({remove_dots: false});
 
     // Check for validation errors
     var errors = req.validationErrors();
     if (errors) {
-        return res.status(400).send(errors);
+        req.errors = errors;
+        return next();
     }
 
     // Make sure this account doesn't already exist
@@ -71,7 +93,7 @@ let signup = function (req, res) {
 
         // Create and save the user
         user = new User({
-            name: req.body.name,
+            name: req.body.username,
             email: req.body.email,
             password: req.body.password
         });
@@ -105,8 +127,8 @@ let signup = function (req, res) {
                     from: 'xiandew@student.unimelb.edu.au',
                     to: user.email,
                     subject: 'Account Verification Token',
-                    text: `Hello,\n\nPlease verify your account by clicking the link: \nhttp:\/\/\
-                    ${req.headers.host}\/confirmation\/${token.token}.\n`
+                    text: `Hello, ${user.name}\n\nPlease verify your account by clicking the link: \n
+                    http://${req.headers.host}/confirm-email/${token.token}.\n`
                 };
                 transporter.sendMail(mailOptions, function (err) {
                     if (err) {
@@ -121,27 +143,21 @@ let signup = function (req, res) {
 
 /**
  * When the user clicks the link in the confirmation email.
- * POST /confirm-email
+ * GET /confirm-email
  */
-let confirmEmail = function (req, res) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('token', 'Token cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    // Check for validation errors
-    var errors = req.validationErrors();
-    if (errors) return res.status(400).send(errors);
+let GET_confirmEmail = function (req, res) {
 
     // Find a matching token
-    Token.findOne({token: req.body.token}, function (err, token) {
-        if (!token) return res.status(400).send({
-            type: 'not-verified',
-            msg: 'We were unable to find a valid token. Your token my have expired.'
-        });
+    Token.findOne({token: req.params.token}, function (err, token) {
+        if (!token) {
+            return res.status(400).send({
+                type: 'not-verified',
+                msg: 'We were unable to find a valid token. Your token may have expired.'
+            });
+        }
 
         // If we found a token, find a matching user
-        User.findOne({_id: token._userId, email: req.body.email}, function (err, user) {
+        User.findOne({_id: token._userId}, function (err, user) {
             if (!user)
                 return res.status(400).send({
                     msg: 'We were unable to find a user for this token.'
@@ -171,7 +187,7 @@ let confirmEmail = function (req, res) {
  * We’re going to need a mechanism for reissuing confirmation tokens.
  * POST /resend
  */
-let resendToken = function (req, res) {
+let POST_resendToken = function (req, res) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({remove_dots: false});
@@ -225,8 +241,9 @@ let resendToken = function (req, res) {
     });
 };
 
-module.exports.login = login;
-module.exports.signup = signup;
-module.exports.confirmEmail = confirmEmail;
-module.exports.resendToken = resendToken;
-
+module.exports.GET_login = GET_login;
+module.exports.GET_signup = GET_signup;
+module.exports.GET_confirmEmail = GET_confirmEmail;
+module.exports.POST_login = POST_login;
+module.exports.POST_signup = POST_signup;
+module.exports.POST_resendToken = POST_resendToken;

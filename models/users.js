@@ -23,9 +23,8 @@ userSchema.pre('save', function(next) {
 
     // generate a salt
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-        //if (err)
-            //return next(err);
-        return next('test next');
+        if (err)
+            return next(err);
 
         // hash the password using our new salt
         bcrypt.hash(user.password, salt, function(err, hash) {
@@ -37,9 +36,6 @@ userSchema.pre('save', function(next) {
             next();
         });
     });
-});
-userSchema.pre('save', function(err) {
-    throw new Error(err);
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {

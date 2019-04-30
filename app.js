@@ -2,20 +2,28 @@
 let express = require('express');
 let app = express();
 
-let bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-let expressValidator = require('express-validator');
-app.use(expressValidator());
-
-app.use(express.static('public'));
+// Database setup
+require('./models/db.js');
 
 // set the view engine
 app.set('view engine', 'pug');
 
-// Database setup
-require('./models/db.js');
+app.use(express.static('public'));
+
+let bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+let expressValidator = require('express-validator');
+app.use(expressValidator());
+
+let expressSession = require('express-session');
+app.use(expressSession({
+    secret: 'secret-code',
+    cookie: {maxAge: 86400},
+    resave: false,
+    saveUninitialized: true
+}));
 
 // Routes setup
 let routes = require('./routes/routes.js');
@@ -23,6 +31,6 @@ app.use('/', routes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, function(){
+app.listen(PORT, function () {
     console.log(`Express listening on port ${PORT}`);
 });
