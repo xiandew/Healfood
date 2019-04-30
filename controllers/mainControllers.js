@@ -4,9 +4,8 @@ let Restaurant = mongoose.model('restaurants');
 let home = function(req, res){
     Restaurant.find(function(err, rstrnts){
         if(!err){
-            req.rstrnts = rstrnts;
             res.render('index', {
-                req: req
+                rstrnts: rstrnts
             });
         }else{
             res.sendStatus(404);

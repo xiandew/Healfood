@@ -1,14 +1,21 @@
 let GET_login = function (req, res) {
     res.render('user', {
         action: "log in",
-        req: req
+        errors: req.errors,
+        body:req.body
     });
 };
 let GET_signup = function (req, res) {
     res.render('user', {
         action: "sign up",
-        req: req
+        errors: req.errors,
+        body:req.body
     });
+};
+let GET_logout = function (req, res) {
+    delete app.locals.session;
+    req.session.destroy();
+    res.redirect('/');
 };
 
 /**
@@ -59,8 +66,10 @@ let POST_login = function (req, res, next) {
                 msg: 'Your account has not been verified.'
             });
 
-            // Login successful, write token, and send back user
-            res.send({token: generateToken(user), user: user.toJSON()});
+            // Login successful
+            req.session.user = user;
+            app.locals.session = req.session;
+            res.redirect('/');
         });
     });
 };
@@ -243,6 +252,7 @@ let POST_resendToken = function (req, res) {
 
 module.exports.GET_login = GET_login;
 module.exports.GET_signup = GET_signup;
+module.exports.GET_logout = GET_logout;
 module.exports.GET_confirmEmail = GET_confirmEmail;
 module.exports.POST_login = POST_login;
 module.exports.POST_signup = POST_signup;
