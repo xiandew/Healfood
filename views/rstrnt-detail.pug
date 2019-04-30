@@ -1,0 +1,17 @@
+extends default
+
+block content
+    .detail
+        .photos
+            img(src=`${r.photo}`, alt=`${r.name}`)
+        .info
+            div Rating #{r.rating}
+            a(href="/maps", style="color: inherit; display: inline-table")
+                | #{r.address}
+                i(style="margin-left: 1rem;").fas.fa-map-marker-alt
+    .overview
+        div(style="font-weight: bold; font-size: 1.5rem") Overview
+        p #{r.description}
+
+    .Reviews
+

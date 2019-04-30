@@ -3,8 +3,8 @@ let restaurantSchema = mongoose.Schema(
     {
         "name": String,
         "address": {type: String, unique: true},
-        "distance": String,
         "rating": String,
+        "description": String,
         "photo": String
     }
 );

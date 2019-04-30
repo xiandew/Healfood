@@ -18,16 +18,18 @@ router.get("/ratings", mainControllers.ratings);
 router.get("/reviews", mainControllers.reviews);
 
 
+router.get('/new-restaurant', rstrntControllers.newRestaurant);
 router.get('/restaurants', rstrntControllers.findAllRestaurants);
 router.get('/restaurants/id/:id', rstrntControllers.findRestaurantByID);
 router.get('/restaurants/name/:name', rstrntControllers.findRestaurantByName);
 
+router.post('/new-restaurant', rstrntControllers.POST_newRstrnt);
 
 router.get('/new-review', function (req, res) {
     res.render('new-review');
 });
 
-
+router.get('/user', userControllers.GET_user);
 router.get('/login', userControllers.GET_login);
 router.get('/signup', userControllers.GET_signup);
 router.get('/logout', userControllers.GET_logout);
@@ -47,6 +49,9 @@ router.use(function (req, res) {
                 userControllers.GET_signup(req, res);
                 break;
         }
+    }
+    if (req.rstrntUpdated) {
+        rstrntControllers.newRestaurant(req, res);
     }
 });
 
