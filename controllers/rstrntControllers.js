@@ -4,12 +4,7 @@ let Restaurant = mongoose.model('restaurants');
 /**
  * GET
  */
-let newRestaurant = function (req, res, next) {
-    if (!req.session.user) {
-        req.errors = [{msg: "Please log in"}];
-        req.url = '/login';
-        return next();
-    }
+let newRestaurant = function (req, res) {
     res.render('new-rstrnt', {
         rstrntUpdated: req.rstrntUpdated,
         body: req.body
@@ -70,7 +65,7 @@ let storage = multer.diskStorage({
     }
 });
 let parser = multer({storage: storage});
-let POST_newRstrnt = [parser.single("photo"), function (req, res, next) {
+let POST_newRstrnt = [parser.single("photo"), function (req, res) {
     // Make sure this address doesn't already exist
     Restaurant.findOne({email: req.body.address}, function (err, rstrnt) {
 
@@ -91,8 +86,7 @@ let POST_newRstrnt = [parser.single("photo"), function (req, res, next) {
             if (err) {
                 return res.status(500).send({msg: err.message});
             }
-            req.rstrntUpdated = true;
-            next();
+            return newRestaurant(req, res);
         });
     });
 }];
