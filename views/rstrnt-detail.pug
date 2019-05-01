@@ -5,6 +5,7 @@ block append head
 
 block content
     .detail
+        .name #{r.name}
         .photo
             img(src=`${r.photo}`, alt=`${r.name}`)
         .overview
@@ -22,5 +23,5 @@ block content
         .Reviews
             .title Reviews
         .btn
-            a(href='/new-review') Add review
+            a(href=`/new-review/${r._id}`) Add review
 

@@ -21,19 +21,40 @@ let GET_logout = function (req, res) {
     res.redirect('/');
 };
 
+let isLoggedIn = function (req, res, next) {
+    if (!req.session.user) {
+        req.errors = [{msg: "Please log in"}];
+        req.url = '/login';
+        return GET_login();
+    }
+    next();
+};
+
 /**
  * Reference: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
  *
  * POST /login
  * Sign in with email and password
  */
-let crypto = require('crypto');
-let nodemailer = require('nodemailer');
 let mongoose = require('mongoose');
 let User = mongoose.model('users');
 let Token = mongoose.model('tokens');
+let crypto = require('crypto');
+let nodemailer = require('nodemailer');
 
-let POST_login = function (req, res, next) {
+// settings for sending email
+let transporter = nodemailer.createTransport({
+    service: 'SendGrid',
+    auth: {
+        user: "apikey",
+        pass: "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"
+    }
+});
+let mailOptions = {
+    from: 'xiandew@student.unimelb.edu.au',
+};
+
+let POST_login = function (req, res) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.assert('password', 'Password cannot be blank').notEmpty();
@@ -43,8 +64,7 @@ let POST_login = function (req, res, next) {
     var errors = req.validationErrors();
     if (errors) {
         req.errors = errors;
-        req.action = "log in";
-        return next();
+        return GET_login(req, res);
     }
 
     User.findOne({email: req.body.email}, function (err, user) {
@@ -80,7 +100,7 @@ let POST_login = function (req, res, next) {
 /**
  * POST /signup
  */
-let POST_signup = function (req, res, next) {
+let POST_signup = function (req, res) {
     req.assert('username', 'Name cannot be blank').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
@@ -92,7 +112,7 @@ let POST_signup = function (req, res, next) {
     var errors = req.validationErrors();
     if (errors) {
         req.errors = errors;
-        return next();
+        return GET_signup(req, res);
     }
 
     // Make sure this account doesn't already exist
@@ -127,21 +147,12 @@ let POST_signup = function (req, res, next) {
                     return res.status(500).send({msg: err.message});
                 }
 
+                mailOptions[to] = user.email;
+                mailOptions[subject] = 'Account Verification Token';
+                mailOptions[text] = `Hello, ${user.name}\n\nPlease verify your account by clicking the link: \n
+                    http://${req.headers.host}/confirm-email/${token.token}.\n`;
+
                 // Send the email
-                let transporter = nodemailer.createTransport({
-                    service: 'SendGrid',
-                    auth: {
-                        user: "apikey",
-                        pass: "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"
-                    }
-                });
-                let mailOptions = {
-                    from: 'xiandew@student.unimelb.edu.au',
-                    to: user.email,
-                    subject: 'Account Verification Token',
-                    text: `Hello, ${user.name}\n\nPlease verify your account by clicking the link: \n
-                    http://${req.headers.host}/confirm-email/${token.token}.\n`
-                };
                 transporter.sendMail(mailOptions, function (err) {
                     if (err) {
                         return res.status(500).send({msg: err.message});
@@ -230,18 +241,12 @@ let POST_resendToken = function (req, res) {
                 return res.status(500).send({msg: err.message});
             }
 
+            mailOptions[to] = user.email;
+            mailOptions[subject] = 'Account Verification Token';
+            mailOptions[text] = `Hello, ${user.name}\n\nPlease verify your account by clicking the link: \n
+                    http://${req.headers.host}/confirm-email/${token.token}.\n`;
+
             // Send the email
-            var transporter = nodemailer.createTransport({
-                service: 'Sendgrid',
-                auth: {user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD}
-            });
-            var mailOptions = {
-                from: 'no-reply@codemoto.io',
-                to: user.email,
-                subject: 'Account Verification Token',
-                text: `Hello,\n\nPlease verify your account by clicking the link: \n
-                http:\/\/${req.headers.host}\/confirmation\/${token.token}.\n`
-            };
             transporter.sendMail(mailOptions, function (err) {
                 if (err) {
                     return res.status(500).send({msg: err.message});
@@ -253,6 +258,7 @@ let POST_resendToken = function (req, res) {
     });
 };
 
+module.exports.isLoggedIn = isLoggedIn;
 module.exports.GET_user = GET_user;
 module.exports.GET_login = GET_login;
 module.exports.GET_signup = GET_signup;
