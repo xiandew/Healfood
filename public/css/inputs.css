@@ -45,18 +45,21 @@ form label {
     float: right;
     margin: 0;
     padding: 0;
+    /*font-family: FontAwesome, "Font Awesome\ 5 Free";*/
+    font-family: "Font Awesome\ 5 Free";
     font-weight: 900;
 }
 
 .rating-stars .half::before {
     content: "\f089";
     position: absolute;
+    width: 15px;
+    overflow: hidden;
 }
 
 .rating-stars label::before {
     margin: 0 10px 0 0;
-    font-size: 1.25rem;
-    font-family: FontAwesome;
+    font-size: 1.5rem;
     display: inline-block;
     content: "\f005";
 }
