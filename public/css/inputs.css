@@ -55,8 +55,8 @@ form label {
 
 .rating-stars label::before {
     margin: 0 10px 0 0;
-    font-size: 1.25em;
-    font-family: "FontAwesome";
+    font-size: 1.25rem;
+    font-family: FontAwesome;
     display: inline-block;
     content: "\f005";
 }
