@@ -4,8 +4,12 @@ let Restaurant = mongoose.model('restaurants');
 /**
  * GET
  */
-
-let newRestaurant = function (req, res) {
+let newRestaurant = function (req, res, next) {
+    if (!req.session.user) {
+        req.errors = [{msg: "Please log in"}];
+        req.url = '/login';
+        return next();
+    }
     res.render('new-rstrnt', {
         rstrntUpdated: req.rstrntUpdated,
         body: req.body
@@ -92,7 +96,6 @@ let POST_newRstrnt = [parser.single("photo"), function (req, res, next) {
         });
     });
 }];
-
 
 
 module.exports.POST_newRstrnt = POST_newRstrnt;

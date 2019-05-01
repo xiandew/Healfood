@@ -5,14 +5,14 @@ let GET_login = function (req, res) {
     res.render('auth', {
         action: "log in",
         errors: req.errors,
-        body:req.body
+        body: req.body
     });
 };
 let GET_signup = function (req, res) {
     res.render('auth', {
         action: "sign up",
         errors: req.errors,
-        body:req.body
+        body: req.body
     });
 };
 let GET_logout = function (req, res) {
