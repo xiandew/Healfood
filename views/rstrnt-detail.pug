@@ -1,17 +1,26 @@
 extends default
 
+block append head
+    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+
 block content
     .detail
-        .photos
+        .photo
             img(src=`${r.photo}`, alt=`${r.name}`)
+        .overview
+            .title Overview
+            | #{r.description}
         .info
-            div Rating #{r.rating}
-            a(href="/maps", style="color: inherit; display: inline-table")
+            .title Rating
+            | #{r.rating}
+            .title Address
+            a.address(href="/maps")
+                i.fas.fa-map-marker-alt
                 | #{r.address}
-                i(style="margin-left: 1rem;").fas.fa-map-marker-alt
-    .overview
-        div(style="font-weight: bold; font-size: 1.5rem") Overview
-        p #{r.description}
 
-    .Reviews
+
+        .Reviews
+            .title Reviews
+        .btn
+            a(href='/new-review') Add review
 
