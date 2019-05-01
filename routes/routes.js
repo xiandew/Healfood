@@ -21,8 +21,8 @@ router.post('/new-restaurant', rstrntControllers.POST_newRstrnt);
 
 
 // review logic
-router.get("/reviews", reviewControllers.reviews);
-router.get('/new-review/:rstrnt_id', userControllers.isLoggedIn, reviewControllers.newReview);
+router.get("/reviews", reviewControllers.GET_reviews);
+router.get('/new-review/:rstrnt_id', userControllers.isLoggedIn, reviewControllers.GET_newReview);
 
 
 // user logic
