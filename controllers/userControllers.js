@@ -25,7 +25,7 @@ let isLoggedIn = function (req, res, next) {
     if (!req.session.user) {
         req.errors = [{msg: "Please log in"}];
         req.url = '/login';
-        return GET_login();
+        return GET_login(req, res);
     }
     next();
 };
