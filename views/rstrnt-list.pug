@@ -9,4 +9,9 @@ block content
                 .detail
                     a.name(href=`./restaurants/id/${r.id}`)
                         h2 #{r.name}
-                    .rating Average Rating: #{r.rating}
+                    .rating
+                        | Average Rating:
+                        if r.rating < 0
+                            | No ratings yet
+                        else
+                            #{r.rating}

@@ -290,7 +290,7 @@ article {
 }
 .address:hover {
     box-shadow: none;
-    color: #ddd;
+    color: #fff;
 }
 
 @media screen and (max-width: 970px) {
