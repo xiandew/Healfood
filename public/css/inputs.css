@@ -2,7 +2,6 @@ form, .wrapper, .alert {
     max-width: 630px;
     width: 100%;
     margin: 0 auto;
-    font-family: "Montserrat", sans-serif;
 }
 
 form input, form textarea {
@@ -88,7 +87,6 @@ form label {
     border: 1px solid #acacac;
     outline: none;
     padding: 0.8rem;
-    font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
     width: 100%;
     resize: none;
@@ -99,7 +97,6 @@ form label {
 button[type="submit"], .btn {
     cursor: pointer;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
     letter-spacing: 1.3px;
     text-transform: uppercase;
     font-size: 0.9rem;
