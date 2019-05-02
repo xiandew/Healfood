@@ -4,16 +4,18 @@ let GET_user = function (req, res) {
 let GET_login = function (req, res) {
     res.render('auth', {
         action: "log in",
-        errors: req.errors,
+        errors: req.session.errors,
         body: req.body
     });
+    delete req.session.errors;
 };
 let GET_signup = function (req, res) {
     res.render('auth', {
         action: "sign up",
-        errors: req.errors,
+        errors: req.session.errors,
         body: req.body
     });
+    delete req.session.errors;
 };
 let GET_logout = function (req, res) {
     delete app.locals.session;
@@ -23,9 +25,8 @@ let GET_logout = function (req, res) {
 
 let isLoggedIn = function (req, res, next) {
     if (!req.session.user) {
-        req.errors = [{msg: "Please log in"}];
-        req.url = '/login';
-        return GET_login(req, res);
+        req.session.errors = [{msg: "Please log in"}];
+        return res.redirect('/login');
     }
     next();
 };
@@ -63,8 +64,8 @@ let POST_login = function (req, res) {
     // Check for validation erro
     var errors = req.validationErrors();
     if (errors) {
-        req.errors = errors;
-        return GET_login(req, res);
+        req.session.errors = errors;
+        return res.redirect('/login');
     }
 
     User.findOne({email: req.body.email}, function (err, user) {
@@ -111,8 +112,8 @@ let POST_signup = function (req, res) {
     // Check for validation errors
     var errors = req.validationErrors();
     if (errors) {
-        req.errors = errors;
-        return GET_signup(req, res);
+        req.session.errors = errors;
+        return res.redirect('/signup');
     }
 
     // Make sure this account doesn't already exist
