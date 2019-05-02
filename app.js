@@ -29,7 +29,7 @@ app.use(expressSession({
 let routes = require('./routes/routes.js');
 app.use('/', routes);
 
-app.use(function (err, req, res) {
+app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });

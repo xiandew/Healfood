@@ -12,8 +12,11 @@ block content
             .title Overview
             | #{r.description}
         .info
-            .title Average Rating
-            | #{r.rating}
+            .title Rating
+                span(style='font-size: 1rem;font-variant: all-petite-caps;padding-left: 1rem;font-family: Arial;')
+                    | (Average)
+            if r.rating === -1
+                | No ratings yet
             .title Address
             a.address(href="/maps")
                 i.fas.fa-map-marker-alt
