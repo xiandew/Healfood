@@ -101,12 +101,6 @@ article {
     background-color: #ddd;
 }
 
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    /*display: block;*/
-}
-
 /* Slideshow container */
 .slideshow-container {
     position: relative;
@@ -302,8 +296,14 @@ article {
         margin: 0 4%;
     }
 
+    header h1 {
+        margin-top: 0;
+    }
+
     .menu {
         width: 70px;
+        border-radius: 0 0 20px;
+        overflow: hidden;
     }
 
     .dropbtn {
@@ -327,15 +327,15 @@ article {
         text-decoration: none;
     }
 
+    .menu:hover {
+        border-radius: 0;
+    }
+
     .menu:hover .dropbtn {
         background-color: #b19569;
     }
 
-    .menu:hover .menu-content {
-        display: block;
-    }
-
-    .menu-content a:hover {
+    .menu:hover .menu-content, .menu-content a:hover {
         display: block;
     }
 
