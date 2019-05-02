@@ -15,7 +15,7 @@ block content
             .title Rating
                 span(style='font-size: 1rem;font-variant: all-petite-caps;padding-left: 1rem;font-family: Arial;')
                     | (Average)
-            if r.rating === -1
+            if r.rating < 0
                 | No ratings yet
             .title Address
             a.address(href="/maps")
