@@ -65,7 +65,7 @@ let POST_login = function (req, res) {
     var errors = req.validationErrors();
     if (errors) {
         req.session.errors = errors;
-        return res.redirect('/login');
+        return GET_login(req, res);
     }
 
     User.findOne({email: req.body.email}, function (err, user) {
@@ -113,7 +113,7 @@ let POST_signup = function (req, res) {
     var errors = req.validationErrors();
     if (errors) {
         req.session.errors = errors;
-        return res.redirect('/signup');
+        return GET_signup(req, res);
     }
 
     // Make sure this account doesn't already exist
