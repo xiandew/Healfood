@@ -69,12 +69,12 @@ let POST_newRstrnt = [parser.single("photo"), function (req, res) {
     // Make sure this address doesn't already exist
     Restaurant.findOne({email: req.body.address}, function (err, rstrnt) {
 
-        // Make sure user doesn't already exist
+        // Make sure the restaurant doesn't already exist
         if (rstrnt) return res.status(400).send({
-            msg: 'The email address you have entered is already associated with another account.'
+            msg: 'The restaurant of the same address had been already added.'
         });
 
-        // Create and save the user
+        // Create and save the restaurant
         rstrnt = new Restaurant({
             name: req.body.name,
             address: req.body.address,
