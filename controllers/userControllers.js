@@ -8,6 +8,7 @@ let GET_login = function (req, res) {
         body: req.body
     });
     delete req.session.errors;
+    req.session.save();
 };
 let GET_signup = function (req, res) {
     res.render('auth', {
@@ -16,6 +17,7 @@ let GET_signup = function (req, res) {
         body: req.body
     });
     delete req.session.errors;
+    req.session.save();
 };
 let GET_logout = function (req, res) {
     delete app.locals.session;
