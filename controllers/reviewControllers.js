@@ -8,7 +8,7 @@ let GET_reviews = function(req, res){
 
 let GET_newReview = function (req, res) {
 
-    res.render('new-review');
+    res.render('edit-review');
 };
 
 module.exports.GET_reviews = GET_reviews;

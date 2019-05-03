@@ -4,13 +4,21 @@ let Restaurant = mongoose.model('restaurants');
 /**
  * GET
  */
-let newRestaurant = function (req, res) {
-    res.render('new-rstrnt', {
-        rstrntUpdated: req.rstrntUpdated,
-        body: req.body
+let GET_editRestaurant = function (req, res) {
+    Restaurant.findById(req.params.id, function (err, rstrnt) {
+        if (!err) {
+            res.render('edit-rstrnt', {
+                msg: req.session.msg,
+                r: rstrnt
+            });
+            delete req.session.msg;
+            req.session.save();
+        } else {
+            res.render('edit-rstrnt');
+        }
     });
 };
-let findAllRestaurants = function (req, res) {
+let GET_allRestaurants = function (req, res) {
     Restaurant.find(function (err, rstrnts) {
         if (!err) {
             res.render('rstrnt-list', {
@@ -21,33 +29,33 @@ let findAllRestaurants = function (req, res) {
         }
     });
 };
-let findRestaurantByID = function (req, res) {
-    Restaurant.findById(req.params.id, function (err, restaurant) {
+let GET_restaurantByID = function (req, res) {
+    Restaurant.findById(req.params.id, function (err, rstrnt) {
         if (!err) {
             res.render('rstrnt-detail', {
-                r: restaurant
+                r: rstrnt
             });
         } else {
             res.sendStatus(404);
         }
     });
 };
-let findRestaurantByName = function (req, res) {
-    let restName = req.params.name;
-    Restaurant.find({name: restName}, function (err, restaurant) {
+let GET_restaurantByName = function (req, res) {
+    Restaurant.find({name: req.params.name}, function (err, rstrnt) {
         if (!err) {
-            res.write(`Restaurant name: ${restName}\n`);
-            res.write(restaurant.toString());
+            res.write(`Restaurant name: ${rstrnt.name}\n`);
+            res.write(rstrnt.toString());
             res.send();
         } else {
             res.sendStatus(404);
         }
     });
 };
-module.exports.newRestaurant = newRestaurant;
-module.exports.findAllRestaurants = findAllRestaurants;
-module.exports.findRestaurantByID = findRestaurantByID;
-module.exports.findRestaurantByName = findRestaurantByName;
+
+module.exports.GET_editRestaurant = GET_editRestaurant;
+module.exports.GET_allRestaurants = GET_allRestaurants;
+module.exports.GET_restaurantByID = GET_restaurantByID;
+module.exports.GET_restaurantByName = GET_restaurantByName;
 
 /**
  * POST
@@ -65,31 +73,38 @@ let storage = multer.diskStorage({
     }
 });
 let parser = multer({storage: storage});
-let POST_newRstrnt = [parser.single("photo"), function (req, res) {
+let POST_editRestaurant = [parser.single("photo"), function (req, res) {
     // Make sure this address doesn't already exist
-    Restaurant.findOne({email: req.body.address}, function (err, rstrnt) {
+    Restaurant.findOne({address: req.body.address}, function (err, rstrnt) {
 
-        // Make sure the restaurant doesn't already exist
-        if (rstrnt) return res.status(400).send({
-            msg: 'The restaurant of the same address had been already added.'
-        });
-
-        // Create and save the restaurant
-        rstrnt = new Restaurant({
+        let newRstrnt = {
             name: req.body.name,
             address: req.body.address,
             description: req.body.description,
             photo: '/images/uploads/' + req.file.filename
-        });
+        };
 
+        if (rstrnt) {
+            // remove the old photo file
+            fs.unlink('public' + rstrnt.photo, function (err) {
+                if (err) throw err;
+            });
+            // update instead if restaurant already exists
+            Object.assign(rstrnt, newRstrnt);
+        } else {
+            // Create the restaurant if the restaurant doesn't exist
+            rstrnt = new Restaurant(newRstrnt);
+        }
+
+        // Save the restaurant
         rstrnt.save(function (err) {
-            if (err) {
-                return res.status(500).send({msg: err.message});
-            }
-            return newRestaurant(req, res);
+            if (err) return res.status(500).send({msg: err.message});
         });
+        req.session.msg = "Restaurant updated!";
+        req.session.save();
+        req.params.id = rstrnt._id;
+        return GET_newRestaurant(req, res);
     });
 }];
 
-
-module.exports.POST_newRstrnt = POST_newRstrnt;
+module.exports.POST_editRestaurant = POST_editRestaurant;

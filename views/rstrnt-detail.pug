@@ -8,13 +8,12 @@ block content
         .name #{r.name}
         .photo
             img(src=`${r.photo}`, alt=`${r.name}`)
+        a.btn(href=`/edit-restaurant/${r._id}`) Edit this restaurant
         .overview
             .title Overview
             | #{r.description}
         .info
-            .title Rating
-                span(style='font-size: 1rem;font-variant: all-petite-caps;padding-left: 1rem;font-family: Arial;')
-                    | (Average)
+            .title Average Rating
             if r.rating < 0
                 | No ratings yet
             .title Address
@@ -25,6 +24,6 @@ block content
 
         .Reviews
             .title Reviews
-        .btn
-            a(href=`/new-review/${r._id}`) Add review
+
+        a.btn(href=`/edit-review/${r._id}`) Add review
 

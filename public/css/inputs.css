@@ -105,18 +105,19 @@ button[type="submit"], .btn {
     border: none;
     outline: none;
     min-width: 130px;
-    margin-top: 1rem;
+    margin: 1rem 0;
     display: inline-block;
 }
 
-.btn {
+a.btn {
     background-color: wheat;
-    display: table;
-}
-
-.btn a {
+    margin: 0;
     box-shadow: none;
     color: black;
+}
+
+a.btn:hover {
+    display: table;
 }
 
 .alert {
