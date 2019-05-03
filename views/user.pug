@@ -4,16 +4,11 @@ block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    .wrapper
-        .btn
-            a(href='/new-restaurant') Add new restaurant
     form(method="post")
         label(for='username') Username
         input(id='username', type='username', name='username', placeholder='Username', value=session.user.name)
         label(for='email') Email
         input(id='email', type='email', name='email', placeholder='Email', value=session.user.email)
-        button(type='submit', style="max-width: unset") Update
-    hr
+        button(type='submit', style="margin-top: 2rem;") Update
     .wrapper
-        .btn
-            a(href='/reset-pwd') Change Password
+        a.btn(href='/reset-pwd') Change Password

@@ -12,17 +12,17 @@ router.get("/maps", mainControllers.maps);
 
 
 // restaurant logic
-router.get('/new-restaurant', userControllers.isLoggedIn, rstrntControllers.newRestaurant);
-router.get('/restaurants', rstrntControllers.findAllRestaurants);
-router.get('/restaurants/id/:id', rstrntControllers.findRestaurantByID);
-router.get('/restaurants/name/:name', rstrntControllers.findRestaurantByName);
+router.get('/restaurants', rstrntControllers.GET_allRestaurants);
+router.get('/restaurants/id/:id', rstrntControllers.GET_restaurantByID);
+router.get('/restaurants/name/:name', rstrntControllers.GET_restaurantByName);
+router.get(['/edit-restaurant', '/edit-restaurant/:id'], userControllers.isLoggedIn, rstrntControllers.GET_editRestaurant);
 
-router.post('/new-restaurant', rstrntControllers.POST_newRstrnt);
+router.post(['/edit-restaurant', '/edit-restaurant/:id'], rstrntControllers.POST_editRestaurant);
 
 
 // review logic
 router.get("/reviews", reviewControllers.GET_reviews);
-router.get('/new-review/:rstrnt_id', userControllers.isLoggedIn, reviewControllers.GET_newReview);
+router.get('/edit-review/:id', userControllers.isLoggedIn, reviewControllers.GET_newReview);
 
 
 // user logic

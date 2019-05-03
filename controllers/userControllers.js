@@ -94,6 +94,7 @@ let POST_login = function (req, res) {
 
             // Login successful
             req.session.user = user;
+            req.session.save();
             app.locals.session = req.session;
             res.redirect('/');
         });

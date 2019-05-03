@@ -1,6 +1,11 @@
 extends default
 
+block append head
+    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+
 block content
+    .wrapper(style="padding: 0 10% 2rem; max-width: unset")
+        a.btn(href='/edit-restaurant') Add new restaurant
     ul.restaurant-list
         each r in rstrnts
             li
