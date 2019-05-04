@@ -1,37 +1,100 @@
+let isLoggedIn = function (req, res, next) {
+    if (!req.session.user) {
+        req.session.errors = [{msg: "Please log in"}];
+        req.session.redirect_url = req.url;
+        req.session.save();
+        return res.redirect('/login');
+    }
+    next();
+};
+
+module.exports.isLoggedIn = isLoggedIn;
+
+
 let GET_user = function (req, res) {
     res.render('user');
 };
-let GET_login = function (req, res) {
+
+function auth(action, req, res) {
     res.render('auth', {
-        action: "log in",
+        action: action,
         errors: req.session.errors,
+        msg: req.session.msg,
         body: req.body
     });
     delete req.session.errors;
+    delete req.session.msg;
     req.session.save();
+}
+
+let GET_login = function (req, res) {
+    auth("log in", req, res);
 };
 let GET_signup = function (req, res) {
-    res.render('auth', {
-        action: "sign up",
-        errors: req.session.errors,
-        body: req.body
-    });
-    delete req.session.errors;
-    req.session.save();
+    auth("sign up", req, res);
 };
+
 let GET_logout = function (req, res) {
     delete app.locals.session;
     req.session.destroy();
     res.redirect('/');
 };
 
-let isLoggedIn = function (req, res, next) {
-    if (!req.session.user) {
-        req.session.errors = [{msg: "Please log in"}];
-        return res.redirect('/login');
-    }
-    next();
+/**
+ * When the user clicks the link in the confirmation email.
+ * GET /confirm-email
+ */
+let GET_confirmEmail = function (req, res) {
+
+    // Find a matching token
+    Token.findOne({token: req.params.token}, function (err, token) {
+        if (!token) {
+            req.session.errors = [{msg: 'We were unable to find a valid token. Your token may have expired.'}];
+            req.session.save();
+            return res.redirect('/resend');
+        }
+
+        // If we found a token, find a matching user
+        User.findOne({_id: token._userId}, function (err, user) {
+            if (!user) {
+                req.session.errors = [{msg: 'We were unable to find a user for this token. The account may be deleted'}];
+                req.session.save();
+                return res.redirect('/signup');
+            }
+            if (user.isVerified) {
+                req.session.errors = [{msg: 'This user has already been verified.'}];
+                req.session.save();
+                return res.redirect('/login');
+            }
+
+            // Verify and save the user
+            user.isVerified = true;
+            user.save(function (err) {
+                if (err) {
+                    req.session.errors = [{msg: err.message}];
+                    req.session.save();
+                    return res.redirect('/resend');
+                }
+                req.session.msg = "The account has been verified. Please log in.";
+                req.session.save();
+                return res.redirect('/login');
+            });
+        });
+    });
 };
+
+let GET_resendToken = function (req, res) {
+    auth("resend token", req, res);
+};
+
+module.exports.GET_user = GET_user;
+module.exports.GET_login = GET_login;
+module.exports.GET_signup = GET_signup;
+module.exports.GET_logout = GET_logout;
+
+module.exports.GET_confirmEmail = GET_confirmEmail;
+module.exports.GET_resendToken = GET_resendToken;
+
 
 /**
  * Reference: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
@@ -67,36 +130,50 @@ let POST_login = function (req, res) {
     var errors = req.validationErrors();
     if (errors) {
         req.session.errors = errors;
+        req.session.save();
         return GET_login(req, res);
     }
 
     User.findOne({email: req.body.email}, function (err, user) {
-        if (!user) return res.status(401).send({
-            msg: `The email address ${req.body.email} is not associated with any account.
+        if (!user) {
+            req.session.errors = [{
+                msg: `The email address ${req.body.email} is not associated with any account.
             Double-check your email address and try again.`
-        });
+            }];
+            req.session.save();
+            return GET_login(req, res);
+        }
 
         user.comparePassword(req.body.password, function (err, isMatch) {
             if (err) {
                 throw new Error(err);
             }
             if (!isMatch) {
-                return res.status(401).send({
-                    msg: 'Invalid email or password'
-                });
+                req.session.errors = [{msg: 'Invalid password'}];
+                req.session.save();
+                return GET_login(req, res);
             }
 
             // Make sure the user has been verified
-            if (!user.isVerified) return res.status(401).send({
-                type: 'not-verified',
-                msg: 'Your account has not been verified.'
-            });
+            if (!user.isVerified) {
+                req.session.errors = [{
+                    msg: `Your account has not been verified.
+                Please verify your account by click the link sent to ${req.body.email}`
+                }];
+                req.session.save();
+                return GET_login(req, res);
+            }
 
             // Login successful
             req.session.user = user;
-            req.session.save();
+            let redirect_url = '/';
+            if (req.session.redirect_url) {
+                redirect_url = req.session.redirect_url;
+                delete req.session.redirect_url;
+            }
             app.locals.session = req.session;
-            res.redirect('/');
+            req.session.save();
+            return res.redirect(redirect_url);
         });
     });
 };
@@ -116,6 +193,7 @@ let POST_signup = function (req, res) {
     var errors = req.validationErrors();
     if (errors) {
         req.session.errors = errors;
+        req.session.save();
         return GET_signup(req, res);
     }
 
@@ -123,9 +201,11 @@ let POST_signup = function (req, res) {
     User.findOne({email: req.body.email}, function (err, user) {
 
         // Make sure user doesn't already exist
-        if (user) return res.status(400).send({
-            msg: 'The email address you have entered is already associated with another account.'
-        });
+        if (user) {
+            req.session.errors = [{msg: 'The email address you have entered is already associated with another account.'}];
+            req.session.save();
+            return GET_signup(req, res);
+        }
 
         // Create and save the user
         user = new User({
@@ -136,7 +216,9 @@ let POST_signup = function (req, res) {
 
         user.save(function (err) {
             if (err) {
-                return res.status(500).send({msg: err.message});
+                req.session.errors = [{msg: err.message}];
+                req.session.save();
+                return GET_signup(req, res);
             }
 
             // Create a verification token for this user
@@ -159,51 +241,14 @@ let POST_signup = function (req, res) {
                 // Send the email
                 transporter.sendMail(mailOptions, function (err) {
                     if (err) {
-                        return res.status(500).send({msg: err.message});
+                        req.session.errors = [{msg: err.message}];
+                        req.session.save();
+                        return GET_signup(req, res);
                     }
-                    res.status(200).send(`A verification email has been sent to ${user.email}.`);
+                    req.session.msg = `A verification email has been sent to ${user.email}.`;
+                    req.session.save();
+                    return GET_signup(req, res);
                 });
-            });
-        });
-    });
-};
-
-/**
- * When the user clicks the link in the confirmation email.
- * GET /confirm-email
- */
-let GET_confirmEmail = function (req, res) {
-
-    // Find a matching token
-    Token.findOne({token: req.params.token}, function (err, token) {
-        if (!token) {
-            return res.status(400).send({
-                type: 'not-verified',
-                msg: 'We were unable to find a valid token. Your token may have expired.'
-            });
-        }
-
-        // If we found a token, find a matching user
-        User.findOne({_id: token._userId}, function (err, user) {
-            if (!user)
-                return res.status(400).send({
-                    msg: 'We were unable to find a user for this token.'
-                });
-            if (user.isVerified)
-                return res.status(400).send({
-                    type: 'already-verified',
-                    msg: 'This user has already been verified.'
-                });
-
-            // Verify and save the user
-            user.isVerified = true;
-            user.save(function (err) {
-                if (err) {
-                    return res.status(500).send({
-                        msg: err.message
-                    });
-                }
-                res.status(200).send("The account has been verified. Please log in.");
             });
         });
     });
@@ -220,21 +265,27 @@ let POST_resendToken = function (req, res) {
     req.sanitize('email').normalizeEmail({remove_dots: false});
 
     // Check for validation errors
-    var errors = req.validationErrors();
-    if (errors) return res.status(400).send(errors);
+    let errors = req.validationErrors();
+    if (errors) {
+        req.session.errors = errors;
+        req.session.save();
+        return GET_resendToken(req, res);
+    }
 
     User.findOne({email: req.body.email}, function (err, user) {
-        if (!user)
-            return res.status(400).send({
-                msg: 'We were unable to find a user with that email.'
-            });
-        if (user.isVerified)
-            return res.status(400).send({
-                msg: 'This account has already been verified. Please log in.'
-            });
+        if (!user) {
+            req.session.errors = [{msg: 'We were unable to find a user with that email.'}];
+            req.session.save();
+            return GET_resendToken(req, res);
+        }
+        if (user.isVerified) {
+            req.session.errors = [{msg: 'This account has already been verified. Please log in.'}];
+            req.session.save();
+            return res.redirect('/login');
+        }
 
         // Create a verification token, save it, and send email
-        var token = new Token({
+        let token = new Token({
             _userId: user._id,
             token: crypto.randomBytes(16).toString('hex')
         });
@@ -242,7 +293,9 @@ let POST_resendToken = function (req, res) {
         // Save the token
         token.save(function (err) {
             if (err) {
-                return res.status(500).send({msg: err.message});
+                req.session.errors = [{msg: err.message}];
+                req.session.save();
+                return GET_resendToken(req, res);
             }
 
             mailOptions[to] = user.email;
@@ -253,21 +306,18 @@ let POST_resendToken = function (req, res) {
             // Send the email
             transporter.sendMail(mailOptions, function (err) {
                 if (err) {
-                    return res.status(500).send({msg: err.message});
+                    req.session.errors = [{msg: err.message}];
+                } else {
+                    req.session.msg = `A verification email has been sent to ${user.email}.`;
                 }
-                res.status(200).send(`A verification email has been sent to ${user.email}.`);
+                req.session.save();
+                return GET_resendToken(req, res);
             });
         });
 
     });
 };
 
-module.exports.isLoggedIn = isLoggedIn;
-module.exports.GET_user = GET_user;
-module.exports.GET_login = GET_login;
-module.exports.GET_signup = GET_signup;
-module.exports.GET_logout = GET_logout;
-module.exports.GET_confirmEmail = GET_confirmEmail;
 module.exports.POST_login = POST_login;
 module.exports.POST_signup = POST_signup;
 module.exports.POST_resendToken = POST_resendToken;

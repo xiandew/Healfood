@@ -1,20 +1,25 @@
-extend default
+extends parents/form
 
-block append head
-    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+block append content
+    .wrapper(style='margin-bottom:2rem')
+        - urlGoBack = r ? `/restaurants/id/${r._id}` : '/restaurants'
+        a.btn(href=urlGoBack) Go back
 
-block content
-    if msg
-        .alert.alert-success #{msg}
     form(method='post', enctype="multipart/form-data")
-        if r.photo
+        if r
             img(src=r.photo)
-        label Select a photo for the restaurant
+        label Update the photo of the restaurant
         input(type='file', name='photo', placeholder="Photo")
-        input(type='name', name='name', placeholder="Name", value=r.name)
-        input(type='address', name='address', placeholder='Address', value=r.address)
+        if r
+            label Name
+        input(type='name', name='name', placeholder="Name", value=r ? r.name : "")
+        if r
+            label Address
+        input(type='address', name='address', placeholder='Address', value=r ? r.address : "")
+        if r
+            label Description
         textarea(name='description', placeholder='Description')
-            if r.description
+            if r
                 | #{r.description}
 
         button(type='submit') Submit

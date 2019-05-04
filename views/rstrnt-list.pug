@@ -1,10 +1,10 @@
-extends default
+extends parents/default
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    .wrapper(style="padding: 0 10% 2rem; max-width: unset")
+    .wrapper(style="padding: 0 0 2rem;max-width: unset")
         a.btn(href='/edit-restaurant') Add new restaurant
     ul.restaurant-list
         each r in rstrnts
@@ -12,8 +12,8 @@ block content
                 .photo
                     img(src=`${r.photo}`, alt=`${r.name}`)
                 .detail
-                    a.name(href=`./restaurants/id/${r.id}`)
-                        h2 #{r.name}
+                    .name
+                        a(href=`./restaurants/id/${r.id}`) #{r.name}
                     .rating
                         | Average Rating:
                         if r.rating < 0
