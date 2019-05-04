@@ -1,13 +1,6 @@
-extends default
+extends parents/form
 
-block append head
-    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
-
-block content
-    if errors
-        ul.alert.alert-error
-            each error in errors
-                li #{error.msg}
+block append content
     form(method="post")
         if action === "log in"
             input(type='email', name='email', placeholder='Email', value=body.email)
@@ -18,6 +11,10 @@ block content
             input(type='email', name='email', placeholder='Email', value=body.email)
             input(type='password', name='password', placeholder='Password', value=body.password)
             input(type='password', name='confirmPwd', placeholder='Confirm password', value=body.confirmPwd)
+
+        if action === "resend token"
+            label Please enter your email
+            input(type='email', name='email', placeholder='Email', value=body.email)
 
         button(type='submit') #{action}
 

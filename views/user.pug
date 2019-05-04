@@ -1,9 +1,6 @@
-extends default
+extends parents/form
 
-block append head
-    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
-
-block content
+block append content
     form(method="post")
         label(for='username') Username
         input(id='username', type='username', name='username', placeholder='Username', value=session.user.name)

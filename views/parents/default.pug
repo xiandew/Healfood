@@ -22,7 +22,7 @@ html(lang='en')
                     a(href='/maps') Maps
                     a(href='/reviews') Reviews
                     a(href='/restaurants') Restaurants
-                    if session
+                    if session && session.user
                         a(href='/user') My account
                         a(href='/logout') Log out
                     else
