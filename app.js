@@ -14,9 +14,6 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-let expressValidator = require('express-validator');
-app.use(expressValidator());
-
 let expressSession = require('express-session');
 app.use(expressSession({
     secret: 'secret-code',

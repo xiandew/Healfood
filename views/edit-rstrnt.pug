@@ -8,18 +8,19 @@ block append content
     form(method='post', enctype="multipart/form-data")
         if r
             img(src=r.photo)
-        label Update the photo of the restaurant
-        input(type='file', name='photo', placeholder="Photo")
-        if r
+            label Update the photo of the restaurant
+            input(type='file', name='photo', placeholder="Photo")
             label Name
-        input(type='name', name='name', placeholder="Name", value=r ? r.name : "")
-        if r
+            input(type='name', name='name', placeholder="Name", value=r.name)
             label Address
-        input(type='address', name='address', placeholder='Address', value=r ? r.address : "")
-        if r
+            input(type='address', name='address', placeholder='Address', value=r.address)
             label Description
-        textarea(name='description', placeholder='Description')
-            if r
-                | #{r.description}
+            textarea(name='description', placeholder='Description') #{r.description}
+        else
+            label Update the photo of the restaurant
+            input(type='file', name='photo', placeholder="Photo")
+            input(type='name', name='name', placeholder="Name")
+            input(type='address', name='address', placeholder='Address')
+            textarea(name='description', placeholder='Description')
 
         button(type='submit') Submit

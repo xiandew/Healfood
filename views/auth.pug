@@ -1,6 +1,7 @@
 extends parents/form
 
 block append content
+    - body = body === undefined ? {} : body;
     form(method="post")
         if action === "log in"
             input(type='email', name='email', placeholder='Email', value=body.email)
@@ -10,7 +11,7 @@ block append content
             input(type='username', name='username', placeholder='Username', value=body.username)
             input(type='email', name='email', placeholder='Email', value=body.email)
             input(type='password', name='password', placeholder='Password', value=body.password)
-            input(type='password', name='confirmPwd', placeholder='Confirm password', value=body.confirmPwd)
+            input(type='password', name='pwdConfirm', placeholder='Confirm password', value=body.pwdConfirm)
 
         if action === "resend token"
             label Please enter your email

@@ -48,9 +48,9 @@ router.get('/logout', userControllers.GET_logout);
 router.get('/confirm-email/:token', userControllers.GET_confirmEmail);
 router.get('/resend', userControllers.GET_resendToken);
 
-router.post('/login', userControllers.POST_login);
-router.post('/signup', userControllers.POST_signup);
-router.post('/resend', userControllers.POST_resendToken);
+router.post('/login', userControllers.validateInputs, userControllers.POST_login);
+router.post('/signup', userControllers.validateInputs, userControllers.POST_signup);
+router.post('/resend', userControllers.validateInputs, userControllers.POST_resendToken);
 
 
 module.exports = router;
