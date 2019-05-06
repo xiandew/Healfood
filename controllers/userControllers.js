@@ -20,10 +20,11 @@ function auth(action, req, res) {
         action: action,
         errors: req.session.errors,
         msg: req.session.msg,
-        body: req.body
+        body: req.session.body
     });
     delete req.session.errors;
     delete req.session.msg;
+    delete req.session.body;
     req.session.save();
 }
 
@@ -95,6 +96,33 @@ module.exports.GET_logout = GET_logout;
 module.exports.GET_confirmEmail = GET_confirmEmail;
 module.exports.GET_resendToken = GET_resendToken;
 
+let {body, validationResult} = require('express-validator/check');
+let {sanitizeBody} = require('express-validator/filter');
+
+let validateInputs = [
+    body('username')
+        .not().isEmpty().withMessage('Name cannot be blank'),
+    body('email')
+        .not().isEmpty().withMessage('Email cannot be blank')
+        .isEmail().withMessage('Email is not valid'),
+    body('password')
+        .not().isEmpty().withMessage('Password cannot be blank')
+        .isLength({min: 8}).withMessage('Password must be at least 8 characters long'),
+    body('pwdConfirm')
+        .custom((value, {req}) => value === req.body.password).withMessage('Passwords do not match'),
+    sanitizeBody('email').normalizeEmail({gmail_remove_dots: true, gmail_convert_googlemaildotcom: true}),
+    function (req, res, next) {
+        // Check for validation errors
+        let errors = validationResult(req).array({onlyFirstError: true}).filter(e => e.value !== undefined);
+        if (errors) {
+            req.session.errors = errors;
+            req.session.body = req.body;
+            req.session.save();
+            return res.redirect(req.originalUrl);
+        }
+        next();
+    }
+];
 
 /**
  * Reference: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
@@ -119,29 +147,15 @@ let transporter = nodemailer.createTransport({
 let mailOptions = {
     from: 'xiandew@student.unimelb.edu.au',
 };
-
 let POST_login = function (req, res) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    // Check for validation erro
-    var errors = req.validationErrors();
-    if (errors) {
-        req.session.errors = errors;
-        req.session.save();
-        return GET_login(req, res);
-    }
-
     User.findOne({email: req.body.email}, function (err, user) {
         if (!user) {
             req.session.errors = [{
                 msg: `The email address ${req.body.email} is not associated with any account.
-            Double-check your email address and try again.`
+                Double-check your email address and try again.`
             }];
             req.session.save();
-            return GET_login(req, res);
+            return res.redirect(res.url);
         }
 
         user.comparePassword(req.body.password, function (err, isMatch) {
@@ -151,17 +165,17 @@ let POST_login = function (req, res) {
             if (!isMatch) {
                 req.session.errors = [{msg: 'Invalid password'}];
                 req.session.save();
-                return GET_login(req, res);
+                return res.redirect(res.url);
             }
 
             // Make sure the user has been verified
             if (!user.isVerified) {
                 req.session.errors = [{
                     msg: `Your account has not been verified.
-                Please verify your account by click the link sent to ${req.body.email}`
+                    Please verify your account by click the link sent to ${req.body.email}`
                 }];
                 req.session.save();
-                return GET_login(req, res);
+                return res.redirect(res.url);
             }
 
             // Login successful
@@ -182,20 +196,6 @@ let POST_login = function (req, res) {
  * POST /signup
  */
 let POST_signup = function (req, res) {
-    req.assert('username', 'Name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password must be at least 8 characters long').len(8);
-    req.assert('password', 'Passwords do not match').equals(req.body.confirmPwd);
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    // Check for validation errors
-    var errors = req.validationErrors();
-    if (errors) {
-        req.session.errors = errors;
-        req.session.save();
-        return GET_signup(req, res);
-    }
 
     // Make sure this account doesn't already exist
     User.findOne({email: req.body.email}, function (err, user) {
@@ -260,17 +260,6 @@ let POST_signup = function (req, res) {
  * POST /resend
  */
 let POST_resendToken = function (req, res) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    // Check for validation errors
-    let errors = req.validationErrors();
-    if (errors) {
-        req.session.errors = errors;
-        req.session.save();
-        return GET_resendToken(req, res);
-    }
 
     User.findOne({email: req.body.email}, function (err, user) {
         if (!user) {
@@ -318,6 +307,7 @@ let POST_resendToken = function (req, res) {
     });
 };
 
+module.exports.validateInputs = validateInputs;
 module.exports.POST_login = POST_login;
 module.exports.POST_signup = POST_signup;
 module.exports.POST_resendToken = POST_resendToken;
