@@ -114,7 +114,7 @@ let validateInputs = [
     function (req, res, next) {
         // Check for validation errors
         let errors = validationResult(req).array({onlyFirstError: true}).filter(e => e.value !== undefined);
-        if (errors) {
+        if (errors.length) {
             req.session.errors = errors;
             req.session.body = req.body;
             req.session.save();

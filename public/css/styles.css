@@ -289,7 +289,7 @@ article {
 }
 .address i {
     float: left;
-    margin-right: 1rem;
+    margin-right: 0.35rem;
 }
 .address:hover {
     box-shadow: none;
