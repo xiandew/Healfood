@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Restaurant = mongoose.model('restaurants');
 
 let home = function (req, res) {
-    Restaurant.find({"photo": {$exists: true}}, function (err, rstrnts) {
+    Restaurant.find({"photo": {$exists: true}}, null, {sort: {lastModified: -1}}, function (err, rstrnts) {
         if (!err) {
             res.render('index', {
                 rstrnts: rstrnts
