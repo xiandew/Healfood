@@ -1,8 +1,9 @@
 extends parents/form
 
 block append content
+    .wrapper
+        .heading You can update your personal information here
     form(method="post")
-        label You can update your personal information here
         label Username
         input(type='username', name='username', placeholder='Username', value=session.user.name)
         label Email

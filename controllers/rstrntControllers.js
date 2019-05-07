@@ -8,8 +8,6 @@ let GET_editRestaurant = function (req, res) {
     Restaurant.findById(req.params.id, function (err, rstrnt) {
         if (!err) {
             res.render('edit-rstrnt', {
-                errors: req.session.errors,
-                msg: req.session.msg,
                 r: rstrnt
             });
             delete req.session.errors;

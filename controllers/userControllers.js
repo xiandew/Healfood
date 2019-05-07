@@ -17,10 +17,7 @@ let GET_user = function (req, res) {
 
 function auth(action, req, res) {
     res.render('auth', {
-        action: action,
-        errors: req.session.errors,
-        msg: req.session.msg,
-        body: req.session.body
+        action: action
     });
     delete req.session.errors;
     delete req.session.msg;
@@ -36,9 +33,9 @@ let GET_signup = function (req, res) {
 };
 
 let GET_logout = function (req, res) {
-    delete app.locals.session;
-    req.session.destroy();
-    res.redirect('/');
+    delete req.session.user;
+    req.session.save();
+    return res.redirect('/');
 };
 
 /**
@@ -158,7 +155,6 @@ let POST_login = function (req, res) {
                 redirect_url = req.session.redirect_url;
                 delete req.session.redirect_url;
             }
-            app.locals.session = req.session;
             req.session.save();
             return res.redirect(redirect_url);
         });

@@ -1,11 +1,16 @@
-extends parents/default
+extends parents/form
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
-block content
-    include includes/rstrnt-detail
-    form(method='post', style='float: left; margin: 2rem 0 0;')
+block prepend content
+    .wrapper
+        include includes/rstrnt-detail
+
+block append content
+    form(method='post', style='margin: 2.5rem auto;')
+        .heading Add your review
+
         input.title(type='text', name='title', placeholder='title of review')
         br(style='clear:both')
         div.rating-stars-wrapper
