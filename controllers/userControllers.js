@@ -96,33 +96,6 @@ module.exports.GET_logout = GET_logout;
 module.exports.GET_confirmEmail = GET_confirmEmail;
 module.exports.GET_resendToken = GET_resendToken;
 
-let {body, validationResult} = require('express-validator/check');
-let {sanitizeBody} = require('express-validator/filter');
-
-let validateInputs = [
-    body('username')
-        .not().isEmpty().withMessage('Name cannot be blank'),
-    body('email')
-        .not().isEmpty().withMessage('Email cannot be blank')
-        .isEmail().withMessage('Email is not valid'),
-    body('password')
-        .not().isEmpty().withMessage('Password cannot be blank')
-        .isLength({min: 8}).withMessage('Password must be at least 8 characters long'),
-    body('pwdConfirm')
-        .custom((value, {req}) => value === req.body.password).withMessage('Passwords do not match'),
-    sanitizeBody('email').normalizeEmail({gmail_remove_dots: true, gmail_convert_googlemaildotcom: true}),
-    function (req, res, next) {
-        // Check for validation errors
-        let errors = validationResult(req).array({onlyFirstError: true}).filter(e => e.value !== undefined);
-        if (errors.length) {
-            req.session.errors = errors;
-            req.session.body = req.body;
-            req.session.save();
-            return res.redirect(req.originalUrl);
-        }
-        next();
-    }
-];
 
 /**
  * Reference: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
@@ -307,7 +280,6 @@ let POST_resendToken = function (req, res) {
     });
 };
 
-module.exports.validateInputs = validateInputs;
 module.exports.POST_login = POST_login;
 module.exports.POST_signup = POST_signup;
 module.exports.POST_resendToken = POST_resendToken;

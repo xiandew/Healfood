@@ -5,6 +5,8 @@ let mainControllers = require("../controllers/mainControllers.js");
 let userControllers = require("../controllers/userControllers.js");
 let rstrntControllers = require("../controllers/rstrntControllers.js");
 let reviewControllers = require("../controllers/reviewControllers.js");
+let multer = require("../controllers/multer.js");
+let validator = require("../controllers/validator.js");
 
 
 router.get("/", mainControllers.home);
@@ -23,6 +25,8 @@ router.get(
 
 router.post(
     ['/edit-restaurant', '/edit-restaurant/:id'],
+    multer.parser.single("photo"),
+    validator.validateRstrntInput,
     rstrntControllers.POST_editRestaurant
 );
 
@@ -48,9 +52,8 @@ router.get('/logout', userControllers.GET_logout);
 router.get('/confirm-email/:token', userControllers.GET_confirmEmail);
 router.get('/resend', userControllers.GET_resendToken);
 
-router.post('/login', userControllers.validateInputs, userControllers.POST_login);
-router.post('/signup', userControllers.validateInputs, userControllers.POST_signup);
-router.post('/resend', userControllers.validateInputs, userControllers.POST_resendToken);
-
+router.post('/login', validator.validateUserInput, userControllers.POST_login);
+router.post('/signup', validator.validateUserInput, userControllers.POST_signup);
+router.post('/resend', validator.validateUserInput, userControllers.POST_resendToken);
 
 module.exports = router;
