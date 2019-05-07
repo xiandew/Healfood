@@ -23,6 +23,13 @@ form label {
     display: block;
 }
 
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+    font-variant: all-petite-caps;
+}
+
 .rating-stars-wrapper {
     color: #fff;
     margin-top: 2rem;
@@ -74,9 +81,10 @@ form label {
 .rating-stars > input:checked ~ label {
     color: #FFD700;
 }
+
 .rating-stars > input:checked ~ label:hover,
 .rating-stars > input:checked ~ label:hover ~ label,
-.rating-stars > label:hover ~ input:checked ~ label{
+.rating-stars > label:hover ~ input:checked ~ label {
     color: #FFED85;
 }
 

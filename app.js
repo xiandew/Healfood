@@ -1,6 +1,6 @@
 // Set up express
 let express = require('express');
-app = express();
+let app = express();
 
 // Database setup
 require('./models/db.js');
@@ -21,6 +21,11 @@ app.use(expressSession({
     resave: false,
     saveUninitialized: true
 }));
+
+app.use(function (req, res, next) {
+    app.locals.session = req.session;
+    next();
+});
 
 // Routes setup
 let routes = require('./routes/routes.js');

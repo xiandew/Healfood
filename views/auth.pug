@@ -1,7 +1,7 @@
 extends parents/form
 
 block append content
-    - body = body === undefined ? {} : body;
+    - body = session.body === undefined ? {} : session.body;
     form(method="post")
         if action === "log in"
             input(type='email', name='email', placeholder='Email', value=body.email)

@@ -4,9 +4,12 @@ block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    if errors
-        ul.alert.alert-error
-            each error in errors
-                li #{error.msg}
-    if msg
-        .alert.alert-success #{msg}
+    if session
+        - errors = session.errors
+        - message = session.msg
+        if errors
+            ul.alert.alert-error
+                each error in errors
+                    li #{error.msg}
+        if message
+            .alert.alert-success #{message}
