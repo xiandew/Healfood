@@ -125,7 +125,7 @@ let POST_login = function (req, res) {
                 Double-check your email address and try again.`
             }];
             req.session.save();
-            return res.redirect(res.url);
+            return res.redirect(req.url);
         }
 
         user.comparePassword(req.body.password, function (err, isMatch) {
@@ -135,7 +135,7 @@ let POST_login = function (req, res) {
             if (!isMatch) {
                 req.session.errors = [{msg: 'Invalid password'}];
                 req.session.save();
-                return res.redirect(res.url);
+                return res.redirect(req.url);
             }
 
             // Make sure the user has been verified
@@ -145,7 +145,7 @@ let POST_login = function (req, res) {
                     Please verify your account by click the link sent to ${req.body.email}`
                 }];
                 req.session.save();
-                return res.redirect(res.url);
+                return res.redirect(req.url);
             }
 
             // Login successful
@@ -202,10 +202,10 @@ let POST_signup = function (req, res) {
                     return res.status(500).send({msg: err.message});
                 }
 
-                mailOptions[to] = user.email;
-                mailOptions[subject] = 'Account Verification Token';
-                mailOptions[text] = `Hello, ${user.name}\n\nPlease verify your account by clicking the link: \n
-                    http://${req.headers.host}/confirm-email/${token.token}.\n`;
+                mailOptions.to = user.email;
+                mailOptions.subject = 'Account Verification Token';
+                mailOptions.text = `Hello, ${user.name}\n\nPlease verify your account by visiting the link: \n
+                    http://${req.headers.host}/confirm-email/${token.token}\n`;
 
                 // Send the email
                 transporter.sendMail(mailOptions, function (err) {
@@ -256,10 +256,10 @@ let POST_resendToken = function (req, res) {
                 return GET_resendToken(req, res);
             }
 
-            mailOptions[to] = user.email;
-            mailOptions[subject] = 'Account Verification Token';
-            mailOptions[text] = `Hello, ${user.name}\n\nPlease verify your account by clicking the link: \n
-                    http://${req.headers.host}/confirm-email/${token.token}.\n`;
+            mailOptions.to = user.email;
+            mailOptions.subject = 'Account Verification Token';
+            mailOptions.text = `Hello, ${user.name}\n\nPlease verify your account by visiting the link: \n
+                    http://${req.headers.host}/confirm-email/${token.token}\n`;
 
             // Send the email
             transporter.sendMail(mailOptions, function (err) {
