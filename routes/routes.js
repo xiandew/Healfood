@@ -22,6 +22,7 @@ router.get(
     userControllers.isLoggedIn,
     rstrntControllers.GET_editRestaurant
 );
+router.get('/deleteRestaurant/:id', rstrntControllers.GET_deleteRestaurant);
 
 router.post(
     ['/edit-restaurant', '/edit-restaurant/:id'],

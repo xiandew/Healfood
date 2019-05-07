@@ -7,8 +7,8 @@ let GET_reviews = function (req, res) {
 };
 
 let GET_editReview = function (req, res) {
-    Restaurant.findById(req.params.id, function (err, rstrnt) {
-        if (!err) {
+    Restaurant.findById(req.params.rstrnt_id, function (err, rstrnt) {
+        if (!err && rstrnt) {
             res.render('edit-review', {
                 r: rstrnt
             });
