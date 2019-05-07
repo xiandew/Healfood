@@ -2,10 +2,13 @@ extends parents/form
 
 block append content
     form(method="post")
-        label(for='username') Username
-        input(id='username', type='username', name='username', placeholder='Username', value=session.user.name)
-        label(for='email') Email
-        input(id='email', type='email', name='email', placeholder='Email', value=session.user.email)
+        label You can update your personal information here
+        label Username
+        input(type='username', name='username', placeholder='Username', value=session.user.name)
+        label Email
+        input(type='email', name='email', placeholder='Email', value=session.user.email)
         button(type='submit', style="margin-top: 2rem;") Update
     .wrapper
-        a.btn(href='/reset-pwd') Change Password
+        a.btn(href='/reset-pwd')
+            i.fas.fa-key
+            | Reset Password

@@ -2,12 +2,12 @@ extends parents/form
 
 block append content
     .wrapper
-        - urlGoBack = r ? `/restaurants/id/${r._id}` : '/restaurants'
-        a.btn(href=urlGoBack) Go back
+        a.btn(href=(r ? `/restaurants/id/${r._id}` : '/restaurants')) Go back
 
     form(method='post', enctype="multipart/form-data")
         if r
-            img(src=r.photo)
+            if r.photo
+                img(style="margin-top:2rem", src=r.photo)
             label Update the photo of the restaurant
             input(type='file', name='photo', placeholder="Photo")
             label Name
@@ -24,3 +24,9 @@ block append content
             textarea(name='description', placeholder='Description')
 
         button(type='submit') Submit
+
+    if r && session.user.roles.includes("admin")
+        .wrapper
+            a.btn(href=`/deleteRestaurant/${r._id}`, style="color: red;")
+                i.fas.fa-exclamation-triangle
+                | Delete this restaurant

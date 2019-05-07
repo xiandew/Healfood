@@ -53,11 +53,22 @@ let GET_restaurantByName = function (req, res) {
         }
     });
 };
+let GET_deleteRestaurant = function (req, res) {
+    Restaurant.deleteOne({_id: req.params.id}, function (err) {
+        if (err) {
+            res.send(err);
+        } else {
+            req.session.msg = "Restaurant deleted!";
+            return res.redirect('/edit-restaurant');
+        }
+    });
+};
 
 module.exports.GET_editRestaurant = GET_editRestaurant;
 module.exports.GET_allRestaurants = GET_allRestaurants;
 module.exports.GET_restaurantByID = GET_restaurantByID;
 module.exports.GET_restaurantByName = GET_restaurantByName;
+module.exports.GET_deleteRestaurant = GET_deleteRestaurant;
 
 /**
  * POST

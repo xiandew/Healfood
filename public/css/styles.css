@@ -286,6 +286,7 @@ article {
 }
 .address {
     color: inherit;
+    display: block;
 }
 .address i {
     float: left;
