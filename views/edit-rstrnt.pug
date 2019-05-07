@@ -1,7 +1,7 @@
 extends parents/form
 
 block append content
-    .wrapper(style='margin-bottom:2rem')
+    .wrapper
         - urlGoBack = r ? `/restaurants/id/${r._id}` : '/restaurants'
         a.btn(href=urlGoBack) Go back
 

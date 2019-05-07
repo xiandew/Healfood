@@ -8,9 +8,11 @@ let GET_editRestaurant = function (req, res) {
     Restaurant.findById(req.params.id, function (err, rstrnt) {
         if (!err) {
             res.render('edit-rstrnt', {
+                errors: req.session.errors,
                 msg: req.session.msg,
                 r: rstrnt
             });
+            delete req.session.errors;
             delete req.session.msg;
             req.session.save();
         } else {
@@ -60,21 +62,9 @@ module.exports.GET_restaurantByName = GET_restaurantByName;
 /**
  * POST
  */
-
-/**
- * Reference: https://github.com/expressjs/multer
- */
-let multer = require("multer");
-let path = require('path');
 let fs = require("fs");
-let storage = multer.diskStorage({
-    destination: 'public/images/uploads/',
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
-});
-let parser = multer({storage: storage});
-let POST_editRestaurant = [parser.single("photo"), function (req, res) {
+
+let POST_editRestaurant = function (req, res) {
     // Make sure this address doesn't already exist
     Restaurant.findOne({address: req.body.address}, function (err, rstrnt) {
 
@@ -106,9 +96,8 @@ let POST_editRestaurant = [parser.single("photo"), function (req, res) {
         });
         req.session.msg = "Restaurant updated!";
         req.session.save();
-        req.params.id = rstrnt._id;
-        return GET_editRestaurant(req, res);
+        return res.redirect(req.param.id ? req.originalUrl : '/edit-restaurant/' + rstrnt._id);
     });
-}];
+};
 
 module.exports.POST_editRestaurant = POST_editRestaurant;
