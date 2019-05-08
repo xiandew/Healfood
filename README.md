@@ -3,7 +3,7 @@ INFO30005 project, fall 2019
 
 ## Core functionalities
 
-### Authentication
+### 1. Authentication
 
 Authentication is required if a user wants to edit restaurants
 or post reviews. Each user is identified by the email address.
@@ -56,7 +56,7 @@ router.post('/resend', validator.validateUserInput, userControllers.POST_resendT
 - User
 - Token
 
-### Restaurants
+### 2. Restaurants
 
 This functionality is for editing, posting and displaying restaurants.
 

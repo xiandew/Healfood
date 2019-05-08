@@ -205,7 +205,8 @@ let POST_signup = function (req, res) {
                 mailOptions.to = user.email;
                 mailOptions.subject = 'Account Verification Token';
                 mailOptions.text = `Hello, ${user.name}\n\nPlease verify your account by visiting the link: \n
-                    http://${req.headers.host}/confirm-email/${token.token}\n`;
+                    http://${req.headers.host}/confirm-email/${token.token}\n
+                    Note: Be sure to check your spam folder as well!`;
 
                 // Send the email
                 transporter.sendMail(mailOptions, function (err) {
@@ -259,7 +260,8 @@ let POST_resendToken = function (req, res) {
             mailOptions.to = user.email;
             mailOptions.subject = 'Account Verification Token';
             mailOptions.text = `Hello, ${user.name}\n\nPlease verify your account by visiting the link: \n
-                    http://${req.headers.host}/confirm-email/${token.token}\n`;
+                    http://${req.headers.host}/confirm-email/${token.token}\n
+                    Note: Be sure to check your spam folder as well!`;
 
             // Send the email
             transporter.sendMail(mailOptions, function (err) {
