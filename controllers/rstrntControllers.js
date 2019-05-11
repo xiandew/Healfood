@@ -85,9 +85,11 @@ let POST_editRestaurant = function (req, res) {
 
         if (req.file) {
             // remove the old photo file
-            fs.unlink('public' + rstrnt.photo, function (err) {
-                if (err) throw err;
-            });
+            if (rstrnt && rstrnt.photo) {
+                fs.unlink('public' + rstrnt.photo, function (err) {
+                    if (err) throw err;
+                });
+            }
             newRstrnt.photo = '/images/uploads/' + req.file.filename;
         }
 
