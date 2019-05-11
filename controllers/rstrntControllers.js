@@ -71,8 +71,6 @@ module.exports.GET_deleteRestaurant = GET_deleteRestaurant;
 /**
  * POST
  */
-let fs = require("fs");
-
 let POST_editRestaurant = function (req, res) {
     // Make sure this address doesn't already exist
     Restaurant.findOne({address: req.body.address}, function (err, rstrnt) {
@@ -84,13 +82,7 @@ let POST_editRestaurant = function (req, res) {
         };
 
         if (req.file) {
-            // remove the old photo file
-            if (rstrnt && rstrnt.photo) {
-                fs.unlink('public' + rstrnt.photo, function (err) {
-                    if (err) throw err;
-                });
-            }
-            newRstrnt.photo = '/images/uploads/' + req.file.filename;
+            newRstrnt.photo = req.file.url;
         }
 
         if (rstrnt) {
