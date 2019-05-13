@@ -1,0 +1,15 @@
+extends parents/form
+
+block append content
+    .wrapper
+        .heading You can update your personal information here
+    form(method="post")
+        label Username
+        input(type='username', name='username', placeholder='Username', value=session.user.name)
+        label Email
+        input(type='email', name='email', placeholder='Email', value=session.user.email)
+        button(type='submit', style="margin-top: 2rem;") Update
+    .wrapper
+        a.btn(href='/reset-pwd')
+            i.fas.fa-key
+            | Reset Password

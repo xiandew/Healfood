@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+    head
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport', content='width=device-width, initial-scale=1')
+            title HealFood
+            link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.8.1/css/all.css",
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf",
+            crossorigin="anonymous")
+            link(rel='stylesheet', type='text/css', href='/css/fonts/hinted-Impact.css')
+            link(rel='stylesheet', type='text/css', href='/css/styles.css')
+
+    body
+        .page
+            .menu
+                button.dropbtn
+                    | Menu
+                    i.fa.fa-caret-down
+                .menu-content
+                    a(href='/') Home
+                    a(href='/maps') Maps
+                    a(href='/reviews') Reviews
+                    a(href='/restaurants') Restaurants
+                    if session && session.user
+                        a(href='/user') My account
+                        a(href='/logout') Log out
+                    else
+                        a(href='/login') Log in
+            header
+                h1#logo HealFood Melbourne
+
+            block content

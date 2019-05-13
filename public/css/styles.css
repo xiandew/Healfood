@@ -1,33 +1,36 @@
-* {
-    box-sizing:border-box
+*, ::before, ::after {
+    box-sizing: border-box
 }
 
 body {
-    background: url('/images/woodBack.jpg');
-    background-attachment: fixed;
+    background: url('/images/woodBack.jpg') fixed;
     max-width: 970px;
     margin: 0 auto;
+    font-family: sans-serif;
 }
+
 a {
     text-decoration: none;
 }
+
 a:hover {
     display: block;
     box-shadow: 0 1px 0 0 currentColor;
     transition: color .1s linear, background-color .1s linear, opacity .1s linear;
 }
+
 a:focus {
-    outline: thin dotted;
+    outline: none;
 }
+
 .page {
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas:
-            "header"
-            "figure"
-            "article";
+    grid-template-areas: "nav" "header" "figure" "article";
+    margin-bottom: 5rem;
 }
-header{
+
+header {
     grid-area: header;
     text-align: center;
     font-family: Impact, serif;
@@ -38,81 +41,63 @@ header{
     -webkit-text-stroke-color: #8c5f40;
     margin-bottom: 2rem;
 }
-figure{
+
+figure {
     grid-area: figure;
     margin: 0 auto;
 }
-article{
-    grid-area:article;
+
+article {
+    grid-area: article;
     text-align: center;
     color: #feffb8;
 }
 
 /* Navbar container */
-.navbar {
-    background-color: #333;
-    font-family: Arial, serif;
-    width: 70px;
-    position: absolute;
-    top: 2.25rem;
+.menu {
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
 }
 
-/* Links inside the navbar */
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: #e7c48a;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* The dropdown container */
+/* The menu container */
 
 /* Dropdown button */
-.dropdown .dropbtn {
+.dropbtn {
+    display: none;
+}
+
+.menu .dropbtn {
     font-size: 16px;
     border: none;
     outline: none;
-    color: #dfcdff;
-    background-color: inherit;
-    font-family: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
+    color: #fff;
+    margin: 0;
     height: 40px;
     width: 100%;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #b19569;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
+/* Dropdown content */
+.menu-content {
     background-color: #e7c48a;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 99999;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    line-height: 40px;
+    height: 40px;
+    width: 100%;
+    max-width: 970px;
+    text-align: center;
+    overflow: hidden;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-    float: none;
+.menu-content a {
     color: black;
     padding: 12px 16px;
-    display: block;
-    text-align: left;
 }
 
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
+.menu-content a:hover {
+    display: inline;
+    box-shadow: none;
     background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 /* Slideshow container */
@@ -127,6 +112,7 @@ article{
     display: none; /* Hide the images by default */
     text-align: center;
 }
+
 .mySlides img {
     width: 100%;
     height: 100%;
@@ -160,7 +146,7 @@ article{
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Caption text */
@@ -200,13 +186,21 @@ article{
 }
 
 @-webkit-keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
 }
 
 @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
 }
 
 /* map */
@@ -219,86 +213,185 @@ article{
 /* restaurant list */
 
 .restaurant-list {
-    padding: 0 10%;
+    padding: 0;
     list-style: none;
 }
+
 .restaurant-list li {
     border: 1px solid aliceblue;
-    margin-bottom: 5rem;
-    border-radius: 1rem;
+    margin-bottom: 2.5rem;
+    border-radius: 0.5rem;
     overflow: hidden;
 }
+
 .restaurant-list * {
     margin: 0;
 }
+
 .restaurant-list .photo {
     display: block;
-    width: 12rem;
+    width: 18rem;
     float: left;
 }
+
 .restaurant-list img {
     vertical-align: middle;
-    max-width: 100%;
+    width: 100%;
 }
+
 .restaurant-list .detail {
     color: #e7c48a;
     float: left;
-    margin: 0 1rem;
+    padding: 0.5rem 1rem;
 }
+
 .restaurant-list .detail .name {
-    display: inline-table;
-    vertical-align: top;
-    color: inherit;
+    text-align: left;
+    line-height: 0.85;
 }
+
+.restaurant-list .detail .name a {
+    display: inline;
+    color: inherit;
+    font-variant: all-petite-caps;
+}
+
 .restaurant-list .detail .rating {
-    margin: 0.5rem 0;
+    margin-top: 1rem;
+}
+
+/* restaurant detail */
+.detail {
+    color: wheat;
+    max-width: 630px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.detail .name {
+    text-align: center;
+    font-variant: all-petite-caps;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.detail .photo {
+    text-align: center;
+    margin: 2.5rem 0;
+}
+
+.detail .title {
+    font-weight: bold;
+    margin: 2rem 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+    color: #b19569;
+}
+.address {
+    color: inherit;
+    display: block;
+}
+.address i {
+    float: left;
+    margin-right: 0.35rem;
+}
+.address:hover {
+    box-shadow: none;
+    color: #fff;
 }
 
 @media screen and (max-width: 970px) {
     body {
         margin: 0 4%;
     }
+
+    header h1 {
+        margin-top: 0;
+    }
+
+    .menu {
+        width: 70px;
+        border-radius: 0 0 20px;
+        overflow: hidden;
+    }
+
+    .dropbtn {
+        display: block;
+        background-color: #333;
+    }
+
+    .menu-content {
+        display: none;
+        position: absolute;
+        z-index: 99999;
+        width: 92%;
+        height: auto;
+        line-height: unset;
+    }
+
+    .menu-content a {
+        display: block;
+        text-align: left;
+        font-size: 16px;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .menu:hover {
+        border-radius: 0;
+    }
+
+    .menu:hover .dropbtn {
+        background-color: #b19569;
+    }
+
+    .menu:hover .menu-content, .menu-content a:hover {
+        display: block;
+    }
+
     header {
         margin: 0;
     }
+
     #mapid {
         width: 100%;
         height: 350px;
     }
+
     .restaurant-list li {
         margin-bottom: 3.5rem;
     }
-}
-
-/* restaurant detail */
-.detail {
-    font-size: 1.25rem;
-    color: wheat;
+    .restaurant-list .detail {
+        padding: 0 1rem;
+    }
+    .restaurant-list .photo {
+        width: 30%;
+    }
+    .restaurant-list .detail {
+        width: 70%;
+    }
 }
 
 @media screen and (max-width: 520px) {
-    .navbar {
-        top: 0;
-    }
     figure, .slideshow-container {
         width: 100%;
     }
-    .restaurant-list {
-        padding: 5%;
-    }
+
     .restaurant-list li {
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
     }
+
     .restaurant-list .photo {
         width: auto;
         float: none;
-        margin: -1rem -1rem 1rem;
     }
+
     .restaurant-list img {
         width: 100%;
         margin: 0;
     }
-    .restaurant-list .detail{
-        margin: 0 1rem 1rem;
+
+    .restaurant-list .detail {
+        padding: 1rem;
     }
 }
