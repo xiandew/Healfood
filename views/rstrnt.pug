@@ -1,0 +1,24 @@
+extends parents/default
+
+block append head
+    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+
+block content
+    include includes/rstrnt-detail
+
+        .wrapper(style='max-width:unset; margin-top:2rem')
+            a.btn(href=`/edit-restaurant/${r._id}`)
+                i.fas.fa-edit
+                | Edit
+
+        .title Average Rating
+        if r.rating < 0
+            | No ratings yet
+        else
+            | #{r.rating}
+
+        .Reviews
+            .title Reviews
+
+        a.btn(href=`/edit-review/${r._id}`) Add review
+

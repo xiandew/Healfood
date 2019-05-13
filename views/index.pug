@@ -1,4 +1,4 @@
-extends default
+extends parents/default
 
 block append head
     script(type='text/javascript', src='/js/showSlides.js')
@@ -9,7 +9,7 @@ block content
         // Slideshow container
         .slideshow-container
             // Full-width images with number and caption text
-            each r in restaurants
+            each r in rstrnts
                 .mySlides.fade
                     a(href=`/restaurants/id/${r.id}`)
                         img(src=`${r.photo}`, alt=`${r.name}`)
@@ -20,10 +20,10 @@ block content
         br
         // The dots/circles
         div(style='text-align:center')
-            each _, i in restaurants
+            each _, i in rstrnts
                 span.dot(onclick=`currentSlide(${i})`)
     article
-        h2 Welcome to HealFood Melbourne!
+        h2(style="font-family: times;") Welcome to HealFood Melbourne!
         span.byline Brought to you by The Artisans
         p
             | With our website, you will be able to find healthy restaurants

@@ -1,0 +1,24 @@
+extends parents/form
+
+block append content
+    - body = session.body === undefined ? {} : session.body;
+    form(method="post")
+        if action === "log in"
+            input(type='email', name='email', placeholder='Email', value=body.email)
+            input(type='password', name='password', placeholder='Password', value=body.password)
+
+        if action === "sign up"
+            input(type='username', name='username', placeholder='Username', value=body.username)
+            input(type='email', name='email', placeholder='Email', value=body.email)
+            input(type='password', name='password', placeholder='Password', value=body.password)
+            input(type='password', name='pwdConfirm', placeholder='Confirm password', value=body.pwdConfirm)
+
+        if action === "resend token"
+            label Please enter your email
+            input(type='email', name='email', placeholder='Email', value=body.email)
+
+        button(type='submit') #{action}
+
+    if action === "log in"
+        .wrapper
+            a.btn(href='/signup') CREATE ACCOUNT

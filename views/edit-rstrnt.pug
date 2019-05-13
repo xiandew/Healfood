@@ -1,0 +1,32 @@
+extends parents/form
+
+block append content
+    .wrapper
+        a.btn(href=(r ? `/restaurants/id/${r._id}` : '/restaurants')) Go back
+
+    form(method='post', enctype="multipart/form-data")
+        if r
+            if r.photo
+                img(style="margin-top:2rem", src=r.photo)
+            label Update the photo of the restaurant
+            input(type='file', name='photo', placeholder="Photo")
+            label Name
+            input(type='name', name='name', placeholder="Name", value=r.name)
+            label Address
+            input(type='address', name='address', placeholder='Address', value=r.address)
+            label Description
+            textarea(name='description', placeholder='Description') #{r.description}
+        else
+            label Update the photo of the restaurant
+            input(type='file', name='photo', placeholder="Photo")
+            input(type='name', name='name', placeholder="Name")
+            input(type='address', name='address', placeholder='Address')
+            textarea(name='description', placeholder='Description')
+
+        button(type='submit') Submit
+
+    if r && session.user.roles.includes("admin")
+        .wrapper
+            a.btn(href=`/deleteRestaurant/${r._id}`, style="color: red;")
+                i.fas.fa-exclamation-triangle
+                | Delete this restaurant

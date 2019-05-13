@@ -1,27 +1,60 @@
 let express = require("express");
 let router = express.Router();
 
-let controllers = require("../controllers/controllers.js");
+let mainControllers = require("../controllers/mainControllers.js");
+let userControllers = require("../controllers/userControllers.js");
+let rstrntControllers = require("../controllers/rstrntControllers.js");
+let reviewControllers = require("../controllers/reviewControllers.js");
+let multer = require("../controllers/multer.js");
+let validator = require("../controllers/validator.js");
 
-//Take the user to the Homepage
-router.get("/", controllers.home);
 
-//Take the user to the Maps Page
-router.get("/maps", controllers.maps);
+router.get("/", mainControllers.home);
+router.get("/maps", mainControllers.maps);
 
-//Take the user to the Health Ratings Page
-router.get("/ratings", controllers.ratings);
 
-//Take the user to the Recommendations Page
-router.get("/reviews", controllers.reviews);
+// restaurant logic
+router.get('/restaurants', rstrntControllers.GET_allRestaurants);
+router.get('/restaurants/id/:id', rstrntControllers.GET_restaurantByID);
+router.get('/restaurants/name/:name', rstrntControllers.GET_restaurantByName);
+router.get(
+    ['/edit-restaurant', '/edit-restaurant/:id'],
+    userControllers.isLoggedIn,
+    rstrntControllers.GET_editRestaurant
+);
+router.get('/deleteRestaurant/:id', rstrntControllers.GET_deleteRestaurant);
 
-//List all restaurants
-router.get('/restaurants', controllers.findAllRestaurants);
+router.post(
+    ['/edit-restaurant', '/edit-restaurant/:id'],
+    multer.parser.single("photo"),
+    validator.validateRstrntInput,
+    rstrntControllers.POST_editRestaurant
+);
 
-//Find a restaurant by ID
-router.get('/restaurants/id/:id', controllers.findRestaurantByID);
 
-//Find restaurant by name
-router.get('/restaurants/name/:name', controllers.findRestaurantByName);
+// review logic
+router.get('/reviews', reviewControllers.GET_reviews);
+router.get(
+    ['/edit-review/:rstrnt_id', '/edit-review/:rstrnt_id/:review_id'],
+    userControllers.isLoggedIn,
+    reviewControllers.GET_editReview
+);
+
+router.post(
+    ['/edit-review/:rstrnt_id', '/edit-review/:rstrnt_id/:review_id'],
+    reviewControllers.POST_editReview
+);
+
+// user logic
+router.get('/user', userControllers.GET_user);
+router.get('/login', userControllers.GET_login);
+router.get('/signup', userControllers.GET_signup);
+router.get('/logout', userControllers.GET_logout);
+router.get('/confirm-email/:token', userControllers.GET_confirmEmail);
+router.get('/resend', userControllers.GET_resendToken);
+
+router.post('/login', validator.validateUserInput, userControllers.POST_login);
+router.post('/signup', validator.validateUserInput, userControllers.POST_signup);
+router.post('/resend', validator.validateUserInput, userControllers.POST_resendToken);
 
 module.exports = router;

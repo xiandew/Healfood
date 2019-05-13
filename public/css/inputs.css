@@ -1,0 +1,152 @@
+form, .wrapper, .alert {
+    max-width: 630px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+form input, form textarea {
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #acacac;
+    outline: none;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-top: 1rem;
+    box-sizing: border-box;
+}
+
+form label {
+    font-variant: all-petite-caps;
+    color: white;
+    margin-top: 2rem;
+    display: block;
+}
+
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+    font-variant: all-petite-caps;
+}
+
+.rating-stars-wrapper {
+    color: #fff;
+    margin-top: 2rem;
+}
+
+.rating-stars-wrapper p {
+    margin: 0;
+}
+
+.rating-stars {
+    padding: 1rem 0;
+    border: none;
+    font-size: 1.25rem;
+    float: left;
+}
+
+.rating-stars label {
+    color: #ddd;
+    float: right;
+    margin: 0;
+    padding: 0;
+    font-family: "Font Awesome\ 5 Free";
+    font-weight: 900;
+}
+
+.rating-stars .half::before {
+    content: "\f089";
+    position: absolute;
+    width: 15px;
+    overflow: hidden;
+}
+
+.rating-stars label::before {
+    margin: 0 10px 0 0;
+    font-size: 1.5rem;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating-stars > input[type="radio"] {
+    display: none;
+    box-sizing: border-box;
+    padding: 0;
+    overflow: visible;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.rating-stars > input:checked ~ label {
+    color: #FFD700;
+}
+
+.rating-stars > input:checked ~ label:hover,
+.rating-stars > input:checked ~ label:hover ~ label,
+.rating-stars > label:hover ~ input:checked ~ label {
+    color: #FFED85;
+}
+
+.description {
+    position: relative;
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #acacac;
+    outline: none;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    width: 100%;
+    resize: none;
+    margin-top: 1rem;
+    box-sizing: border-box;
+}
+
+button[type="submit"], .btn {
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    border-radius: 4.1px;
+    border: none;
+    outline: none;
+    min-width: 130px;
+    margin: 1rem 0;
+    display: inline-block;
+}
+
+a.btn {
+    background-color: wheat;
+    margin: 0;
+    box-shadow: none;
+    color: black;
+}
+
+a.btn:hover {
+    display: table;
+}
+
+.alert {
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 15px 15px 15px 2rem;
+}
+
+.alert li {
+    line-height: 1.5;
+}
+
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
