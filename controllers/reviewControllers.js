@@ -9,9 +9,22 @@ let GET_reviews = function (req, res) {
 let GET_editReview = function (req, res) {
     Restaurant.findById(req.params.rstrnt_id, function (err, rstrnt) {
         if (!err && rstrnt) {
-            res.render('edit-review', {
-                r: rstrnt
+            Review.findById(req.params.review_id, function (err, review) {
+
+
+                if (!err && review) {
+                    res.render('edit-review', {
+                        restaurant: rstrnt,
+                        review: review
+                    });
+                } else {
+                    res.render('edit-review', {
+                        restaurant: rstrnt
+                    });
+                }
+
             });
+
         } else {
             res.sendStatus(404);
         }
@@ -25,7 +38,31 @@ module.exports.GET_editReview = GET_editReview;
 // otherwise update the existing review
 let POST_editReview = function (req, res) {
     Review.findOne({_id: req.params.review_id}, function (err, review) {
-        
+
+        let newReview = {
+            title: req.body.title,
+            description: req.body.description,
+            rating: req.body.rating,
+            user_id: req.session.user._id,
+            restaurant_id: req.params.rstrnt_id
+        };
+
+        if (review) {
+            // update instead if review already exists
+            Object.assign(review, newReview);
+        } else {
+            // Create the restaurant if the restaurant doesn't exist
+            review = new Review(newReview);
+        }
+
+        // Save the restaurant
+        review.save(function (err) {
+            if (err) return res.status(500).send({msg: err.message});
+        });
+
+        req.session.msg = "Review updated!";
+        req.session.save();
+        return res.redirect(req.param.id ? req.originalUrl : '/edit-review/' + review.restaurant_id + '/' + review._id);
     });
 };
 

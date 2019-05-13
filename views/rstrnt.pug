@@ -7,18 +7,18 @@ block content
     include includes/rstrnt-detail
 
         .wrapper(style='max-width:unset; margin-top:2rem')
-            a.btn(href=`/edit-restaurant/${r._id}`)
+            a.btn(href=`/edit-restaurant/${restaurant._id}`)
                 i.fas.fa-edit
                 | Edit
 
         .title Average Rating
-        if r.rating < 0
+        if restaurant.rating < 0
             | No ratings yet
         else
-            | #{r.rating}
+            | #{restaurant.rating}
 
         .Reviews
             .title Reviews
 
-        a.btn(href=`/edit-review/${r._id}`) Add review
+        a.btn(href=`/edit-review/${restaurant._id}`) Add review
 

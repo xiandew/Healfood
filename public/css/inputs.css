@@ -18,6 +18,7 @@ form input, form textarea {
 
 form label {
     font-variant: all-petite-caps;
+    font-size: 1.5rem;
     color: white;
     margin-top: 2rem;
     display: block;
