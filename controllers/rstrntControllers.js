@@ -8,7 +8,7 @@ let GET_editRestaurant = function (req, res) {
     Restaurant.findById(req.params.id, function (err, rstrnt) {
         if (!err) {
             res.render('edit-rstrnt', {
-                r: rstrnt
+                restaurant: rstrnt
             });
             delete req.session.errors;
             delete req.session.msg;
@@ -33,7 +33,7 @@ let GET_restaurantByID = function (req, res) {
     Restaurant.findById(req.params.id, function (err, rstrnt) {
         if (!err) {
             res.render('rstrnt', {
-                r: rstrnt
+                restaurant: rstrnt
             });
         } else {
             res.sendStatus(404);

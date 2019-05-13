@@ -11,10 +11,13 @@ block append content
     form(method='post', style='margin: 2.5rem auto;')
         .heading Add your review
 
-        input.title(type='text', name='title', placeholder='title of review')
+        input.title(type='text', name='title', placeholder='title of review', value = review ? review.title : "")
+
         br(style='clear:both')
         div.rating-stars-wrapper
             label Choose your rating
+                if review
+                    | #{":  " + review.rating}
             fieldset.rating-stars
                 input#star5(type='radio', name='rating', value='5')
                 label.full(for='star5', title='Awesome - 5 stars')
@@ -39,5 +42,8 @@ block append content
         br(style='clear:both')
         .description-wrapper
             textarea.description(name='description', cols='30', rows='10', placeholder='review description')
+                if review
+                    | #{review.description}
+
         br(style='clear:both')
         button(type='submit') Submit

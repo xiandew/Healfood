@@ -1,13 +1,13 @@
 .detail
-    .name #{r.name}
+    .name #{restaurant.name}
     .photo
-        img(src=`${r.photo}`, alt=`${r.name}`)
+        img(src=`${restaurant.photo}`, alt=`${restaurant.name}`)
     .overview
         .title Overview
-        | #{r.description}
+        | #{restaurant.description}
     .info
         .title Address
         a.address(href="/maps")
             i.fas.fa-map-marker-alt
-            | #{r.address}
+            | #{restaurant.address}
 
