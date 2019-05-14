@@ -4,19 +4,19 @@ block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    .wrapper(style="padding: 0 0 2rem;max-width: unset")
-        a.btn(href='/edit-restaurant') Add new restaurant
-    ul.restaurant-list
-        each r in rstrnts
-            li
-                .photo
-                    img(src=`${r.photo}`, alt=`${r.name}`)
-                .detail
-                    .name
-                        a(href=`./restaurants/id/${r.id}`) #{r.name}
-                    .rating
-                        | Average Rating:
-                        if r.rating < 0
-                            | No ratings yet
-                        else
-                            #{r.rating}
+    .wrapper
+        a.btn(href='/edit-restaurant', style="margin-bottom: 3rem;") Add new restaurant
+        ul.restaurant-list
+            each r in rstrnts
+                li
+                    .photo
+                        img(src=`${r.photo}`, alt=`${r.name}`)
+                    .detail
+                        .name
+                            a(href=`./restaurants/id/${r.id}`) #{r.name}
+                        .rating
+                            | Average Rating:
+                            if r.rating < 0
+                                | No ratings yet
+                            else
+                                #{r.rating}
