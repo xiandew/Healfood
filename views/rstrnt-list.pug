@@ -9,7 +9,7 @@ block content
         ul.restaurant-list
             each r in rstrnts
                 li
-                    .photo
+                    a.photo(href=`./restaurants/id/${r.id}`)
                         img(src=`${r.photo}`, alt=`${r.name}`)
                     .detail
                         .name
