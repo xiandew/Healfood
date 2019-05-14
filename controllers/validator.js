@@ -23,6 +23,9 @@ let rstrntInputRules = [
         .not().isEmpty().withMessage('Restaurant address cannot be blank')
 ];
 
+// TODO reviewInputRules
+// Tile, rating and description cannot be blank
+
 let validate = function (req, res, next) {
     // Check for validation errors
     let errors = validationResult(req)

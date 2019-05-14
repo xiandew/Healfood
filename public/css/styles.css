@@ -50,7 +50,7 @@ figure {
 article {
     grid-area: article;
     text-align: center;
-    color: #feffb8;
+    color: #b19569;
 }
 
 /* Navbar container */
@@ -230,7 +230,7 @@ article {
 
 .restaurant-list .photo {
     display: block;
-    width: 18rem;
+    width: 12rem;
     float: left;
 }
 
@@ -242,7 +242,8 @@ article {
 .restaurant-list .detail {
     color: #e7c48a;
     float: left;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
+    width: 27rem;
 }
 
 .restaurant-list .detail .name {

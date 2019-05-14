@@ -123,6 +123,7 @@ a.btn {
     margin: 0;
     box-shadow: none;
     color: black;
+    display: table;
 }
 
 a.btn:hover {

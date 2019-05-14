@@ -3,15 +3,14 @@ let Review = mongoose.model('reviews');
 let Restaurant = mongoose.model('restaurants');
 
 let GET_reviews = function (req, res) {
-    res.send('This is the reviews Page');
+    // TODO
+    res.render("review-list");
 };
 
 let GET_editReview = function (req, res) {
     Restaurant.findById(req.params.rstrnt_id, function (err, rstrnt) {
         if (!err && rstrnt) {
             Review.findById(req.params.review_id, function (err, review) {
-
-
                 if (!err && review) {
                     res.render('edit-review', {
                         restaurant: rstrnt,
@@ -22,9 +21,9 @@ let GET_editReview = function (req, res) {
                         restaurant: rstrnt
                     });
                 }
-
+                delete req.session.msg;
+                req.session.save();
             });
-
         } else {
             res.sendStatus(404);
         }
@@ -57,7 +56,11 @@ let POST_editReview = function (req, res) {
 
         // Save the restaurant
         review.save(function (err) {
-            if (err) return res.status(500).send({msg: err.message});
+            if (err) {
+                return res.status(500).send({msg: err.message});
+            } else {
+                // TODO update the average rating of corresponding restaurant
+            }
         });
 
         req.session.msg = "Review updated!";
