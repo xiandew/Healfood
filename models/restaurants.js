@@ -2,11 +2,12 @@ let mongoose = require('mongoose');
 let restaurantSchema = mongoose.Schema(
     {
         "name": String,
-        "address": {type: String, unique: true},
+        "address": String,
         "rating": {type: String, default: -1},
         "description": String,
         "photo": String,
-        "lastModified": {type: Date, default: Date.now}
+        "lastModified": {type: Date, default: Date.now},
+        "coord": {type: String, unique: true}
     }
 );
 mongoose.model('restaurants', restaurantSchema);

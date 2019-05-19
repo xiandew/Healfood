@@ -1,9 +1,12 @@
 var themap;
-var markers = [];
-var addr_searched = 0;
-var addr_found = 0;
+var markerGroup;
+var addr_searched;
+var addr_found;
 
 window.onload = function () {
+    markerGroup = new L.featureGroup([]);
+    addr_searched = addr_found = 0;
+
     themap = new L.map('mapid');
     themap.setView([-37.813611, 144.963056], 13);
     let baseLayer = new L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -16,36 +19,19 @@ window.onload = function () {
     themap.addLayer(baseLayer);
 
     for (let i = 0; i < rstrntData.length; i++) {
-        let r = rstrntData[i];
-        addr_search(r, add_marker);
+        add_marker(rstrntData[i]);
     }
+
+    themap.fitBounds(markerGroup.getBounds().pad(0.5));
+    themap.addLayer(markerGroup);
 };
 
-function add_marker(r, coord) {
-    let marker = L.marker(coord)
-        .addTo(themap)
+function add_marker(r) {
+    if (!r.coord) {
+        return;
+    }
+    L.marker(JSON.parse(r.coord))
         .bindPopup(`<b>${r.name}</b><br><a href=\"/restaurants/id/${r._id}\">See more information</a>`)
-        .openPopup();
-    markers.push(marker);
-    let markerGroup = new L.featureGroup(markers);
-    themap.fitBounds(markerGroup.getBounds());
-}
-
-function addr_search(r, cb) {
-    addr_searched++;
-    let xmlhttp = new XMLHttpRequest();
-    let url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + r.address;
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            let resultArr = JSON.parse(this.responseText);
-            if (resultArr.length > 0) {
-                cb(r, [resultArr[0].lat, resultArr[0].lon]);
-                addr_found++;
-            } else if (addr_searched === rstrntData.length && addr_found === 0) {
-                alert("Sorry but cannot find any matching address!");
-            }
-        }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
+        .openPopup()
+        .addTo(markerGroup);
 }

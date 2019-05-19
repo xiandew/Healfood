@@ -73,11 +73,12 @@ module.exports.GET_deleteRestaurant = GET_deleteRestaurant;
  */
 let POST_editRestaurant = function (req, res) {
     // Make sure this address doesn't already exist
-    Restaurant.findOne({address: req.body.address}, function (err, rstrnt) {
+    Restaurant.findOne({_id: req.params.id}, function (err, rstrnt) {
 
         let newRstrnt = {
             name: req.body.name,
             address: req.body.address,
+            coord: req.body.coord,
             description: req.body.description
         };
 

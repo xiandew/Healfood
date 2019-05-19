@@ -1,5 +1,6 @@
 let {body, validationResult} = require('express-validator/check');
 let {sanitizeBody} = require('express-validator/filter');
+let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 let userInputRules = [
     body('username')
@@ -21,6 +22,24 @@ let rstrntInputRules = [
         .not().isEmpty().withMessage('Restaurant name cannot be blank'),
     body('address')
         .not().isEmpty().withMessage('Restaurant address cannot be blank')
+        .custom(async (value, {req}) => {
+            let xmlhttp = new XMLHttpRequest();
+            let url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + value;
+
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let resultArr = JSON.parse(this.responseText);
+                    if (resultArr.length > 0) {
+                        req.body.coord = JSON.stringify([resultArr[0].lat, resultArr[0].lon]);
+                    } else {
+                        return promise.reject();
+                    }
+                }
+            };
+            xmlhttp.open("GET", url, false);
+            xmlhttp.send();
+            await xmlhttp.onreadystatechange;
+        }).withMessage("Cannot find any matching address on the map. Make sure it well-formatted please")
 ];
 
 // TODO reviewInputRules
