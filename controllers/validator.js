@@ -38,7 +38,6 @@ let rstrntInputRules = [
             };
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
-            await xmlhttp.onreadystatechange;
         }).withMessage("Cannot find any matching address on the map. Make sure it well-formatted please")
 ];
 
