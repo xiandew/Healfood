@@ -32,6 +32,5 @@ function add_marker(r) {
     }
     L.marker(JSON.parse(r.coord))
         .bindPopup(`<b>${r.name}</b><br><a href=\"/restaurants/id/${r._id}\">See more information</a>`)
-        .openPopup()
         .addTo(markerGroup);
 }
