@@ -22,7 +22,7 @@ let rstrntInputRules = [
         .not().isEmpty().withMessage('Restaurant name cannot be blank'),
     body('address')
         .not().isEmpty().withMessage('Restaurant address cannot be blank')
-        .custom(async (value, {req}) => {
+        .custom((value, {req}) => {
             let xmlhttp = new XMLHttpRequest();
             let url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + value;
 
@@ -38,6 +38,7 @@ let rstrntInputRules = [
             };
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
+            return true;
         }).withMessage("Cannot find any matching address on the map. Make sure it well-formatted please")
 ];
 
