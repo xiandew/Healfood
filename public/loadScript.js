@@ -2,7 +2,7 @@
 function render_data(template, item) {
     var clone = document.importNode(template.content, true);
     clone.querySelector("#color-bg").style.backgroundColor = item.color;
-    var color_code = clone.querySelector("#color-code")
+    var color_code = clone.querySelector("#color-code");
     color_code.innerText = item.color;
     color_code.style.color = getContrastYIQ(item.color);
     clone.querySelector("#pantone-code").innerHTML = `PANTONE®<br/>${item.pantone_value}`;
@@ -25,7 +25,7 @@ function load(page_number) {
         load_more.classList.remove("is-loading");
 
         // Hide button if reaching the last page
-        if (obj.page == obj.total_pages) {
+        if (obj.page === obj.total_pages) {
             load_more.style.display = "none";
         }
 
