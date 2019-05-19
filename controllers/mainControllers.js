@@ -13,9 +13,4 @@ let home = function (req, res) {
     }).limit(5);
 };
 
-let maps = function (req, res) {
-    res.render('maps');
-};
-
 module.exports.home = home;
-module.exports.maps = maps;

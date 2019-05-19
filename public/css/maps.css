@@ -1,0 +1,10 @@
+/* map */
+#mapid {
+    height: 400px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.leaflet-popup-close-button:hover {
+    box-shadow: none;
+}

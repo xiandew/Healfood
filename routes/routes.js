@@ -5,12 +5,12 @@ let mainControllers = require("../controllers/mainControllers.js");
 let userControllers = require("../controllers/userControllers.js");
 let rstrntControllers = require("../controllers/rstrntControllers.js");
 let reviewControllers = require("../controllers/reviewControllers.js");
+let mapControllers = require("../controllers/mapControllers.js");
 let multer = require("../controllers/multer.js");
 let validator = require("../controllers/validator.js");
 
 
 router.get("/", mainControllers.home);
-router.get("/maps", mainControllers.maps);
 
 
 // restaurant logic
@@ -56,5 +56,8 @@ router.get('/resend', userControllers.GET_resendToken);
 router.post('/login', validator.validateUserInput, userControllers.POST_login);
 router.post('/signup', validator.validateUserInput, userControllers.POST_signup);
 router.post('/resend', validator.validateUserInput, userControllers.POST_resendToken);
+
+// map
+router.get(["/maps", "/maps/:rstrnt_id"], mapControllers.maps);
 
 module.exports = router;

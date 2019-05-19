@@ -14,7 +14,6 @@ a {
 }
 
 a:hover {
-    display: block;
     box-shadow: 0 1px 0 0 currentColor;
     transition: color .1s linear, background-color .1s linear, opacity .1s linear;
 }
@@ -201,13 +200,6 @@ article {
     to {
         opacity: 1
     }
-}
-
-/* map */
-#mapid {
-    height: 400px;
-    width: 80%;
-    margin: 0 auto;
 }
 
 /* restaurant list */
