@@ -7,7 +7,7 @@
         | #{restaurant.description}
     .info
         .title Address
-        a.address(href="/maps")
+        a.address(href=`/maps/${restaurant._id}`)
             i.fas.fa-map-marker-alt
             | #{restaurant.address}
 
