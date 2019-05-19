@@ -5,7 +5,7 @@ let maps = function (req, res) {
     Restaurant.findById(req.params.rstrnt_id, function (err, rstrnt) {
         if (!err && rstrnt) {
             res.render('maps', {
-                rstrntData: rstrnt
+                rstrntData: [rstrnt]
             });
         } else {
             Restaurant.find(function (err, rstrnts) {

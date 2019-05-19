@@ -1,5 +1,7 @@
 var themap;
 var markers = [];
+var addr_searched = 0;
+var addr_found = 0;
 
 window.onload = function () {
     themap = new L.map('mapid');
@@ -17,19 +19,20 @@ window.onload = function () {
         let r = rstrntData[i];
         addr_search(r, add_marker);
     }
-    let markerGroup = new L.featureGroup(markers);
-    themap.fitBounds(markerGroup.getBounds());
 };
 
 function add_marker(r, coord) {
     let marker = L.marker(coord)
         .addTo(themap)
-        .bindPopup(`<b>${r.name}</b><br><a href=\"/restaurants/id/${r._id}\">See more information</a>`);
+        .bindPopup(`<b>${r.name}</b><br><a href=\"/restaurants/id/${r._id}\">See more information</a>`)
+        .openPopup();
     markers.push(marker);
-    console.log(markers);
+    let markerGroup = new L.featureGroup(markers);
+    themap.fitBounds(markerGroup.getBounds());
 }
 
 function addr_search(r, cb) {
+    addr_searched++;
     let xmlhttp = new XMLHttpRequest();
     let url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + r.address;
     xmlhttp.onreadystatechange = function() {
@@ -37,6 +40,9 @@ function addr_search(r, cb) {
             let resultArr = JSON.parse(this.responseText);
             if (resultArr.length > 0) {
                 cb(r, [resultArr[0].lat, resultArr[0].lon]);
+                addr_found++;
+            } else if (addr_searched === rstrntData.length && addr_found === 0) {
+                alert("Sorry but cannot find any matching address!");
             }
         }
     };

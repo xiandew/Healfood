@@ -241,6 +241,7 @@ article {
 .restaurant-list .detail .name {
     text-align: left;
     line-height: 0.85;
+    font-size: 1.5rem;
 }
 
 .restaurant-list .detail .name a {
@@ -250,7 +251,7 @@ article {
 }
 
 .restaurant-list .detail .rating {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 /* restaurant detail */
@@ -282,7 +283,7 @@ article {
 }
 .address {
     color: inherit;
-    display: block;
+    display: table;
 }
 .address i {
     float: left;
