@@ -3,8 +3,7 @@
 }
 
 body {
-    background-image: url("/images/woodBack.jpg");
-    background-attachment: fixed;
+    background: url("/images/woodBack.jpg") fixed;
     max-width: 970px;
     margin: 0 auto;
     font-family: sans-serif;
