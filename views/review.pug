@@ -4,20 +4,5 @@ block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block content
-    include includes/rstrnt-detail
-
-        .wrapper(style='max-width:unset; margin-top:2rem')
-            a.btn(href=`/edit-restaurant/${restaurant._id}`)
-                i.fas.fa-edit
-                | Edit
-
-        .title Average Rating
-        if restaurant.rating < 0
-            | No ratings yet
-        else
-            | #{restaurant.rating}
-
-        .Reviews
-            .title Reviews
-
-        a.btn(href=`/edit-review/${restaurant._id}`) Add review
+    include includes/review-detail
+    .wrapper

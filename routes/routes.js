@@ -34,6 +34,7 @@ router.post(
 
 // review logic
 router.get('/reviews', reviewControllers.GET_reviews);
+router.get('/reviews/id/:id', reviewControllers.GET_reviewByID);
 router.get(
     ['/edit-review/:rstrnt_id', '/edit-review/:rstrnt_id/:review_id'],
     userControllers.isLoggedIn,
