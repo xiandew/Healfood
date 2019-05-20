@@ -14,6 +14,18 @@ let GET_reviews = function (req, res) {
     });
 };
 
+let GET_reviewByID = function (req, res) {
+    Review.findById(req.params.id, function (err, review) {
+        if (!err) {
+            res.render('review', {
+                review: review
+            });
+        } else {
+            res.sendStatus(404);
+        }
+    });
+};
+
 let GET_editReview = function (req, res) {
     Restaurant.findById(req.params.rstrnt_id, function (err, rstrnt) {
         if (!err && rstrnt) {
@@ -50,7 +62,9 @@ let POST_editReview = function (req, res) {
             description: req.body.description,
             rating: req.body.rating,
             user_id: req.session.user._id,
-            restaurant_id: req.params.rstrnt_id
+            restaurant_id: req.params.rstrnt_id,
+            //Not sure how to get restaurant name
+            restaurant_name: req.body.name
         };
 
         if (review) {
@@ -77,3 +91,4 @@ let POST_editReview = function (req, res) {
 };
 
 module.exports.POST_editReview = POST_editReview;
+module.exports.GET_reviewByID = GET_reviewByID;
