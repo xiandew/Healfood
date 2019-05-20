@@ -3,8 +3,15 @@ let Review = mongoose.model('reviews');
 let Restaurant = mongoose.model('restaurants');
 
 let GET_reviews = function (req, res) {
-    // TODO
-    res.render("review-list");
+    Review.find(function (err, reviews) {
+       if (!err) {
+            res.render('review-list', {
+                reviews: reviews
+            });
+        } else {
+            res.sendStatus(404);
+        }
+    });
 };
 
 let GET_editReview = function (req, res) {
