@@ -294,6 +294,77 @@ article {
     color: #fff;
 }
 
+/* restaurant list */
+
+.restaurant-list {
+    padding: 0;
+    list-style: none;
+}
+
+.restaurant-list li {
+    border: 1px solid aliceblue;
+    margin-bottom: 2.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.restaurant-list * {
+    margin: 0;
+}
+
+.restaurant-list .photo {
+    display: block;
+    width: 12rem;
+    float: left;
+}
+
+.restaurant-list img {
+    vertical-align: middle;
+    width: 100%;
+}
+
+/* Review details */
+.review-list .detail {
+    color: #e7c48a;
+    float: left;
+    padding: 0 1rem;
+    width: 27rem;
+}
+
+.review-list .detail .title {
+    text-align: left;
+    line-height: 0.85;
+    font-size: 1.5rem;
+}
+
+.review-list .detail .title a {
+    display: inline;
+    color: inherit;
+    font-variant: all-petite-caps;
+}
+
+.review-list .detail .rating {
+    margin-top: 0.5rem;
+}
+
+/* review list */
+
+.review-list {
+    padding: 0;
+    list-style: none;
+}
+
+.review-list li {
+    border: 1px solid aliceblue;
+    margin-bottom: 2.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.review-list * {
+    margin: 0;
+}
+
 @media screen and (max-width: 970px) {
     body {
         margin: 0 4%;

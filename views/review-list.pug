@@ -1,5 +1,18 @@
 extends parents/default
 
+block append head
+    link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+
 block content
     .wrapper
-        // TODO
+        a.btn(href='/edit-reviews', style="margin-bottom: 3rem;") Add new review
+        ul.review-list
+            each r in reviews
+                if r.title && r.description && r.rating
+                    .detail
+                        .title
+                            a(href=`./reviews/id/${r.id}`) #{r.title}
+                        .description
+                            a(href=`./reviews/id/${r.id}`) #{r.description}
+                        .rating
+                            a(href=`./reviews/id/${r.id}`) #{r.rating}
