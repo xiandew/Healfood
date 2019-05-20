@@ -23,6 +23,10 @@ a:focus {
     outline: none;
 }
 
+.clearfloat {
+    clear: both;
+}
+
 .page {
     display: grid;
     grid-template-columns: 1fr;
@@ -326,16 +330,15 @@ article {
 
 /* Review details */
 .review-list .detail {
-    color: #e7c48a;
-    float: left;
-    padding: 0 1rem;
-    width: 27rem;
+    position: relative;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
 }
 
 .review-list .detail .title {
-    text-align: left;
-    line-height: 0.85;
-    font-size: 1.5rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin: 0;
 }
 
 .review-list .detail .title a {
@@ -344,8 +347,33 @@ article {
     font-variant: all-petite-caps;
 }
 
-.review-list .detail .rating {
-    margin-top: 0.5rem;
+.review-list .detail .date {
+    font-size: 0.9rem;
+    color: #B6B6B6;
+    font-style: italic;
+}
+
+.review-list .detail .descript {
+    width: 100%;
+    padding-top: 0.7rem;
+}
+
+.review-list .rating-stars label {
+    float: none;
+    color: #FFD700;
+}
+
+.review-list .rating-stars label::before {
+    margin: 0 10px 0 0;
+    font-size: 1.5rem;
+    display: inline-block;
+    content: "\f005";
+}
+
+.review-list .rating-stars .half::before {
+    content: "\f089";
+    width: 15px;
+    overflow: hidden;
 }
 
 /* review list */
@@ -356,9 +384,7 @@ article {
 }
 
 .review-list li {
-    border: 1px solid aliceblue;
     margin-bottom: 2.5rem;
-    border-radius: 0.5rem;
     overflow: hidden;
 }
 
