@@ -42,8 +42,11 @@ let rstrntInputRules = [
         }).withMessage("Cannot find any matching address on the map. Make sure it well-formatted please")
 ];
 
-// TODO reviewInputRules
-// Tile, rating and description cannot be blank
+// Tile, rating cannot be blank
+let reviewInputRules = [
+    body('title').not().isEmpty().withMessage("Review title cannot be blank"),
+    body('rating').not().isEmpty().withMessage("Please select rating stars")
+];
 
 let validate = function (req, res, next) {
     // Check for validation errors
@@ -61,3 +64,4 @@ let validate = function (req, res, next) {
 
 module.exports.validateUserInput = [userInputRules, validate];
 module.exports.validateRstrntInput = [rstrntInputRules, validate];
+module.exports.validateReviewInput = [reviewInputRules, validate];

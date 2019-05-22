@@ -4,7 +4,7 @@ let restaurantSchema = Schema(
     {
         "name": String,
         "address": String,
-        "rating": {type: String, default: -1},
+        "rating": {type: Number, default: -1},
         "description": String,
         "photo": String,
         "lastModified": {type: Date, default: Date.now},

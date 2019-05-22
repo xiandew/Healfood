@@ -43,6 +43,7 @@ router.get(
 
 router.post(
     ['/edit-review/:rstrnt_id', '/edit-review/:rstrnt_id/:review_id'],
+    validator.validateReviewInput,
     reviewControllers.POST_editReview
 );
 
