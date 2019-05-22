@@ -3,16 +3,12 @@ ul.review-list
         li
             .detail
                 .title
-                    | #{r.title}
-                    if session.user && (r.user._id.equals(session.user._id))
+                    a(href=`./reviews/id/${r._id}`) #{r.title}
+                    if true || session.user && (r.user._id.equals(session.user._id))
                         a(href=`./edit-review/${r.restaurant._id}/${r.id}`)
                             i.fas.fa-edit(style="color:wheat;float:right;")
-
-                .rating-stars
-                    - for (var i = 0; i < Math.floor(r.rating); i++)
-                        label.full
-                    if (r.rating !== Math.floor(r.rating))
-                        label.half
+                - rating = r.rating
+                include rating-stars
                 .clearfloat
                 .date
                     | on #{r.date.toLocaleString()}

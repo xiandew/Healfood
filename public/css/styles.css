@@ -369,22 +369,23 @@ article {
     padding-top: 0.7rem;
 }
 
-.review-list .rating-stars label {
-    float: none;
-    color: #FFD700;
+.review-list .detail .authority {
+    margin-top: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
-.review-list .rating-stars label::before {
-    margin: 0 10px 0 0;
-    font-size: 1.5rem;
-    display: inline-block;
-    content: "\f005";
+.review-list .detail .authority > * {
+    font-style: italic;
+    font-weight: bold;
 }
 
-.review-list .rating-stars .half::before {
-    content: "\f089";
-    width: 15px;
-    overflow: hidden;
+.review-list .detail .authority .username {
+    margin-right: 0.35rem;
+}
+
+.review-list .detail .authority .rstrntname {
+    margin-left: 0.35rem;
 }
 
 /* review list */

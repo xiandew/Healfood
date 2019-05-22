@@ -2,6 +2,7 @@ extends parents/default
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+    link(rel='stylesheet', type='text/css', href='/css/rating-stars.css')
 
 block content
     .wrapper
@@ -15,8 +16,8 @@ block content
                         .name
                             a(href=`./restaurants/id/${r.id}`) #{r.name}
                         .rating
-                            | Average Rating:
                             if r.rating < 0
                                 |  No ratings yet
                             else
-                                #{r.rating}
+                                - rating = r.rating
+                                include includes/rating-stars

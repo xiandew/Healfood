@@ -57,7 +57,7 @@ let POST_editReview = function (req, res) {
         let newReview = {
             title: req.body.title,
             description: req.body.description,
-            rating: req.body.rating,
+            rating: parseFloat(req.body.rating),
             user: req.session.user._id,
             restaurant: req.params.rstrnt_id
         };
@@ -77,10 +77,33 @@ let POST_editReview = function (req, res) {
             } else {
                 User.findById(req.session.user._id, (err, usr) => {
                     usr.reviews.push(review._id);
+                    usr.save();
                 });
-                Restaurant.findById(req.params.rstrnt_id, (err, rstrnt) => {
-                    rstrnt.reviews.push(review._id);
-                });
+                Restaurant.findById(req.params.rstrnt_id)
+                    .then(rstrnt => {
+                        rstrnt.reviews.push(review._id);
+                        // remove duplicate
+                        rstrnt.reviews = rstrnt.reviews.filter(function (r, i) {
+                            return rstrnt.reviews.indexOf(r) === i;
+                        });
+
+                        rstrnt.save(() => {
+                            Restaurant.populate(rstrnt, "reviews", () => {
+                                let totalReview = 0;
+                                for (let i = rstrnt.reviews.length - 1; i >= 0; i--) {
+                                    let r = rstrnt.reviews[i];
+                                    if (!r.rating) {
+                                        rstrnt.reviews.splice(i, 1);
+                                    } else {
+                                        totalReview += r.rating;
+                                    }
+                                }
+                                rstrnt.rating = totalReview / rstrnt.reviews.length;
+                                rstrnt.save();
+                            })
+                        });
+
+                    });
             }
         });
 

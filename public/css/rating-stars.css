@@ -1,0 +1,17 @@
+.rating-stars label {
+    float: none;
+    color: #FFD700;
+}
+
+.rating-stars label::before {
+    margin: 0 10px 0 0;
+    font-size: 1.5rem;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating-stars .half::before {
+    content: "\f089";
+    width: 15px;
+    overflow: hidden;
+}
