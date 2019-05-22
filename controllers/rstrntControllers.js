@@ -30,15 +30,21 @@ let GET_allRestaurants = function (req, res) {
     });
 };
 let GET_restaurantByID = function (req, res) {
-    Restaurant.findById(req.params.id, function (err, rstrnt) {
-        if (!err) {
+    Restaurant.findById(req.params.id)
+        .populate({
+            path: "reviews",
+            populate:
+                [{
+                    path: "user"
+                }, {
+                    path: "restaurant"
+                }]
+        })
+        .then(function (rstrnt) {
             res.render('rstrnt', {
                 restaurant: rstrnt
             });
-        } else {
-            res.sendStatus(404);
-        }
-    });
+        });
 };
 let GET_restaurantByName = function (req, res) {
     Restaurant.find({name: req.params.name}, function (err, rstrnt) {

@@ -2,6 +2,7 @@ extends parents/default
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
+    link(rel='stylesheet', type='text/css', href='/css/rating-stars.css')
 
 block content
     include includes/rstrnt-detail
@@ -15,9 +16,13 @@ block content
         if restaurant.rating < 0
             | No ratings yet
         else
-            | #{restaurant.rating}
-
+            - rating = restaurant.rating
+            include includes/rating-stars
+        .clearfloat
         .Reviews
             .title Reviews
 
         a.btn(href=`/edit-review/${restaurant._id}`) Add review
+
+        - reviews = restaurant.reviews
+        include includes/review-list
