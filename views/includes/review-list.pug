@@ -4,7 +4,7 @@ ul.review-list
             .detail
                 .title
                     a(href=`./reviews/id/${r._id}`) #{r.title}
-                    if true || session.user && (r.user._id.equals(session.user._id))
+                    if session.user && (r.user._id.equals(session.user._id))
                         a(href=`./edit-review/${r.restaurant._id}/${r.id}`)
                             i.fas.fa-edit(style="color:wheat;float:right;")
                 - rating = r.rating
