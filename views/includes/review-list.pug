@@ -1,0 +1,26 @@
+ul.review-list
+    each r in reviews
+        li
+            .detail
+                .title
+                    | #{r.title}
+                    if session.user && (r.user._id.equals(session.user._id))
+                        a(href=`./edit-review/${r.restaurant._id}/${r.id}`)
+                            i.fas.fa-edit(style="color:wheat;float:right;")
+
+                .rating-stars
+                    - for (var i = 0; i < Math.floor(r.rating); i++)
+                        label.full
+                    if (r.rating !== Math.floor(r.rating))
+                        label.half
+                .clearfloat
+                .date
+                    | on #{r.date.toLocaleString()}
+                .descript
+                    | #{r.description}
+                .authority
+                    a.username(href=`./reviews/user/${r.user._id}`)
+                        | #{r.user.name}
+                    | on
+                    a.rstrntname(href=`./restaurants/id/${r.restaurant._id}`)
+                        | #{r.restaurant.name}

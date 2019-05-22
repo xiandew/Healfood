@@ -1,13 +1,14 @@
 let mongoose = require('mongoose');
-let reviewSchema = mongoose.Schema(
+let Schema = mongoose.Schema;
+
+let reviewSchema = Schema(
     {
         "title": String,
         "description": String,
         "rating": Number,
         "date": {type: Date, required: true, default: Date.now},
-        "user_id": String,
-        "restaurant_id": String,
-        "restaurant_name": String
+        "user": {type: Schema.Types.ObjectId, ref: 'users'},
+        "restaurant": {type: Schema.Types.ObjectId, ref: 'restaurants'}
     }
 );
 mongoose.model('reviews', reviewSchema);

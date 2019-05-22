@@ -1,15 +1,18 @@
 let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 let bcrypt = require('bcrypt');
 let SALT_WORK_FACTOR = 10;
 
-let userSchema = mongoose.Schema({
+let userSchema = Schema({
     "name": {type: String, required: true},
     "email": {type: String, required: true, unique: true},
     "password": {type: String, required: true},
     "isVerified": {type: Boolean, default: false},
     "passwordResetToken": String,
     "passwordResetExpires": Date,
-    "roles": [{type: String}]
+    "roles": [{type: String}],
+    "reviews": [{type: Schema.Types.ObjectId, ref: "reviews"}],
+    "ownedRstrnts": [{type: Schema.Types.ObjectId, ref: "restaurants"}]
 });
 
 /**
@@ -46,7 +49,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 
-let tokenSchema = mongoose.Schema({
+let tokenSchema = Schema({
     _userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     token: {type: String, required: true},
     createdAt: {type: Date, required: true, default: Date.now, expires: 43200}
