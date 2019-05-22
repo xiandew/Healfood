@@ -2,6 +2,10 @@
     box-sizing: border-box
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background: url("/images/woodBack.jpg") fixed;
     background-size: auto 100%;
@@ -339,12 +343,19 @@ article {
     font-weight: bold;
     font-size: 1.4rem;
     margin: 0;
+    display: table;
+    color: #b19569;
+    font-variant: all-petite-caps;
+    width:100%;
 }
 
 .review-list .detail .title a {
-    display: inline;
     color: inherit;
-    font-variant: all-petite-caps;
+    box-shadow: none;
+}
+
+.review-list .detail a {
+    color:wheat;
 }
 
 .review-list .detail .date {

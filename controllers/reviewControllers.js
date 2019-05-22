@@ -1,16 +1,13 @@
 let mongoose = require('mongoose');
 let Review = mongoose.model('reviews');
 let Restaurant = mongoose.model('restaurants');
+let User = mongoose.model('users');
 
 let GET_reviews = function (req, res) {
-    Review.find(function (err, reviews) {
-       if (!err) {
-            res.render('review-list', {
-                reviews: reviews
-            });
-        } else {
-            res.sendStatus(404);
-        }
+    Review.find(null, null, {sort: {date: -1}}).populate('user').populate('restaurant').then(reviews => {
+        res.render('reviews', {
+            reviews: reviews
+        });
     });
 };
 
@@ -61,10 +58,8 @@ let POST_editReview = function (req, res) {
             title: req.body.title,
             description: req.body.description,
             rating: req.body.rating,
-            user_id: req.session.user._id,
-            restaurant_id: req.params.rstrnt_id,
-            //Not sure how to get restaurant name
-            restaurant_name: req.body.name
+            user: req.session.user._id,
+            restaurant: req.params.rstrnt_id
         };
 
         if (review) {
@@ -78,15 +73,20 @@ let POST_editReview = function (req, res) {
         // Save the restaurant
         review.save(function (err) {
             if (err) {
-                return res.status(500).send({msg: err.message});
+                console.log(err);
             } else {
-                // TODO update the average rating of corresponding restaurant
+                User.findById(req.session.user._id, (err, usr) => {
+                    usr.reviews.push(review._id);
+                });
+                Restaurant.findById(req.params.rstrnt_id, (err, rstrnt) => {
+                    rstrnt.reviews.push(review._id);
+                });
             }
         });
 
         req.session.msg = "Review updated!";
         req.session.save();
-        return res.redirect(req.param.id ? req.originalUrl : '/edit-review/' + review.restaurant_id + '/' + review._id);
+        return res.redirect(req.param.id ? req.originalUrl : '/edit-review/' + review.restaurant._id + '/' + review._id);
     });
 };
 

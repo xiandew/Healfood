@@ -19,9 +19,9 @@ let GET_editRestaurant = function (req, res) {
     });
 };
 let GET_allRestaurants = function (req, res) {
-    Restaurant.find(function (err, rstrnts) {
+    Restaurant.find(null, null, {sort: {lastModified: -1}}, function (err, rstrnts) {
         if (!err) {
-            res.render('rstrnt-list', {
+            res.render('rstrnts', {
                 rstrnts: rstrnts
             });
         } else {
