@@ -12,15 +12,13 @@ let GET_reviews = function (req, res) {
 };
 
 let GET_reviewByID = function (req, res) {
-    Review.findById(req.params.id, function (err, review) {
-        if (!err) {
+    Review.findById(req.params.id)
+        .populate("restaurant")
+        .then(function (review) {
             res.render('review', {
                 review: review
             });
-        } else {
-            res.sendStatus(404);
-        }
-    });
+        });
 };
 
 let GET_editReview = function (req, res) {
