@@ -286,9 +286,10 @@ article {
 .detail .title {
     font-weight: bold;
     margin: 2rem 0 1rem;
-    text-transform: uppercase;
+    font-variant: all-petite-caps;
     letter-spacing: 0.06rem;
     color: #b19569;
+    font-size: 1.75rem;
 }
 .address {
     color: inherit;
@@ -356,6 +357,10 @@ article {
 
 .review-list .detail a {
     color:wheat;
+}
+
+.review-list .rating-stars label:before {
+    font-size: 1rem;
 }
 
 .review-list .detail .date {
