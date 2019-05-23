@@ -43,7 +43,6 @@ form label {
 .rating-stars {
     padding: 1rem 0;
     border: none;
-    font-size: 1.25rem;
     float: left;
 }
 
@@ -124,6 +123,8 @@ a.btn {
     box-shadow: none;
     color: black;
     display: table;
+    font-weight: normal;
+    font-variant: none;
 }
 
 a.btn:hover {

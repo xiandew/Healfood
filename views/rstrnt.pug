@@ -7,7 +7,7 @@ block append head
 block content
     include includes/rstrnt-detail
 
-        .wrapper(style='max-width:unset; margin-top:2rem')
+        .wrapper(style='max-width:unset;margin-top:2rem')
             a.btn(href=`/edit-restaurant/${restaurant._id}`)
                 i.fas.fa-edit
                 | Edit
@@ -20,9 +20,10 @@ block content
             include includes/rating-stars
         .clearfloat
         .Reviews
-            .title Reviews
 
-        a.btn(href=`/edit-review/${restaurant._id}`) Add review
-
-        - reviews = restaurant.reviews
-        include includes/review-list
+        div(style="margin-top:5rem")
+            .title
+                |Reviews
+                a.btn(href=`/edit-review/${restaurant._id}` style="float:right") Add new review
+            - reviews = restaurant.reviews
+            include includes/review-list
