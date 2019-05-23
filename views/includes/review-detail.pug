@@ -1,11 +1,12 @@
 .detail
-    .name #{review.title}
     .info
         .title Restaurant
-        | #{review.restaurant_name}
-        .title Description
+        | #{review.restaurant.name}
+        .title Review Title
+        | #{review.title}
+        .title Review Description
         | #{review.description}
-        .title Rating
+        .title Personal Rating
         | #{review.rating}
-        .title Date
-        | #{review.date}
+        .title Review Date
+        | #{review.date.toLocaleString()}
