@@ -35,6 +35,7 @@ let GET_editReview = function (req, res) {
                         restaurant: rstrnt
                     });
                 }
+                delete req.session.errors;
                 delete req.session.msg;
                 req.session.save();
             });
