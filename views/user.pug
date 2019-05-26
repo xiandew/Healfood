@@ -6,10 +6,14 @@ block append content
     form(method="post")
         label Username
         input(type='username', name='username', placeholder='Username', value=session.user.name)
+        button(type='submit', style="margin-top: 1rem;") Change Your Username
+
         label Email
-        input(type='email', name='email', placeholder='Email', value=session.user.email)
-        button(type='submit', style="margin-top: 2rem;") Update
+        input(type='email', name='email', placeholder='Email', value=session.user.email, disabled="disabled")
     .wrapper
+        a.btn(href='/change-email')
+            i.fas.fa-email
+            | Change Your Email
         a.btn(href='/reset-pwd')
             i.fas.fa-key
-            | Reset Password
+            | Reset Your Password

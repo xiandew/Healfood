@@ -364,6 +364,7 @@ article {
 }
 
 .review-list .rating-stars .half:before {
+    position: relative;
     display: inherit;
 }
 

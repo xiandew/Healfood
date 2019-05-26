@@ -48,7 +48,7 @@ router.post(
 );
 
 // user logic
-router.get('/user', userControllers.GET_user);
+router.get('/user', userControllers.isLoggedIn, userControllers.GET_user);
 router.get('/login', userControllers.GET_login);
 router.get('/signup', userControllers.GET_signup);
 router.get('/logout', userControllers.GET_logout);
@@ -61,5 +61,8 @@ router.post('/resend', validator.validateUserInput, userControllers.POST_resendT
 
 // map
 router.get(["/maps", "/maps/:rstrnt_id"], mapControllers.maps);
+
+// TODO
+router.get(["/change-email", "/reset-pwd", "/reviews/user/:user_id"], mainControllers.TBD);
 
 module.exports = router;

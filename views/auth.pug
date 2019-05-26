@@ -17,7 +17,7 @@ block append content
             label Please enter your email
             input(type='email', name='email', placeholder='Email', value=body.email)
 
-        button(type='submit') #{action}
+        button(type='submit', style="margin-bottom: 0") #{action}
 
     if action === "log in"
         .wrapper
