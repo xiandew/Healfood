@@ -57,7 +57,7 @@ form label {
 
 .rating-stars .half::before {
     content: "\f089";
-    display: inherit;
+    position: absolute;
     width: 15px;
     overflow: hidden;
 }

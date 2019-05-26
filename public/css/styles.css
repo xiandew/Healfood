@@ -363,6 +363,10 @@ article {
     font-size: 1rem;
 }
 
+.review-list .rating-stars .half:before {
+    display: inherit;
+}
+
 .review-list .detail .date {
     font-size: 0.9rem;
     color: #B6B6B6;
