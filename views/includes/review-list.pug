@@ -3,9 +3,9 @@ ul.review-list
         li
             .detail
                 .title
-                    a(href=`./reviews/id/${r._id}`) #{r.title}
+                    a(href=`/reviews/id/${r._id}`) #{r.title}
                     if session.user && (r.user._id.equals(session.user._id))
-                        a(href=`./edit-review/${r.restaurant._id}/${r.id}`)
+                        a(href=`/edit-review/${r.restaurant._id}/${r.id}`)
                             i.fas.fa-edit(style="color:wheat;float:right;")
                 - rating = r.rating
                 include rating-stars
@@ -15,8 +15,8 @@ ul.review-list
                 .descript
                     | #{r.description}
                 .authority
-                    a.username(href=`./reviews/user/${r.user._id}`)
+                    a.username(href=`/reviews/user/${r.user._id}`)
                         | #{r.user.name}
                     | on
-                    a.rstrntname(href=`./restaurants/id/${r.restaurant._id}`)
+                    a.rstrntname(href=`/restaurants/id/${r.restaurant._id}`)
                         | #{r.restaurant.name}
