@@ -64,5 +64,6 @@ router.get(["/maps", "/maps/:rstrnt_id"], mapControllers.maps);
 
 // TODO
 router.get(["/change-email", "/reset-pwd", "/reviews/user/:user_id"], mainControllers.TBD);
+router.post(["/user"], mainControllers.TBD);
 
 module.exports = router;
