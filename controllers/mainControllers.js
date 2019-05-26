@@ -13,4 +13,9 @@ let home = function (req, res) {
     }).limit(5);
 };
 
+let TBD = function (req, res) {
+    res.send("To be done");
+};
+
 module.exports.home = home;
+module.exports.TBD = TBD;

@@ -24,6 +24,6 @@ block content
         div(style="margin-top:5rem")
             .title
                 |Reviews
-                a.btn(href=`/edit-review/${restaurant._id}` style="float:right") Add new review
+                a.btn.float-btn(href=`/edit-review/${restaurant._id}`) Add new review
             - reviews = restaurant.reviews
             include includes/review-list
