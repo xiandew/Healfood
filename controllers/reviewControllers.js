@@ -48,6 +48,13 @@ let GET_editReview = function (req, res) {
 module.exports.GET_reviews = GET_reviews;
 module.exports.GET_editReview = GET_editReview;
 
+// remove duplicate
+function rm_duplicate(arr) {
+    return arr.filter(function (r, i) {
+        return arr.indexOf(r) === i;
+    });
+}
+
 // Add a new review if review_id is not present in the database,
 // otherwise update the existing review
 let POST_editReview = function (req, res) {
@@ -72,19 +79,26 @@ let POST_editReview = function (req, res) {
         // Save the restaurant
         review.save(function (err) {
             if (err) {
-                console.log(err);
+                if (err.code === 11000) {
+                    req.session.errors = [{
+                        msg: "Sorry but you are only allowed one review per restaurant. " +
+                            "Consider update the previous one"
+                    }];
+                } else {
+                    req.session.errors = [{msg: err.errmsg}];
+                }
+                req.session.save();
+                return res.redirect(req.originalUrl);
             } else {
                 User.findById(req.session.user._id, (err, usr) => {
                     usr.reviews.push(review._id);
+                    usr.reviews = rm_duplicate(usr.reviews);
                     usr.save();
                 });
                 Restaurant.findById(req.params.rstrnt_id)
                     .then(rstrnt => {
                         rstrnt.reviews.push(review._id);
-                        // remove duplicate
-                        rstrnt.reviews = rstrnt.reviews.filter(function (r, i) {
-                            return rstrnt.reviews.indexOf(r) === i;
-                        });
+                        rstrnt.reviews = rm_duplicate(rstrnt.reviews);
 
                         rstrnt.save(() => {
                             Restaurant.populate(rstrnt, "reviews", () => {
@@ -101,14 +115,12 @@ let POST_editReview = function (req, res) {
                                 rstrnt.save();
                             })
                         });
-
                     });
+                req.session.msg = "Review updated!";
+                req.session.save();
+                return res.redirect('/edit-review/' + review.restaurant._id + '/' + review._id);
             }
         });
-
-        req.session.msg = "Review updated!";
-        req.session.save();
-        return res.redirect(req.param.id ? req.originalUrl : '/edit-review/' + review.restaurant._id + '/' + review._id);
     });
 };
 

@@ -44,8 +44,7 @@ let rstrntInputRules = [
 
 // Tile, rating cannot be blank
 let reviewInputRules = [
-    body('title').not().isEmpty().withMessage("Review title cannot be blank"),
-    body('rating').not().isEmpty().withMessage("Please select rating stars")
+    body('title').not().isEmpty().withMessage("Review title cannot be blank")
 ];
 
 let validate = function (req, res, next) {

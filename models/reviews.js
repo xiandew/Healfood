@@ -11,4 +11,6 @@ let reviewSchema = Schema(
         "restaurant": {type: Schema.Types.ObjectId, ref: 'restaurants'}
     }
 );
+reviewSchema.index({user: 1, restaurant: 1}, {unique: true});
+
 mongoose.model('reviews', reviewSchema);
