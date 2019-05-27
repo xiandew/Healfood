@@ -486,6 +486,10 @@ article {
         width: 100%;
     }
 
+    .detail .photo img {
+        width: 100%;
+    }
+
     .restaurant-list li {
         margin-bottom: 2.5rem;
     }
