@@ -55,14 +55,19 @@ form label {
     font-weight: 900;
 }
 
-.rating-stars .half::before {
+.rating-stars .half:before {
     content: "\f089";
-    position: absolute;
+    position: relative;
+    display: inherit;
     width: 15px;
     overflow: hidden;
 }
 
-.rating-stars label::before {
+fieldset.rating-stars .half:before {
+    position: absolute;
+}
+
+.rating-stars label:before {
     margin: 0 10px 0 0;
     font-size: 1.5rem;
     display: inline-block;
