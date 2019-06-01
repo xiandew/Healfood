@@ -4,7 +4,7 @@ html(lang='en')
         block head
             meta(charset='UTF-8')
             meta(name='viewport', content='width=device-width, initial-scale=1')
-            title HealFood
+            title #{title} - HealFood
             link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.8.1/css/all.css",
             integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf",
             crossorigin="anonymous")
@@ -19,7 +19,7 @@ html(lang='en')
                     i.fa.fa-caret-down
                 .menu-content
                     a(href='/') Home
-                    a(href='/maps') Maps
+                    a(href='/map') Map
                     a(href='/reviews') Reviews
                     a(href='/restaurants') Restaurants
                     if session && session.user

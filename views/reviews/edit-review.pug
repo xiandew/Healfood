@@ -5,6 +5,9 @@ block append head
 
 block append content
     .wrapper
+        a.btn(href=`/restaurants/id/${restaurant._id}`) Go back
+
+    .wrapper
         include ../includes/rstrnt-detail
 
     form(method='post', style='margin: 2.5rem auto;')
