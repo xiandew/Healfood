@@ -1,15 +1,15 @@
 # [HEALFOOD MELBOURNE](http://info30005artisans.herokuapp.com)
 INFO30005 project, fall 2019
 
-## Core functionalities
+## *Core functionalities*
 
-### 1. Authentication
+## 1. Authentication
 
 This functionality gives users ability to register a account
 and log in our website. Authentication is required if a user
 wants to edit any information on the website.
 
-#### Sign up
+### Sign up
 
 To create a account, users need to click `log in` on the navbar
 and in the next page click `create account` button, users should
@@ -29,7 +29,7 @@ to input their emails to acquire a new verification token.
 
 Users' passwords will be hashed before storing into database.
 
-#### Log in
+### Log in
 
 Users can log into the website by clicking the `log in` button
 on the navbar and then entering their verified email and password.
@@ -39,19 +39,23 @@ Users can edit their username and email after logging in by clicking
 
 If needed, following account can be used for testing purpose:
 
-**Email** xiandew@student.unimelb.edu.au\
-**Password** 12345678
+```
+Email    xiandew@student.unimelb.edu.au
+Password 12345678
+```
 
 
-#### Relevant urls
+### Relevant urls
 
 - http://info30005artisans.herokuapp.com/login
 - http://info30005artisans.herokuapp.com/signup
 
-#### Routes
+### Routes
 
-| Method   | Url   |
-| -------- |-------|
+`routes/routes.js`
+
+| Method   | Url
+| -------- |-------
 | get      | /user
 | get      | /login
 | get      | /signup
@@ -62,16 +66,54 @@ If needed, following account can be used for testing purpose:
 | post     | /signup
 | post     | /resend
 
-#### Models
+### Views
+
+`views/user/`
+
+### Models
 
 `models/users.js`
 
-#### Controller
+### Controller
 
 `controllers/userController.js`
 
 
-### 2. Restaurants
+## 2. Reviews
+
+This functionality is for editing and displaying reviews.
+
+### Relevant urls
+
+- http://info30005artisans.herokuapp.com/reviews
+
+### Views
+
+`views/reviews/`
+
+### Routes
+
+`routes/routes.js`
+
+| Method   | Url
+| -------- |-------
+| get      | /reviews
+| get      | /reviews/id/:id
+| get      | /edit-review/:rstrnt_id
+| get      | /edit-review/:rstrnt_id/:review_id
+| post     | /edit-review/:rstrnt_id
+| post     | /edit-review/:rstrnt_id/:review_id
+
+### Models
+
+`models/reviews.js`
+
+### Controller
+
+`controllers/reviewController.js`
+
+
+## 3. Restaurants
 
 This functionality is for editing, posting and displaying restaurants.
 
@@ -92,40 +134,69 @@ users can edit the restaurant information by clicking it.
 The average rating for each restaurant will be updated when new review is
 added for it.
 
-#### Relevant urls
+### Relevant urls
 
 - http://info30005artisans.herokuapp.com/restaurants
 - http://info30005artisans.herokuapp.com/edit-restaurant
 
-#### Routes and controllers
+### Views
 
-```javascript
-router.get('/restaurants', rstrntControllers.GET_allRestaurants);
-router.get('/restaurants/id/:id', rstrntControllers.GET_restaurantByID);
-router.get('/restaurants/name/:name', rstrntControllers.GET_restaurantByName);
-router.get(
-    ['/edit-restaurant', '/edit-restaurant/:id'],
-    userControllers.isLoggedIn,
-    rstrntControllers.GET_editRestaurant
-);
-router.get('/deleteRestaurant/:id', rstrntControllers.GET_deleteRestaurant);
+`views/restaurants/`
 
-router.post(
-    ['/edit-restaurant', '/edit-restaurant/:id'],
-    multer.parser.single("photo"),
-    validator.validateRstrntInput,
-    rstrntControllers.POST_editRestaurant
-);
-```
+### Routes
 
-#### models
+`routes/routes.js`
+
+| Method   | Url
+| -------- |-------
+| get      | /restaurants
+| get      | /restaurants/id/:id
+| get      | /edit-restaurant
+| get      | /edit-restaurant/:id
+| post     | /edit-restaurant
+| post     | /edit-restaurant/:id
+
+### Models
 
 `models/restaurants.js`
 
-- Restaurant
+### Controller
+
+`controllers/rstrntController.js`
 
 
-### Validate
+## 4. Map
+
+This functionality is for showing the locations of restaurants on the map.
+
+### Relevant urls
+
+- http://info30005artisans.herokuapp.com/map
+
+### Views
+
+`views/map.pug`
+
+### Routes
+
+`routes/routes.js`
+
+| Method   | Url
+| -------- |-------
+| get      | /map
+
+### models
+
+`models/restaurants.js`
+
+It takes use of the coordinate in the restaurant schema
+
+### Controller
+
+`controllers/mapController.js`
+
+
+## 5. Validate
 
 Input validation is implemented by `express-validator`. Invalid
 inputs will result in error messages showing at the top of the form.
