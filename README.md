@@ -5,56 +5,71 @@ INFO30005 project, fall 2019
 
 ### 1. Authentication
 
-Authentication is required if a user wants to edit restaurants
-or post reviews. Each user is identified by the email address.
+This functionality gives users ability to register a account
+and log in our website. Authentication is required if a user
+wants to edit any information on the website.
 
-By clicking the `log in` button on the navigation bar, users
-will be proceeded to the authentication page. Users are able
-to log in and sign up in this page. A user's email and password
-are required to be logged in.
+#### Sign up
 
-By clicking `CREATE ACCOUNT` button, users should be proceeded
-to sign up page. Users' passwords will be hashed before storing
-into database. For a valid account, users need to confirm
-their emails by visiting the link sent to them. Only users with
-verified emails are allowed to log in.
+To create a account, users need to click `log in` on the navbar
+and in the next page click `create account` button, users should
+be proceeded to sign up page. By submitting required information,
+a message will appear showing that the verification email has been
+sent.
+
+For a valid account, users need to confirm their emails.
+Only users with verified emails are allowed to log in. Users
+can verify their emails by visiting the link in the verification
+email.
 
 The token in the link sent to the user is supposed to be expired by
 12 hours. Users who try to verify their accounts after that time limit
 will be proceeded to `resend` page. In this page, users will be required
 to input their emails to acquire a new verification token.
 
-Users can edit their usernames and emails in `My account`
-section.
+Users' passwords will be hashed before storing into database.
 
-Input validation is implemented by `express-validator`. Invalid
-inputs will result in error messages showing at the top of the form.
+#### Log in
+
+Users can log into the website by clicking the `log in` button
+on the navbar and then entering their verified email and password.
+
+Users can edit their username and email after logging in by clicking
+`My account` in the navbar.
+
+If needed, following account can be used for testing purpose:
+
+**Email** xiandew@student.unimelb.edu.au\
+**Password** 12345678
+
 
 #### Relevant urls
+
 - http://info30005artisans.herokuapp.com/login
 - http://info30005artisans.herokuapp.com/signup
 
-#### Routes and controllers
-These can be found in `routes/routes.js`
+#### Routes
 
-```javascript
-router.get('/user', userControllers.GET_user);
-router.get('/login', userControllers.GET_login);
-router.get('/signup', userControllers.GET_signup);
-router.get('/logout', userControllers.GET_logout);
-router.get('/confirm-email/:token', userControllers.GET_confirmEmail);
-router.get('/resend', userControllers.GET_resendToken);
+| Method   | Url   |
+| -------- |-------|
+| get      | /user
+| get      | /login
+| get      | /signup
+| get      | /logout
+| get      | /confirm-email/:token
+| get      | /resend
+| post     | /login
+| post     | /signup
+| post     | /resend
 
-router.post('/login', validator.validateUserInput, userControllers.POST_login);
-router.post('/signup', validator.validateUserInput, userControllers.POST_signup);
-router.post('/resend', validator.validateUserInput, userControllers.POST_resendToken);
-``` 
-
-#### models
+#### Models
 
 `models/users.js`
-- User
-- Token
+
+#### Controller
+
+`controllers/userController.js`
+
 
 ### 2. Restaurants
 
@@ -73,6 +88,9 @@ address will be considered as different locations by the server.
 
 A `edit` button can be found in each restaurant detail page. Authenticated
 users can edit the restaurant information by clicking it.
+
+The average rating for each restaurant will be updated when new review is
+added for it.
 
 #### Relevant urls
 
@@ -107,10 +125,13 @@ router.post(
 - Restaurant
 
 
+### Validate
+
+Input validation is implemented by `express-validator`. Invalid
+inputs will result in error messages showing at the top of the form.
+
 
 ## TODO
 
-* [ ] Post reviews
-* [ ] Map interaction
 * [ ] Add roles for users (eg. Customer, Owner, Admin...)
 * [ ] Reset password
