@@ -1,11 +1,11 @@
-extends parents/default
+extends ../parents/default
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
     link(rel='stylesheet', type='text/css', href='/css/rating-stars.css')
 
 block content
-    include includes/rstrnt-detail
+    include ../includes/rstrnt-detail
 
         .wrapper(style='max-width:unset')
             a.btn(href=`/edit-restaurant/${restaurant._id}`)
@@ -17,7 +17,7 @@ block content
             | No ratings yet
         else
             - rating = restaurant.rating
-            include includes/rating-stars
+            include ../includes/rating-stars
         .clearfloat
         .Reviews
 
@@ -26,4 +26,4 @@ block content
                 span Reviews
                 a.btn.float-btn(href=`/edit-review/${restaurant._id}`) Add new review
             - reviews = restaurant.reviews
-            include includes/review-list
+            include ../includes/review-list

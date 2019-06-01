@@ -1,11 +1,11 @@
-extends parents/form
+extends ../parents/form
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
 
 block append content
     .wrapper
-        include includes/rstrnt-detail
+        include ../includes/rstrnt-detail
 
     form(method='post', style='margin: 2.5rem auto;')
         .heading Add your review

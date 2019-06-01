@@ -12,11 +12,11 @@ module.exports.isLoggedIn = isLoggedIn;
 
 
 let GET_user = function (req, res) {
-    res.render('user');
+    res.render('user/user');
 };
 
 function auth(action, req, res) {
-    res.render('auth', {
+    res.render('user/auth', {
         action: action
     });
     delete req.session.errors;
