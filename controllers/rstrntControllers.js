@@ -7,21 +7,21 @@ let Restaurant = mongoose.model('restaurants');
 let GET_editRestaurant = function (req, res) {
     Restaurant.findById(req.params.id, function (err, rstrnt) {
         if (!err) {
-            res.render('edit-rstrnt', {
+            res.render('restaurants/edit-rstrnt', {
                 restaurant: rstrnt
             });
             delete req.session.errors;
             delete req.session.msg;
             req.session.save();
         } else {
-            res.render('edit-rstrnt');
+            res.render('restaurants/edit-rstrnt');
         }
     });
 };
 let GET_allRestaurants = function (req, res) {
     Restaurant.find(null, null, {sort: {lastModified: -1}}, function (err, rstrnts) {
         if (!err) {
-            res.render('rstrnts', {
+            res.render('restaurants/rstrnts', {
                 rstrnts: rstrnts
             });
         } else {
@@ -41,7 +41,7 @@ let GET_restaurantByID = function (req, res) {
                 }]
         })
         .then(function (rstrnt) {
-            res.render('rstrnt', {
+            res.render('restaurants/rstrnt', {
                 restaurant: rstrnt
             });
         });
