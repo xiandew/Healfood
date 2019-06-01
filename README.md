@@ -9,7 +9,7 @@ This functionality gives users ability to register a account
 and log in our website. Authentication is required if a user
 wants to edit any information on the website.
 
-### Sign up
+#### Sign up
 
 To create a account, users need to click `log in` on the navbar
 and in the next page click `create account` button, users should
@@ -29,7 +29,7 @@ to input their emails to acquire a new verification token.
 
 Users' passwords will be hashed before storing into database.
 
-### Log in
+#### Log in
 
 Users can log into the website by clicking the `log in` button
 on the navbar and then entering their verified email and password.
@@ -45,12 +45,12 @@ Password 12345678
 ```
 
 
-### Relevant urls
+#### Relevant urls
 
 - http://info30005artisans.herokuapp.com/login
 - http://info30005artisans.herokuapp.com/signup
 
-### Routes
+#### Routes
 
 `routes/routes.js`
 
@@ -66,15 +66,15 @@ Password 12345678
 | post     | /signup
 | post     | /resend
 
-### Views
+#### Views
 
 `views/user/`
 
-### Models
+#### Models
 
 `models/users.js`
 
-### Controller
+#### Controller
 
 `controllers/userController.js`
 
@@ -83,15 +83,15 @@ Password 12345678
 
 This functionality is for editing and displaying reviews.
 
-### Relevant urls
+#### Relevant urls
 
 - http://info30005artisans.herokuapp.com/reviews
 
-### Views
+#### Views
 
 `views/reviews/`
 
-### Routes
+#### Routes
 
 `routes/routes.js`
 
@@ -104,11 +104,11 @@ This functionality is for editing and displaying reviews.
 | post     | /edit-review/:rstrnt_id
 | post     | /edit-review/:rstrnt_id/:review_id
 
-### Models
+#### Models
 
 `models/reviews.js`
 
-### Controller
+#### Controller
 
 `controllers/reviewController.js`
 
@@ -134,16 +134,16 @@ users can edit the restaurant information by clicking it.
 The average rating for each restaurant will be updated when new review is
 added for it.
 
-### Relevant urls
+#### Relevant urls
 
 - http://info30005artisans.herokuapp.com/restaurants
 - http://info30005artisans.herokuapp.com/edit-restaurant
 
-### Views
+#### Views
 
 `views/restaurants/`
 
-### Routes
+#### Routes
 
 `routes/routes.js`
 
@@ -156,11 +156,11 @@ added for it.
 | post     | /edit-restaurant
 | post     | /edit-restaurant/:id
 
-### Models
+#### Models
 
 `models/restaurants.js`
 
-### Controller
+#### Controller
 
 `controllers/rstrntController.js`
 
@@ -169,15 +169,15 @@ added for it.
 
 This functionality is for showing the locations of restaurants on the map.
 
-### Relevant urls
+#### Relevant urls
 
 - http://info30005artisans.herokuapp.com/map
 
-### Views
+#### Views
 
 `views/map.pug`
 
-### Routes
+#### Routes
 
 `routes/routes.js`
 
@@ -185,13 +185,13 @@ This functionality is for showing the locations of restaurants on the map.
 | -------- |-------
 | get      | /map
 
-### models
+#### models
 
 `models/restaurants.js`
 
 It takes use of the coordinate in the restaurant schema
 
-### Controller
+#### Controller
 
 `controllers/mapController.js`
 
