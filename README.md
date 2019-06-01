@@ -204,5 +204,6 @@ inputs will result in error messages showing at the top of the form.
 
 ## TODO
 
+* [ ] Search
 * [ ] Add roles for users (eg. Customer, Owner, Admin...)
 * [ ] Reset password
