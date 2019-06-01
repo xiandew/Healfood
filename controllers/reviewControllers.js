@@ -9,6 +9,7 @@ let GET_reviews = function (req, res) {
         .populate('restaurant')
         .then(reviews => {
             res.render('reviews/reviews', {
+                title: "Reviews",
                 reviews: reviews
             });
         });
@@ -19,6 +20,7 @@ let GET_reviewByID = function (req, res) {
         .populate("restaurant")
         .then(function (review) {
             res.render('reviews/review', {
+                title: "Review",
                 review: review
             });
         });
@@ -30,11 +32,13 @@ let GET_editReview = function (req, res) {
             Review.findById(req.params.review_id, function (err, review) {
                 if (!err && review) {
                     res.render('reviews/edit-review', {
+                        title: "Edit review",
                         restaurant: rstrnt,
                         review: review
                     });
                 } else {
                     res.render('reviews/edit-review', {
+                        title: "Add new review",
                         restaurant: rstrnt
                     });
                 }

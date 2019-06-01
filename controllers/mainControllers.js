@@ -5,6 +5,7 @@ let home = function (req, res) {
     Restaurant.find({"photo": {$exists: true}}, null, {sort: {lastModified: -1}}, function (err, rstrnts) {
         if (!err) {
             res.render('index', {
+                title: "Home",
                 rstrnts: rstrnts
             });
         } else {
