@@ -136,9 +136,9 @@ a.btn:hover {
     display: table;
 }
 
-.float-btn {
+a.float-btn {
     float: right;
-    margin: 0 !important;
+    margin: 0;
 }
 
 .alert {
@@ -165,8 +165,9 @@ a.btn:hover {
 }
 
 @media screen and (max-width: 520px) {
-    .float-btn {
+    a.float-btn {
         display: table;
         float: none;
+        margin: 1rem 0;
     }
 }

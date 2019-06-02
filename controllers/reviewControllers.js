@@ -4,18 +4,23 @@ let Restaurant = mongoose.model('restaurants');
 let User = mongoose.model('users');
 
 let GET_reviews = function (req, res) {
-    Review.find(null, null, {sort: {date: -1}}).populate('user').populate('restaurant').then(reviews => {
-        res.render('reviews', {
-            reviews: reviews
+    Review.find(null, null, {sort: {date: -1}})
+        .populate('user')
+        .populate('restaurant')
+        .then(reviews => {
+            res.render('reviews/reviews', {
+                title: "Reviews",
+                reviews: reviews
+            });
         });
-    });
 };
 
 let GET_reviewByID = function (req, res) {
     Review.findById(req.params.id)
         .populate("restaurant")
         .then(function (review) {
-            res.render('review', {
+            res.render('reviews/review', {
+                title: "Review",
                 review: review
             });
         });
@@ -26,12 +31,14 @@ let GET_editReview = function (req, res) {
         if (!err && rstrnt) {
             Review.findById(req.params.review_id, function (err, review) {
                 if (!err && review) {
-                    res.render('edit-review', {
+                    res.render('reviews/edit-review', {
+                        title: "Edit review",
                         restaurant: rstrnt,
                         review: review
                     });
                 } else {
-                    res.render('edit-review', {
+                    res.render('reviews/edit-review', {
+                        title: "Add new review",
                         restaurant: rstrnt
                     });
                 }
