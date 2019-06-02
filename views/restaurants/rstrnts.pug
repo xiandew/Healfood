@@ -1,4 +1,4 @@
-extends parents/default
+extends ../parents/default
 
 block append head
     link(rel='stylesheet', type='text/css', href='/css/inputs.css')
@@ -21,4 +21,4 @@ block content
                                 |  No ratings yet
                             else
                                 - rating = r.rating
-                                include includes/rating-stars
+                                include ../includes/rating-stars

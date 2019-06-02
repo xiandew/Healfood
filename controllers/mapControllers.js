@@ -1,16 +1,18 @@
 let mongoose = require("mongoose");
 let Restaurant = mongoose.model("restaurants");
 
-let maps = function (req, res) {
+let map = function (req, res) {
     Restaurant.findById(req.params.rstrnt_id, function (err, rstrnt) {
         if (!err && rstrnt) {
-            res.render('maps', {
+            res.render('map', {
+                title: "Map",
                 rstrntData: [rstrnt]
             });
         } else {
             Restaurant.find(function (err, rstrnts) {
                 if (!err) {
-                    res.render('maps', {
+                    res.render('map', {
+                        title: "Map",
                         rstrntData: rstrnts
                     });
                 } else {
@@ -21,4 +23,4 @@ let maps = function (req, res) {
     });
 };
 
-module.exports.maps = maps;
+module.exports.map = map;

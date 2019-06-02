@@ -60,7 +60,7 @@ router.post('/signup', validator.validateUserInput, userControllers.POST_signup)
 router.post('/resend', validator.validateUserInput, userControllers.POST_resendToken);
 
 // map
-router.get(["/maps", "/maps/:rstrnt_id"], mapControllers.maps);
+router.get(["/map", "/map/:rstrnt_id"], mapControllers.map);
 
 // TODO
 router.get(["/change-email", "/reset-pwd", "/reviews/user/:user_id"], mainControllers.TBD);
