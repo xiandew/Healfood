@@ -41,13 +41,12 @@ a:focus {
 header {
     grid-area: header;
     text-align: center;
-    font-family: Impact, serif;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bolder;
     font-size: 22px;
-    letter-spacing: 2px;
-    -webkit-text-fill-color: #e7c48a;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #8c5f40;
-    margin-bottom: 2rem;
+    letter-spacing: 7px;
+    -webkit-text-fill-color: #ffffff;
+    margin-bottom: 8px;
 }
 
 figure {
@@ -56,9 +55,12 @@ figure {
 }
 
 article {
+    font-family: "Bebas Nue", serif;
     grid-area: article;
     text-align: center;
-    color: #b19569;
+    font-size: 20px;
+    /*color: #b19569;*/
+    color: #e7c48a;
 }
 
 /* Navbar container */
