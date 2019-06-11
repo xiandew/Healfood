@@ -25,12 +25,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/samtafoya/info30005_2019.git"
+    "url": "git+https://github.com/xiandew/info30005-2019-project.git"
   },
   "author": "Artisans",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/samtafoya/info30005_2019/issues"
+    "url": "https://github.com/xiandew/info30005-2019-project/issues"
   },
-  "homepage": "https://github.com/samtafoya/info30005_2019#readme"
+  "homepage": "https://github.com/xiandew/info30005-2019-project#readme"
 }
