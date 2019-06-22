@@ -107,16 +107,8 @@ let mongoose = require('mongoose');
 let User = mongoose.model('users');
 let Token = mongoose.model('tokens');
 let crypto = require('crypto');
-let nodemailer = require('nodemailer');
 
-// settings for sending email
-let transporter = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-        user: "apikey",
-        pass: "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"
-    }
-});
+let transporter = require("./nodemailer").transporter;
 let mailOptions = {
     from: 'xiandew@student.unimelb.edu.au',
 };
