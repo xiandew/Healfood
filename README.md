@@ -1,4 +1,4 @@
-# [HEALFOOD MELBOURNE](http://info30005artisans.herokuapp.com)
+# [HEALFOOD MELBOURNE](https://healfood.herokuapp.com/)
 INFO30005 project, fall 2019
 
 ## *Core functionalities*
@@ -204,6 +204,7 @@ inputs will result in error messages showing at the top of the form.
 
 ## TODO
 
+* [ ] Word limit for list
+* [ ] Reset password
 * [ ] Search
 * [ ] Add roles for users (eg. Customer, Owner, Admin...)
-* [ ] Reset password
