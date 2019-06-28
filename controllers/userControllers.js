@@ -8,8 +8,6 @@ let isLoggedIn = function (req, res, next) {
     next();
 };
 
-module.exports.isLoggedIn = isLoggedIn;
-
 
 let GET_user = function (req, res) {
     res.render('user/user', {
@@ -87,15 +85,6 @@ let GET_confirmEmail = function (req, res) {
 let GET_resendToken = function (req, res) {
     auth("resend token", req, res);
 };
-
-module.exports.GET_user = GET_user;
-module.exports.GET_login = GET_login;
-module.exports.GET_signup = GET_signup;
-module.exports.GET_logout = GET_logout;
-
-module.exports.GET_confirmEmail = GET_confirmEmail;
-module.exports.GET_resendToken = GET_resendToken;
-
 
 /**
  * Reference: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
@@ -276,6 +265,15 @@ let POST_resendToken = function (req, res) {
     });
 };
 
-module.exports.POST_login = POST_login;
-module.exports.POST_signup = POST_signup;
-module.exports.POST_resendToken = POST_resendToken;
+module.exports = {
+    isLoggedIn,
+    GET_user,
+    GET_login,
+    GET_signup,
+    GET_logout,
+    GET_confirmEmail,
+    GET_resendToken,
+    POST_login,
+    POST_signup,
+    POST_resendToken
+};

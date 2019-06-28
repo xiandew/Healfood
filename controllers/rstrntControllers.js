@@ -73,12 +73,6 @@ let GET_deleteRestaurant = function (req, res) {
     });
 };
 
-module.exports.GET_editRestaurant = GET_editRestaurant;
-module.exports.GET_allRestaurants = GET_allRestaurants;
-module.exports.GET_restaurantByID = GET_restaurantByID;
-module.exports.GET_restaurantByName = GET_restaurantByName;
-module.exports.GET_deleteRestaurant = GET_deleteRestaurant;
-
 /**
  * POST
  */
@@ -115,4 +109,11 @@ let POST_editRestaurant = function (req, res) {
     });
 };
 
-module.exports.POST_editRestaurant = POST_editRestaurant;
+module.exports = {
+    GET_editRestaurant,
+    GET_allRestaurants,
+    GET_restaurantByID,
+    GET_restaurantByName,
+    GET_deleteRestaurant,
+    POST_editRestaurant
+};

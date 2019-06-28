@@ -52,8 +52,6 @@ let GET_editReview = function (req, res) {
     });
 };
 
-module.exports.GET_reviews = GET_reviews;
-module.exports.GET_editReview = GET_editReview;
 
 // remove duplicate
 function rm_duplicate(arr) {
@@ -131,5 +129,9 @@ let POST_editReview = function (req, res) {
     });
 };
 
-module.exports.POST_editReview = POST_editReview;
-module.exports.GET_reviewByID = GET_reviewByID;
+module.exports = {
+    GET_reviews,
+    GET_reviewByID,
+    GET_editReview,
+    POST_editReview
+};

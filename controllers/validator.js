@@ -61,6 +61,8 @@ let validate = function (req, res, next) {
     next();
 };
 
-module.exports.validateUserInput = [userInputRules, validate];
-module.exports.validateRstrntInput = [rstrntInputRules, validate];
-module.exports.validateReviewInput = [reviewInputRules, validate];
+module.exports = {
+    validateUserInput: [userInputRules, validate],
+    validateRstrntInput: [rstrntInputRules, validate],
+    validateReviewInput: [reviewInputRules, validate]
+};
