@@ -103,15 +103,11 @@ module.exports.GET_resendToken = GET_resendToken;
  * POST /login
  * Sign in with email and password
  */
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 let User = mongoose.model('users');
 let Token = mongoose.model('tokens');
 let crypto = require('crypto');
 
-let transporter = require("./nodemailer").transporter;
-let mailOptions = {
-    from: 'xiandew@student.unimelb.edu.au',
-};
 let POST_login = function (req, res) {
     User.findOne({email: req.body.email}, function (err, user) {
         if (!user) {
@@ -159,6 +155,13 @@ let POST_login = function (req, res) {
 /**
  * POST /signup
  */
+const nodemailer = require('nodemailer');
+const config = require("../config/config");
+let transporter = nodemailer.createTransport(config.sendGrid);
+let mailOptions = {
+    from: 'xiandew@student.unimelb.edu.au',
+};
+
 let POST_signup = function (req, res) {
 
     // Make sure this account doesn't already exist

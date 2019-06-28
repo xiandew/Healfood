@@ -1,15 +1,12 @@
 /**
  * Reference: https://github.com/expressjs/multer
  */
-let multer = require("multer");
-let cloudinary = require("cloudinary");
-let cloudinaryStorage = require("multer-storage-cloudinary");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+const config = require("../config/config");
 
-cloudinary.config({
-    cloud_name: "damdpx5ge",
-    api_key: "287161176894839",
-    api_secret: "CVn3CIAqD94HRuPZRiCz4UUCtQw"
-});
+cloudinary.config(config.cloudinary);
 
 let storage = cloudinaryStorage({
     cloudinary: cloudinary,
