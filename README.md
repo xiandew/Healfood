@@ -47,8 +47,8 @@ Password 12345678
 
 #### Relevant urls
 
-- http://info30005artisans.herokuapp.com/login
-- http://info30005artisans.herokuapp.com/signup
+- https://healfood.herokuapp.com/login
+- https://healfood.herokuapp.com/signup
 
 #### Routes
 
@@ -85,7 +85,7 @@ This functionality is for editing and displaying reviews.
 
 #### Relevant urls
 
-- http://info30005artisans.herokuapp.com/reviews
+- https://healfood.herokuapp.com/reviews
 
 #### Views
 
@@ -136,8 +136,8 @@ added for it.
 
 #### Relevant urls
 
-- http://info30005artisans.herokuapp.com/restaurants
-- http://info30005artisans.herokuapp.com/edit-restaurant
+- https://healfood.herokuapp.com/restaurants
+- https://healfood.herokuapp.com/edit-restaurant
 
 #### Views
 
@@ -171,7 +171,7 @@ This functionality is for showing the locations of restaurants on the map.
 
 #### Relevant urls
 
-- http://info30005artisans.herokuapp.com/map
+- https://healfood.herokuapp.com/map
 
 #### Views
 
