@@ -1,5 +1,5 @@
 // Set up express
-let express = require('express');
+const express = require('express');
 let app = express();
 
 // Database setup
@@ -10,16 +10,19 @@ app.set('view engine', 'pug');
 
 app.use(express.static('public'));
 
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-let expressSession = require('express-session');
+const expressSession = require('express-session');
+const MongoStore = require('connect-mongo')(expressSession);
+const mongoose = require('mongoose');
 app.use(expressSession({
     secret: 'secret-code',
     cookie: {maxAge: 86400},
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 app.use(function (req, res, next) {
@@ -28,7 +31,7 @@ app.use(function (req, res, next) {
 });
 
 // Routes setup
-let routes = require('./routes/routes.js');
+const routes = require('./routes/routes.js');
 app.use('/', routes);
 
 app.use(function (err, req, res, next) {
