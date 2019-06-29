@@ -204,7 +204,7 @@ inputs will result in error messages showing at the top of the form.
 
 ## TODO
 
-* [ ] Word limit for list
+* [ ] folding long paragraph in lists
 * [ ] Reset password
 * [ ] Search
 * [ ] Add roles for users (eg. Customer, Owner, Admin...)

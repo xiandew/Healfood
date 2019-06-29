@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    background: url("/images/woodBack.jpg") fixed;
+    background: url("/img/woodBack.jpg") fixed;
     background-size: auto 100%;
     max-width: 970px;
     margin: 0 auto;
@@ -59,7 +59,7 @@ article {
 	font-size: 20px;
 	color: #e7c48a;
 	border-top: 1px solid;
-	margin-top: 7.5rem;
+	margin-top: 5rem;
 }
 
 /* Navbar container */
@@ -118,7 +118,7 @@ article {
 }
 
 .mySlides {
-    display: none; /* Hide the images by default */
+    display: none;
     text-align: center;
 }
 
