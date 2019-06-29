@@ -3,7 +3,7 @@ ul.review-list
         li
             .detail
                 .title
-                    a(href=`/reviews/id/${r._id}`) #{r.title}
+                    | #{r.title}
                     if session.user && (r.user._id.equals(session.user._id))
                         a(href=`/edit-review/${r.restaurant._id}/${r.id}`)
                             i.fas.fa-edit(style="color:wheat;float:right;")
