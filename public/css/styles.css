@@ -55,12 +55,11 @@ figure {
 }
 
 article {
-    font-family: "Bebas Nue", serif;
-    grid-area: article;
-    text-align: center;
-    font-size: 20px;
-    /*color: #b19569;*/
-    color: #e7c48a;
+	grid-area: article;
+	font-size: 20px;
+	color: #e7c48a;
+	border-top: 1px solid;
+	margin-top: 7.5rem;
 }
 
 /* Navbar container */
