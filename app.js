@@ -19,7 +19,7 @@ const MongoStore = require('connect-mongo')(expressSession);
 const mongoose = require('mongoose');
 app.use(expressSession({
     secret: 'secret-code',
-    cookie: {maxAge: 86400},
+    cookie: {maxAge: 86400000},
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
