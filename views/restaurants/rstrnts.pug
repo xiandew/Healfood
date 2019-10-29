@@ -11,8 +11,8 @@ block content
         ul.restaurant-list
             each r in rstrnts
                 li
-                    a.photo(href=`./restaurants/id/${r.id}`)
-                        img(src=`${r.photo}`, alt=`${r.name}`)
+                    a.photo(style=`background-image:url(${r.photo});` href=`./restaurants/id/${r.id}`)
+                        .photo-placeholder
                     .detail
                         .name
                             a(href=`./restaurants/id/${r.id}`) #{r.name}

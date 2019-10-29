@@ -55,11 +55,11 @@ figure {
 }
 
 article {
-	grid-area: article;
-	font-size: 20px;
-	color: #e7c48a;
-	border-top: 1px solid;
-	margin-top: 5rem;
+    grid-area: article;
+    font-size: 20px;
+    color: #e7c48a;
+    border-top: 1px solid;
+    margin-top: 5rem;
 }
 
 /* Navbar container */
@@ -212,39 +212,10 @@ article {
     }
 }
 
-/* restaurant list */
-
-.restaurant-list {
-    padding: 0;
-    list-style: none;
-}
-
-.restaurant-list li {
-    border: 1px solid aliceblue;
-    margin-bottom: 2.5rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
-}
-
-.restaurant-list * {
-    margin: 0;
-}
-
-.restaurant-list .photo {
-    display: block;
-    width: 12rem;
-    float: left;
-}
-
-.restaurant-list img {
-    vertical-align: middle;
-    width: 100%;
-}
-
 .restaurant-list .detail {
     color: #e7c48a;
     float: left;
-    padding: 0 1rem;
+    padding: 1rem;
     width: 27rem;
 }
 
@@ -292,14 +263,17 @@ article {
     color: #b19569;
     font-size: 1.75rem;
 }
+
 .address {
     color: inherit;
     display: table;
 }
+
 .address i {
     float: left;
     margin-right: 0.35rem;
 }
+
 .address:hover {
     box-shadow: none;
     color: #fff;
@@ -317,6 +291,7 @@ article {
     margin-bottom: 2.5rem;
     border-radius: 0.5rem;
     overflow: hidden;
+    display: flex;
 }
 
 .restaurant-list * {
@@ -324,9 +299,18 @@ article {
 }
 
 .restaurant-list .photo {
-    display: block;
+    background-position: center center;
+    background-size: cover;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
     width: 12rem;
-    float: left;
+}
+
+.restaurant-list .photo-placeholder {
+    height: 0;
+    padding-bottom: 75%;
+    width: 100%;
 }
 
 .restaurant-list img {
@@ -348,7 +332,7 @@ article {
     display: table;
     color: #b19569;
     font-variant: all-petite-caps;
-    width:100%;
+    width: 100%;
 }
 
 .review-list .detail .title a {
@@ -357,7 +341,7 @@ article {
 }
 
 .review-list .detail a {
-    color:wheat;
+    color: wheat;
 }
 
 .review-list .rating-stars label:before {
@@ -471,12 +455,15 @@ article {
     .restaurant-list li {
         margin-bottom: 3.5rem;
     }
+
     .restaurant-list .detail {
         padding: 0 1rem;
     }
+
     .restaurant-list .photo {
         width: 30%;
     }
+
     .restaurant-list .detail {
         width: 70%;
     }
@@ -492,15 +479,12 @@ article {
     }
 
     .restaurant-list li {
+        display: flex;
+        flex-direction: column;
         margin-bottom: 2.5rem;
     }
 
     .restaurant-list .photo {
-        width: auto;
-        float: none;
-    }
-
-    .restaurant-list img {
         width: 100%;
         margin: 0;
     }
