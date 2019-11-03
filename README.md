@@ -1,8 +1,8 @@
-# [HEALFOOD MELBOURNE](https://healfood.herokuapp.com/)
+# HEALFOOD MELBOURNE
 INFO30005 project, fall 2019
 
 ## Introduction
-A web application designed for restaurant rating.
+A web application designed for restaurant rating. [https://healfood.herokuapp.com](https://healfood.herokuapp.com)
 
 ## Core Functionalities
 
