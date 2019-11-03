@@ -1,8 +1,8 @@
 # HEALFOOD MELBOURNE
-INFO30005 project, fall 2019
+INFO30005 (Web Information Technologies) project, fall 2019. [https://healfood.herokuapp.com](https://healfood.herokuapp.com)
 
 ## Introduction
-A web application designed for restaurant rating. [https://healfood.herokuapp.com](https://healfood.herokuapp.com)
+A web application designed for restaurant rating.
 
 ## Core Functionalities
 
