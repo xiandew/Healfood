@@ -1,4 +1,4 @@
-# HEALFOOD MELBOURNE
+# <img src="https://i.loli.net/2019/11/08/OQVlSHYamXbWz6R.png" width="400">
 INFO30005 (Web Information Technologies) project, fall 2019. [https://healfood.herokuapp.com](https://healfood.herokuapp.com)
 
 ## Introduction
