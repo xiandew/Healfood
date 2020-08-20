@@ -4,7 +4,7 @@
   "description": "info30005 group project, fall 2019",
   "main": "app.js",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "latest",
     "cloudinary": "^1.14.0",
     "connect-mongo": "^3.0.0",
